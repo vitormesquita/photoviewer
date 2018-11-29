@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BasePresenterProtocol {
+    
+}
+
 class BasePresenter: NSObject {
 
 }

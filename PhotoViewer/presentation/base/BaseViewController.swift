@@ -9,22 +9,29 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    let basePresenter: BasePresenterProtocol
+    
+    init(presenter: BasePresenterProtocol) {
+        self.basePresenter = presenter
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    init(presenter: BasePresenterProtocol, nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.basePresenter = presenter
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    */
-
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init(coder: aDecoder)
+    }
+    
+    override func loadView() {
+        super.loadView()
+        view.backgroundColor = .white
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

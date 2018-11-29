@@ -1,5 +1,5 @@
 //
-//  PhotoListWireFrame.swift
+//  PhotoAPI.swift
 //  PhotoViewer
 //
 //  Created by Vitor Mesquita on 29/11/18.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class PhotoListWireFrame: NSObject {
+class PhotoAPI: NSObject {
 
 }
