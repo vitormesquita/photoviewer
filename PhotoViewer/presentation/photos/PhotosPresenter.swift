@@ -54,9 +54,17 @@ extension PhotosPresenter: PhotosPresenterProtocol {
                 self.cachedViewModels.append(contentsOf: viewModels)
                 return Observable.just(())
                 
+            case .failure(let error):
+                print(error.localizedDescription)
+                guard self.cachedViewModels.isEmpty else {
+                    return Observable.just(())
+                }
+                
             default:
-                return Observable.empty()
+                break
             }
+            
+            return Observable.empty()
         }
     }
     
