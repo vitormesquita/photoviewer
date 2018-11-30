@@ -23,7 +23,6 @@ class UserAPI: Codable {
         case profilePicutes = "profile_image"
         case bio = "bio"
     }
-    
 }
 
 class ProfilePictureAPI: Codable {    

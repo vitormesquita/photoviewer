@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		009ECDEB0B1721FE5C627C94 /* Pods_PhotoViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC504652ADFD77205FB468ED /* Pods_PhotoViewer.framework */; };
+		FC2F561E21B16C6A00C2D51C /* PresentationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2F561D21B16C6A00C2D51C /* PresentationHelper.swift */; };
+		FC2F562121B190D100C2D51C /* PhotosHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2F562021B190D100C2D51C /* PhotosHeaderView.swift */; };
+		FC2F562321B190D700C2D51C /* PhotosHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2F562221B190D700C2D51C /* PhotosHeaderView.xib */; };
 		FC62F2E821B03C4500E1A7F6 /* PhotosWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2E721B03C4500E1A7F6 /* PhotosWireFrame.swift */; };
 		FC62F2EA21B03C9E00E1A7F6 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2E921B03C9E00E1A7F6 /* PhotosViewController.swift */; };
 		FC62F2EC21B03D3A00E1A7F6 /* PhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2EB21B03D3A00E1A7F6 /* PhotosPresenter.swift */; };
@@ -28,7 +31,6 @@
 		FC62F31421B0A05200E1A7F6 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F31321B0A05200E1A7F6 /* Photo.swift */; };
 		FC62F31621B0A08D00E1A7F6 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F31521B0A08D00E1A7F6 /* Picture.swift */; };
 		FC62F31821B0A4D500E1A7F6 /* PhotoCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F31721B0A4D500E1A7F6 /* PhotoCollectionViewModel.swift */; };
-		FC62F31C21B0B1C400E1A7F6 /* ImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F31B21B0B1C400E1A7F6 /* ImageView+URL.swift */; };
 		FC62F32021B0C4AC00E1A7F6 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F31F21B0C4AC00E1A7F6 /* UserAPI.swift */; };
 		FC62F32221B0C58200E1A7F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F32121B0C58200E1A7F6 /* User.swift */; };
 		FC62F32421B0CB4B00E1A7F6 /* ScrollView+InfiniteScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F32321B0CB4B00E1A7F6 /* ScrollView+InfiniteScroll.swift */; };
@@ -44,6 +46,9 @@
 /* Begin PBXFileReference section */
 		BC504652ADFD77205FB468ED /* Pods_PhotoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39458703E2E11F171880B5C /* Pods-PhotoViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer.debug.xcconfig"; sourceTree = "<group>"; };
+		FC2F561D21B16C6A00C2D51C /* PresentationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationHelper.swift; sourceTree = "<group>"; };
+		FC2F562021B190D100C2D51C /* PhotosHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosHeaderView.swift; sourceTree = "<group>"; };
+		FC2F562221B190D700C2D51C /* PhotosHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosHeaderView.xib; sourceTree = "<group>"; };
 		FC62F2E721B03C4500E1A7F6 /* PhotosWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosWireFrame.swift; sourceTree = "<group>"; };
 		FC62F2E921B03C9E00E1A7F6 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		FC62F2EB21B03D3A00E1A7F6 /* PhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresenter.swift; sourceTree = "<group>"; };
@@ -64,7 +69,6 @@
 		FC62F31321B0A05200E1A7F6 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		FC62F31521B0A08D00E1A7F6 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 		FC62F31721B0A4D500E1A7F6 /* PhotoCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewModel.swift; sourceTree = "<group>"; };
-		FC62F31B21B0B1C400E1A7F6 /* ImageView+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView+URL.swift"; sourceTree = "<group>"; };
 		FC62F31F21B0C4AC00E1A7F6 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		FC62F32121B0C58200E1A7F6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC62F32321B0CB4B00E1A7F6 /* ScrollView+InfiniteScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+InfiniteScroll.swift"; sourceTree = "<group>"; };
@@ -107,6 +111,15 @@
 				BC504652ADFD77205FB468ED /* Pods_PhotoViewer.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC2F561F21B1750300C2D51C /* view */ = {
+			isa = PBXGroup;
+			children = (
+				FC2F562021B190D100C2D51C /* PhotosHeaderView.swift */,
+				FC2F562221B190D700C2D51C /* PhotosHeaderView.xib */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		FC62F2ED21B0411C00E1A7F6 /* api */ = {
@@ -186,7 +199,7 @@
 		FC62F31A21B0B1B200E1A7F6 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				FC62F31B21B0B1C400E1A7F6 /* ImageView+URL.swift */,
+				FC2F561D21B16C6A00C2D51C /* PresentationHelper.swift */,
 				FC62F32321B0CB4B00E1A7F6 /* ScrollView+InfiniteScroll.swift */,
 			);
 			path = utils;
@@ -267,6 +280,7 @@
 		FC951A5121B0350400ABF0E1 /* photos */ = {
 			isa = PBXGroup;
 			children = (
+				FC2F561F21B1750300C2D51C /* view */,
 				FC62F2FE21B081F700E1A7F6 /* cell */,
 				FC62F2EB21B03D3A00E1A7F6 /* PhotosPresenter.swift */,
 				FC62F2E921B03C9E00E1A7F6 /* PhotosViewController.swift */,
@@ -348,6 +362,7 @@
 			files = (
 				FC62F30221B0820D00E1A7F6 /* PhotoCollectionViewCell.xib in Resources */,
 				FC951A4721B0301E00ABF0E1 /* LaunchScreen.storyboard in Resources */,
+				FC2F562321B190D700C2D51C /* PhotosHeaderView.xib in Resources */,
 				FC951A4421B0301E00ABF0E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,10 +445,10 @@
 				FC62F2F421B0441100E1A7F6 /* PhotoAPI.swift in Sources */,
 				FC62F32721B0CB9500E1A7F6 /* InifiteScrollView.swift in Sources */,
 				FC62F30921B09DC800E1A7F6 /* PhotosInteractor.swift in Sources */,
+				FC2F561E21B16C6A00C2D51C /* PresentationHelper.swift in Sources */,
 				FC62F30721B09DA000E1A7F6 /* BaseInteractor.swift in Sources */,
 				FC62F32421B0CB4B00E1A7F6 /* ScrollView+InfiniteScroll.swift in Sources */,
 				FC62F30421B099E700E1A7F6 /* BaseCollectionViewCell.swift in Sources */,
-				FC62F31C21B0B1C400E1A7F6 /* ImageView+URL.swift in Sources */,
 				FC62F31121B09FFB00E1A7F6 /* RequestResponse.swift in Sources */,
 				FC62F2FD21B07F6B00E1A7F6 /* Response+Codable.swift in Sources */,
 				FC62F2EF21B0413500E1A7F6 /* APITarget.swift in Sources */,
@@ -443,6 +458,7 @@
 				FC62F2EA21B03C9E00E1A7F6 /* PhotosViewController.swift in Sources */,
 				FC62F30C21B09F3100E1A7F6 /* BaseRepository.swift in Sources */,
 				FC951A5821B0354D00ABF0E1 /* BaseViewController.swift in Sources */,
+				FC2F562121B190D100C2D51C /* PhotosHeaderView.swift in Sources */,
 				FC62F2EC21B03D3A00E1A7F6 /* PhotosPresenter.swift in Sources */,
 				FC62F30121B0820D00E1A7F6 /* PhotoCollectionViewCell.swift in Sources */,
 				FC951A3D21B0301D00ABF0E1 /* AppDelegate.swift in Sources */,
@@ -589,6 +605,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KXWH4SC5H2;
 				INFOPLIST_FILE = PhotoViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -608,6 +625,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KXWH4SC5H2;
 				INFOPLIST_FILE = PhotoViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -9,21 +9,29 @@
 import UIKit
 import RxSwift
 
-class PhotoCollectionViewModel: PhotoCollectionViewModelProtocol {
+class PhotoCollectionViewModel {
 
     private let photo: Photo
     
+    private let userImageSubject = BehaviorSubject<UIImage?>(value: nil)
+    private let photoImageSubject = BehaviorSubject<UIImage?>(value: nil)
+    
     init(photo: Photo) {
         self.photo = photo
+        
+        PresentationHelper.imageBy(url: photo.pictures.regular) {[weak self] (image) in
+            guard let self = self else { return }
+            self.photoImageSubject.onNext(image)
+        }
+        
+        PresentationHelper.imageBy(url: photo.user.thumbURL) {[weak self] (image) in
+            guard let self = self else { return }
+            self.userImageSubject.onNext(image)
+        }
     }
-    
-    var photoURL: URL {
-        return photo.pictures.regular
-    }
-    
-    var userURL: URL? {
-        return photo.user.thumbURL
-    }
+}
+
+extension PhotoCollectionViewModel: PhotoCollectionViewModelProtocol {
     
     var userName: String {
         return photo.user.name
@@ -32,4 +40,13 @@ class PhotoCollectionViewModel: PhotoCollectionViewModelProtocol {
     var description: String? {
         return photo.description
     }
+    
+    var userImage: Observable<UIImage?> {
+        return userImageSubject.asObservable()
+    }
+    
+    var photoImage: Observable<UIImage?> {
+        return photoImageSubject.asObservable()
+    }
+    
 }

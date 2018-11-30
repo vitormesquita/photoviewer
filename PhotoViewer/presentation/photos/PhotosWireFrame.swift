@@ -21,7 +21,7 @@ class PhotosWireFrame: BaseWireFrame {
     }
     
     func presentOn(window: UIWindow) {
-        window.rootViewController = UINavigationController(rootViewController: viewController)
+        window.rootViewController = viewController
         window.makeKeyAndVisible()
     }
 }

@@ -14,6 +14,12 @@ class PhotosViewController: BaseViewController {
         return basePresenter as! PhotosPresenterProtocol
     }
     
+    private lazy var headerView: PhotosHeaderView = {
+        let view = PhotosHeaderView.loadNibName()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var collectionLayout: UICollectionViewFlowLayout = {
         let collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.minimumLineSpacing = 0
@@ -36,24 +42,18 @@ class PhotosViewController: BaseViewController {
     
     override func loadView() {
         super.loadView()
-        self.view.addSubview(collectionView)
-        
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            ]
-        
-        NSLayoutConstraint.activate(constraints)
+        addHeaderView()
+        addCollectionView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
+        configureCollectionView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.contentInset = UIEdgeInsets(top: headerView.bounds.size.height, left: 0, bottom: 0, right: 0)
     }
     
     override func bind() {
@@ -75,6 +75,12 @@ class PhotosViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    private func configureCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
+    }
 }
 
 extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -87,5 +93,33 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.nibName, for: indexPath) as! PhotoCollectionViewCell
         cell.bindIn(viewModel: presenter.viewModels[indexPath.item])
         return cell
+    }
+}
+
+extension PhotosViewController {
+    
+    private func addHeaderView() {
+        self.view.addSubview(headerView)
+        
+        let constraints = [
+            headerView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func addCollectionView() {
+        self.view.insertSubview(collectionView, at: 0)
+        
+        let constraints = [
+            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
 }

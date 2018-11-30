@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol PhotoCollectionViewModelProtocol {
     
-    var photoURL: URL { get }
-    
-    var userURL: URL? { get }
     var userName: String { get }
     var description: String? { get }
+    
+    var userImage: Observable<UIImage?> { get }
+    var photoImage: Observable<UIImage?> { get }
 }
 
 class PhotoCollectionViewCell: BaseCollectionViewCell {
-
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var infoContainerView: UIView!
@@ -27,15 +28,11 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     private let gradient = CAGradientLayer()
+    private var viewModel: PhotoCollectionViewModelProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         applyLayout()
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
     }
     
     private func applyLayout() {
@@ -58,7 +55,7 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
         infoContainerView.layer.insertSublayer(gradient, at: 0)
         gradient.frame = infoContainerView.bounds
         
-        userNameLabel.numberOfLines = 0
+        userNameLabel.numberOfLines = 2
         userNameLabel.textColor = .white
         userNameLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
         
@@ -70,11 +67,18 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
     }
     
     func bindIn(viewModel: PhotoCollectionViewModelProtocol) {
-        imageView.imageBy(url: viewModel.photoURL)
-        userImageView.imageBy(url: viewModel.userURL)
-        
         userNameLabel.text = viewModel.userName
         descriptionLabel.text = viewModel.description
         descriptionLabel.isHidden = viewModel.description == nil
+        
+        viewModel.userImage
+            .bind(to: userImageView.rx.image)
+            .disposed(by: viewModelDisposeBag)
+        
+        viewModel.photoImage
+            .bind(to: imageView.rx.image)
+            .disposed(by: viewModelDisposeBag)
+        
+        self.viewModel = viewModel
     }
 }
