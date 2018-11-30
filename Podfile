@@ -5,10 +5,15 @@ target 'PhotoViewer' do
   use_frameworks!
   inhibit_all_warnings!
 
+  #Utils
+  pod 'Mextension'
+  pod 'INSPullToRefresh' #OBJC
+  
   #Rx
   pod 'RxSwift'
+  pod 'RxCocoa'
 
   #API
   pod 'Moya/RxSwift'
-  pod 'Moya-ObjectMapper/RxSwift'
+  
 end

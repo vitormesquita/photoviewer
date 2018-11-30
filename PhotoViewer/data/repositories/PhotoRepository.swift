@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  PhotoRepository.swift
 //  PhotoViewer
 //
 //  Created by Vitor Mesquita on 29/11/18.
@@ -7,19 +7,16 @@
 //
 
 import RxSwift
-import Moya
-import Result
 
-protocol APIClientProtocol {
+protocol PhotoRepositoryProtocol {
     
     func getPhotos(page: Int) -> Single<[PhotoAPI]>
 }
 
-class APIClient: APIClientProtocol {
-    
+class PhotoRepository: BaseRepository, PhotoRepositoryProtocol {
+
     func getPhotos(page: Int) -> Single<[PhotoAPI]> {
-        return provider.rx
-            .request(.photos(page: page))
-            .mapObject([PhotoAPI].self)
+        return apiClient.getPhotos(page: page)
     }
+    
 }

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class BaseViewController: UIViewController {
     
     let basePresenter: BasePresenterProtocol
+    let disposeBag = DisposeBag()
     
     init(presenter: BasePresenterProtocol) {
         self.basePresenter = presenter
@@ -33,5 +35,10 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
+    }
+    
+    func bind() {
+        
     }
 }

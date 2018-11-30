@@ -6,8 +6,27 @@
 //  Copyright © 2018 Vitor Mesquita. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class PhotoAPI: NSObject {
+class PhotoAPI: Codable {
+    
+    var id: String?
+    var createdAt: String?
+    var color: String?
+    var likes: Int?
+    var description: String?
+    var pictures: PictureAPI?
+    var height: Float?
+    var user: UserAPI?
 
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case createdAt = "created_at"
+        case color = "color"
+        case likes = "likes"
+        case description = "description"
+        case pictures = "urls"
+        case height = "height"
+        case user = "user"
+    }
 }

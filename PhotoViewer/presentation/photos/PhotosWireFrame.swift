@@ -12,7 +12,9 @@ class PhotosWireFrame: BaseWireFrame {
 
     init() {
         
-        let presenter = PhotosPresenter()
+        let repository = PhotoRepository(apiClient: APIClient())
+        let interactor = PhotosInteractor(repository: repository)
+        let presenter = PhotosPresenter(interactor: interactor)
         let viewController = PhotosViewController(presenter: presenter)
         
         super.init(viewController: viewController)

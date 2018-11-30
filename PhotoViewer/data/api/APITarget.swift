@@ -7,7 +7,6 @@
 //
 
 import Moya
-import Moya_ObjectMapper
 
 let provider = MoyaProvider<APITarget>( endpointClosure: { (target) -> Endpoint in
     
@@ -66,11 +65,10 @@ enum APITarget: TargetType {
     var headers: [String: String]? {
         var _headers: [String: String] = [
             "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Accept-Language": "pt-BR"
+            "Accept": "application/json"
         ]
         
-        _headers["Authorization: Client-ID"] = "c856d5c576aa73358c09efb36eb71d2ac0f6c5a9f7d8006310d50de246af520b"
+        _headers["Authorization"] = "Client-ID c856d5c576aa73358c09efb36eb71d2ac0f6c5a9f7d8006310d50de246af520b"
         
         return _headers
     }
