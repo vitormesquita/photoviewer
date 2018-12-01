@@ -41,17 +41,21 @@ class BaseViewController: UIViewController {
     }
     
     func bind() {
-        basePresenter.isLoading()
-            .subscribe(onNext: {[weak self] (isLoading) in
+        basePresenter.viewState
+            .subscribe(onNext: {[weak self] (state) in
                 guard let self = self else { return }
+                self.hidePlaceholders()
                 
-                if isLoading {
+                switch state {
+                case .empty(let text):
+                    self.showEmptyViewWith(text: text)
+                case .loading:
                     self.showLoading()
-                } else {
-                    self.hidePlaceholders()
+                default:
+                    break
                 }
             })
-            .disposed(by: disposeBag)
+            .disposed(by: disposeBag)        
     }
     
     deinit {
@@ -61,19 +65,19 @@ class BaseViewController: UIViewController {
 
 extension BaseViewController {
     
-    func hidePlaceholders() {
+    private func hidePlaceholders() {
         guard let placeholderView = placeholderView else { return }
         placeholderView.removeFromSuperview()
     }
     
-    func showLoading() {
+    private func showLoading() {
         hidePlaceholders()
         let loadingView = LoadingView.loadNibName()
         showPlaceholderWith(view: loadingView)
         loadingView.startAnimating()
     }
     
-    func showEmptyViewWith(text: String) {
+    private func showEmptyViewWith(text: String) {
         hidePlaceholders()
         let emptyView = EmptyView.loadNibName()
         showPlaceholderWith(view: emptyView)

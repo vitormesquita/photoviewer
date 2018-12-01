@@ -57,19 +57,20 @@ extension SearchPhotoInteractor: SearchPhotoInteractorProtocol {
                 return self.repository.searchPhotos(query: query, page: self.page)
                     .asObservable()
                     .materialize()
-                    .map { (event) -> RequestResponse<[Photo]> in
+                    .flatMap { (event) -> Observable<RequestResponse<[Photo]>> in
+                        
                         switch event {
                         case .next(let searchResultAPI):
                             let photos = Photo.mapArray(photoAPI: searchResultAPI.results ?? [])
-                            return .success(photos)
+                            return Observable.just(.success(photos))
                             
                         case .error(let error):
-                            return .failure(error)
+                            return Observable.just(.failure(error))
                             
                         case .completed:
-                            return .completed
+                            return Observable.empty()
                         }
-                    }                
+                    }
                     .startWith(.loading)
         }
     }

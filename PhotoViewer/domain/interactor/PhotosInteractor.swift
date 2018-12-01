@@ -36,18 +36,17 @@ extension PhotosInteractor: PhotosInteractorProtocol {
                     .asObservable()
                     .materialize()
             }
-            .map { (event) -> RequestResponse<[Photo]> in
-                
+            .flatMap { (event) -> Observable<RequestResponse<[Photo]>> in
                 switch event {
                 case .next(let photosAPI):
                     let photos = Photo.mapArray(photoAPI: photosAPI)
-                    return .success(photos)
+                    return Observable.just(.success(photos))
                     
                 case .error(let error):
-                    return .failure(error)
+                    return Observable.just(.failure(error))
                     
                 case .completed:
-                    return .completed
+                    return Observable.empty()
                 }
             }
             .startWith(.loading)

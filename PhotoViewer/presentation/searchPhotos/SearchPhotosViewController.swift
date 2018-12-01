@@ -14,6 +14,7 @@ class SearchPhotosViewController: BaseCollectionViewController {
         return basePresenter as! SearchPhotosPresenterProtocol
     }
     
+    private var isLoadedOnce: Bool = false
     private var viewModels: [PhotoCollectionViewModelProtocol] = []
     
     private let searchBar = UISearchBar()
@@ -46,30 +47,24 @@ class SearchPhotosViewController: BaseCollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        searchBar.becomeFirstResponder()
+        
+        if !isLoadedOnce {
+            isLoadedOnce = true
+            searchBar.becomeFirstResponder()
+        }
     }
     
     override func bind() {
         super.bind()
         
         searchBar.rx.text
+            .filter {[unowned self] _ in return self.searchBar.textField?.isEditing ?? false }
             .bind(to: presenter.queryObserver)
             .disposed(by: disposeBag)
         
         collectionView.addInfinityScrollRefreshView {[unowned self] in
             self.presenter.didScrollAtEnd()
         }
-        
-        presenter.searchIsEmpty
-            .subscribe(onNext: {[weak self] (isEmpty) in
-                guard let self = self else { return }
-                if isEmpty {
-                    self.showEmptyViewWith(text: "There aren't any results for search")
-                } else {
-                    self.hidePlaceholders()
-                }
-            })
-            .disposed(by: disposeBag)
         
         presenter.photosResults
             .subscribe(onNext: {[weak self] (viewModels) in
@@ -120,5 +115,9 @@ extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.nibName, for: indexPath) as! PhotoCollectionViewCell
         cell.bindIn(viewModel: viewModels[indexPath.item])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelected(item: indexPath.item)
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 protocol PhotosWireFrameProtocol: class {
  
     func goToSearch()
+    func showPhotoDetails(photo: Photo)
 }
 
 class PhotosWireFrame: BaseWireFrame {
@@ -38,5 +39,11 @@ extension PhotosWireFrame: PhotosWireFrameProtocol {
         let searchPhotoWireFrame = SearchPhotosWireFrame()
         searchPhotoWireFrame.presentWithNavigationOn(viewController: viewController, callback: self)
         presentedWireFrame = searchPhotoWireFrame
-    }    
+    }
+    
+    func showPhotoDetails(photo: Photo) {
+        let photoDetailsWireFrame = PhotoDetailsWireFrame(photo: photo)
+        photoDetailsWireFrame.presentWithNavigationOn(viewController: viewController, callback: self)
+        presentedWireFrame = photoDetailsWireFrame
+    }
 }

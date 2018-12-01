@@ -14,6 +14,7 @@ protocol PhotosPresenterProtocol: BasePresenterProtocol, PhotosHeaderViewModelPr
     var viewModels: [PhotoCollectionViewModelProtocol] { get }
     
     func didScrollAtEnd()
+    func didSelected(item: Int)
 }
 
 class PhotosPresenter: BasePresenter {
@@ -26,25 +27,13 @@ class PhotosPresenter: BasePresenter {
         self.interactor = interactor
         super.init()
     }
-    
-    override func isLoading() -> Observable<Bool> {
-        return interactor.photos
-            .map {[unowned self] (response) -> Bool in
-                switch response {
-                case .loading:
-                    return self.cachedViewModels.isEmpty
-                default:
-                    return false
-                }
-            }
-            .distinctUntilChanged()
-    }
 }
 
 extension PhotosPresenter: PhotosPresenterProtocol {
     
     var insertedItems: Observable<Void> {
         return interactor.photos.flatMap {[unowned self] (response) -> Observable<Void> in
+            self.viewStateSubject.onNext(.normal)
             
             switch response {
             case .success(let photo):
@@ -56,6 +45,11 @@ extension PhotosPresenter: PhotosPresenterProtocol {
                 print(error.localizedDescription)
                 guard self.cachedViewModels.isEmpty else {
                     return Observable.just(())
+                }
+                
+            case .loading:
+                if self.cachedViewModels.isEmpty {
+                    self.viewStateSubject.onNext(.loading)
                 }
                 
             default:
@@ -72,6 +66,11 @@ extension PhotosPresenter: PhotosPresenterProtocol {
     
     func didScrollAtEnd() {
         interactor.loadMorePage()
+    }
+    
+    func didSelected(item: Int) {
+        guard item < cachedViewModels.count else { return }
+        router?.showPhotoDetails(photo: cachedViewModels[item].photo)
     }
     
     func searchDidTap() {

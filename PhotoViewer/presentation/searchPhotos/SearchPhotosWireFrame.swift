@@ -11,10 +11,11 @@ import UIKit
 protocol SearchPhotosWireFrameProtocol: class {
     
     func dismiss()
+    func showPhotoDetails(photo: Photo)
 }
 
 class SearchPhotosWireFrame: BaseWireFrame {
-
+    
     init() {        
         let repository = PhotoRepository(apiClient: APIClient())
         let interactor = SearchPhotoInteractor(repository: repository)
@@ -27,4 +28,15 @@ class SearchPhotosWireFrame: BaseWireFrame {
 
 extension SearchPhotosWireFrame: SearchPhotosWireFrameProtocol {
     
+    func showPhotoDetails(photo: Photo) {
+        let photoDetailsWireFrame = PhotoDetailsWireFrame(photo: photo)
+        
+        if let navigationController = navigationController {
+            photoDetailsWireFrame.presentOn(navigationController: navigationController, callback: self)
+        } else {
+            photoDetailsWireFrame.presentWithNavigationOn(viewController: viewController, callback: self)
+        }
+        
+        presentedWireFrame = photoDetailsWireFrame
+    }
 }

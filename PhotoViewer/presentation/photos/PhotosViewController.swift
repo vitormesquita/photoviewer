@@ -74,6 +74,10 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.bindIn(viewModel: presenter.viewModels[indexPath.item])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelected(item: indexPath.item)
+    }
 }
 
 extension PhotosViewController {

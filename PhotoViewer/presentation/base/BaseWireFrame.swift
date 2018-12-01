@@ -14,7 +14,7 @@ protocol WireFrameCallbackProtocol: class {
 }
 
 class BaseWireFrame: NSObject {
-
+    
     let viewController: UIViewController
     var navigationController: UINavigationController?
     
@@ -26,6 +26,21 @@ class BaseWireFrame: NSObject {
         super.init()
     }
     
+    private func bind() {
+        guard let navigationController = navigationController else { return }
+        
+        _ = navigationController.rx
+            .didShow
+            .takeUntil(rx.deallocated)
+            .subscribe(onNext: { [weak self] (viewController, _) in
+                guard let self = self else { return }
+                
+                if self.viewController === viewController {
+                    self.presentedWireFrame = nil
+                }
+            })
+    }
+    
     func presentOn(viewController: UIViewController, callback: WireFrameCallbackProtocol?) {
         self.callback = callback
         viewController.present(self.viewController, animated: true)
@@ -34,12 +49,14 @@ class BaseWireFrame: NSObject {
     func presentOn(navigationController: UINavigationController, callback: WireFrameCallbackProtocol?) {
         self.callback = callback
         navigationController.pushViewController(viewController, animated: true)
+        bind()
     }
     
     func presentWithNavigationOn(viewController: UIViewController, callback: WireFrameCallbackProtocol?) {
         self.callback = callback
         navigationController = UINavigationController(rootViewController: self.viewController)
         viewController.present(navigationController!, animated: true)
+        bind()
     }
     
     func dismiss() {

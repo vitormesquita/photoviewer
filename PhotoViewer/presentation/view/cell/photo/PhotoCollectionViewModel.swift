@@ -11,7 +11,7 @@ import RxSwift
 
 class PhotoCollectionViewModel {
 
-    private let photo: Photo
+    let photo: Photo
     
     private let userImageSubject = BehaviorSubject<UIImage?>(value: nil)
     private let photoImageSubject = BehaviorSubject<UIImage?>(value: nil)

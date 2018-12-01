@@ -9,19 +9,27 @@
 import UIKit
 import RxSwift
 
+enum ViewState {
+    case normal
+    case loading
+    case empty(text: String)
+}
+
 protocol BasePresenterProtocol {
     
-    func isLoading() -> Observable<Bool>
+    var viewState: Observable<ViewState> { get }
 }
 
 class BasePresenter: NSObject, BasePresenterProtocol {
+    
+    let viewStateSubject = BehaviorSubject<ViewState>(value: .normal)
 
     deinit {
         print("dealloc ---> \(String(describing: type(of: self)))")
     }
     
-    func isLoading() -> Observable<Bool> {
-        return Observable.empty()
+    var viewState: Observable<ViewState> {
+        return viewStateSubject
     }
 }
 
