@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol PhotosWireFrameProtocol: class {
+ 
+    func goToSearch()
+}
+
 class PhotosWireFrame: BaseWireFrame {
 
     init() {
@@ -18,10 +23,20 @@ class PhotosWireFrame: BaseWireFrame {
         let viewController = PhotosViewController(presenter: presenter)
         
         super.init(viewController: viewController)
+        presenter.router = self
     }
     
     func presentOn(window: UIWindow) {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
     }
+}
+
+extension PhotosWireFrame: PhotosWireFrameProtocol {
+    
+    func goToSearch() {
+        let searchPhotoWireFrame = SearchPhotosWireFrame()
+        searchPhotoWireFrame.presentWithNavigationOn(viewController: viewController, callback: self)
+        presentedWireFrame = searchPhotoWireFrame
+    }    
 }

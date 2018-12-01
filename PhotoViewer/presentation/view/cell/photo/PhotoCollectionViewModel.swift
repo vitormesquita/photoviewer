@@ -19,12 +19,12 @@ class PhotoCollectionViewModel {
     init(photo: Photo) {
         self.photo = photo
         
-        PresentationHelper.imageBy(url: photo.pictures.regular) {[weak self] (image) in
+        ImageDownloader.imageBy(url: photo.pictures.regular) {[weak self] (image) in
             guard let self = self else { return }
             self.photoImageSubject.onNext(image)
         }
         
-        PresentationHelper.imageBy(url: photo.user.thumbURL) {[weak self] (image) in
+        ImageDownloader.imageBy(url: photo.user.thumbURL) {[weak self] (image) in
             guard let self = self else { return }
             self.userImageSubject.onNext(image)
         }

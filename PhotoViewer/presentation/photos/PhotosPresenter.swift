@@ -8,7 +8,7 @@
 
 import RxSwift
 
-protocol PhotosPresenterProtocol: BasePresenterProtocol {
+protocol PhotosPresenterProtocol: BasePresenterProtocol, PhotosHeaderViewModelProtocol {
     
     var isLoading: Observable<Bool> { get }
     var insertedItems: Observable<Void> { get }
@@ -20,6 +20,7 @@ protocol PhotosPresenterProtocol: BasePresenterProtocol {
 
 class PhotosPresenter: BasePresenter {
     
+    weak var router: PhotosWireFrameProtocol?
     private let interactor: PhotosInteractorProtocol
     private var cachedViewModels = [PhotoCollectionViewModel]()
     
@@ -74,5 +75,9 @@ extension PhotosPresenter: PhotosPresenterProtocol {
     
     func didScrollAtEnd() {
         interactor.loadMorePage()
+    }
+    
+    func searchDidTap() {
+        router?.goToSearch()
     }
 }

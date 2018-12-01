@@ -32,6 +32,7 @@ let provider = MoyaProvider<APITarget>( endpointClosure: { (target) -> Endpoint 
 enum APITarget: TargetType {
     
     case photos(page: Int)
+    case searchPhotos(query: String, page: Int)
     
     var baseURL: URL {
         return URL(string: "https://api.unsplash.com")!
@@ -41,6 +42,8 @@ enum APITarget: TargetType {
         switch self {
         case .photos:
             return "/photos"
+        case .searchPhotos:
+            return "/search/photos"
         }
     }
     
@@ -55,6 +58,9 @@ enum APITarget: TargetType {
         switch self {
         case .photos(let page):
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding())
+            
+        case .searchPhotos(let params):
+            return .requestParameters(parameters: ["query": params.query, "page": params.page], encoding: URLEncoding())
         }
     }
     

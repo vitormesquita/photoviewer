@@ -13,6 +13,7 @@ import Result
 protocol APIClientProtocol {
     
     func getPhotos(page: Int) -> Single<[PhotoAPI]>
+    func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI>
 }
 
 class APIClient: APIClientProtocol {
@@ -20,6 +21,12 @@ class APIClient: APIClientProtocol {
     func getPhotos(page: Int) -> Single<[PhotoAPI]> {
         return provider.rx
             .request(.photos(page: page))
-            .mapObject([PhotoAPI].self)
+            .mapArray(PhotoAPI.self)
+    }
+    
+    func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI> {
+        return provider.rx
+            .request(.searchPhotos(query: query, page: page))
+            .mapObject(SearchPhotoResultAPI.self)
     }
 }

@@ -8,34 +8,51 @@
 
 import UIKit
 
+protocol PhotosHeaderViewModelProtocol {
+ 
+    func searchDidTap()
+}
+
 class PhotosHeaderView: UIView {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var searchImageView: UIImageView!
     @IBOutlet weak var searchLabel: UILabel!
  
+    private var viewModel: PhotosHeaderViewModelProtocol?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         applyLayout()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(containerViewDidTap))
+        containerView.addGestureRecognizer(tapGesture)
     }
     
     private func applyLayout() {
         backgroundColor = UIColor.white.withAlphaComponent(0.95)
         
         containerView.layer.cornerRadius = 4
-        containerView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1.0)
+        containerView.backgroundColor = .searchBar
         
         searchImageView.tintColor = .gray
+        searchImageView.contentMode = .center
         searchImageView.image = UIImage(named: "ic_search")?.withRenderingMode(.alwaysTemplate)
     
         searchLabel.text = "Search"
         searchLabel.textColor = .gray
     }
+    
+    @objc private func containerViewDidTap() {
+        viewModel?.searchDidTap()
+    }
 }
 
 extension PhotosHeaderView {
     
-    static func loadNibName() -> PhotosHeaderView {
-        return Bundle.main.loadNibNamed("PhotosHeaderView", owner: nil)?.first as! PhotosHeaderView
+    static func loadNibName(viewModel: PhotosHeaderViewModelProtocol) -> PhotosHeaderView {
+        let view = Bundle.main.loadNibNamed("PhotosHeaderView", owner: nil)?.first as! PhotosHeaderView
+        view.viewModel = viewModel
+        return view
     }
 }

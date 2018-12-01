@@ -8,36 +8,16 @@
 
 import UIKit
 
-class PhotosViewController: BaseViewController {
+class PhotosViewController: BaseCollectionViewController {
     
     private var presenter: PhotosPresenterProtocol {
         return basePresenter as! PhotosPresenterProtocol
     }
     
     private lazy var headerView: PhotosHeaderView = {
-        let view = PhotosHeaderView.loadNibName()
+        let view = PhotosHeaderView.loadNibName(viewModel: presenter)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    private lazy var collectionLayout: UICollectionViewFlowLayout = {
-        let collectionLayout = UICollectionViewFlowLayout()
-        collectionLayout.minimumLineSpacing = 0
-        collectionLayout.minimumInteritemSpacing = 0
-        collectionLayout.scrollDirection = .vertical
-        let screenWidth = UIScreen.main.bounds.size.width-16
-        collectionLayout.itemSize = CGSize(width: (screenWidth/2), height: screenWidth)
-        return collectionLayout
-    }()
-    
-    private lazy var collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
-        collection.alwaysBounceVertical = true
-        collection.backgroundColor = .clear
-        collection.keyboardDismissMode = .interactive
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.showsVerticalScrollIndicator = false
-        return collection
     }()
     
     override func loadView() {
@@ -105,19 +85,6 @@ extension PhotosViewController {
             headerView.topAnchor.constraint(equalTo: self.view.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
-    }
-    
-    private func addCollectionView() {
-        self.view.insertSubview(collectionView, at: 0)
-        
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ]
         
         NSLayoutConstraint.activate(constraints)

@@ -13,7 +13,7 @@ struct User {
     var id: String
     var userName: String
     var name: String
-    var bio: String
+    var bio: String?
     var thumbURL: URL?
 }
 
@@ -23,15 +23,14 @@ extension User {
         guard let userAPI = userAPI,
             let id = userAPI.id,
             let userName = userAPI.userName,
-            let name = userAPI.name,
-            let bio = userAPI.bio else {
+            let name = userAPI.name else {
                 return nil
         }
         
         return User(id: id,
                     userName: userName,
                     name: name,
-                    bio: bio,
+                    bio: userAPI.bio,
                     thumbURL: userAPI.profilePicutes?.medium)
     }
 }

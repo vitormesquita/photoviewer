@@ -11,6 +11,7 @@ import RxSwift
 protocol PhotoRepositoryProtocol {
     
     func getPhotos(page: Int) -> Single<[PhotoAPI]>
+    func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI>
 }
 
 class PhotoRepository: BaseRepository, PhotoRepositoryProtocol {
@@ -19,4 +20,7 @@ class PhotoRepository: BaseRepository, PhotoRepositoryProtocol {
         return apiClient.getPhotos(page: page)
     }
     
+    func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI> {
+        return apiClient.searchPhotos(query: query, page: page)
+    }
 }

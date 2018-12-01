@@ -41,4 +41,8 @@ class BaseViewController: UIViewController {
     func bind() {
         
     }
+    
+    deinit {
+        print("dealloc ---> \(String(describing: type(of: self)))")
+    }
 }

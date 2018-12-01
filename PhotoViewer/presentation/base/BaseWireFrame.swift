@@ -10,11 +10,13 @@ import UIKit
 
 protocol WireFrameCallbackProtocol: class {
     
+    func dismissedPresentedWireFrame()
 }
 
 class BaseWireFrame: NSObject {
 
     let viewController: UIViewController
+    var navigationController: UINavigationController?
     
     var presentedWireFrame: BaseWireFrame?
     weak var callback: WireFrameCallbackProtocol?
@@ -32,5 +34,30 @@ class BaseWireFrame: NSObject {
     func presentOn(navigationController: UINavigationController, callback: WireFrameCallbackProtocol?) {
         self.callback = callback
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func presentWithNavigationOn(viewController: UIViewController, callback: WireFrameCallbackProtocol?) {
+        self.callback = callback
+        navigationController = UINavigationController(rootViewController: self.viewController)
+        viewController.present(navigationController!, animated: true)
+    }
+    
+    func dismiss() {
+        let viewController = navigationController ?? self.viewController        
+        viewController.dismiss(animated: true) {[weak self] in
+            guard let self = self else { return }
+            self.callback?.dismissedPresentedWireFrame()
+        }
+    }
+    
+    deinit {
+        print("dealloc ---> \(String(describing: type(of: self)))")
+    }
+}
+
+extension BaseWireFrame: WireFrameCallbackProtocol {
+    
+    func dismissedPresentedWireFrame() {
+        presentedWireFrame = nil
     }
 }

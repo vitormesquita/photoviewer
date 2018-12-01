@@ -1,5 +1,5 @@
 //
-//  PresentationHelper.swift
+//  ImageDownloader.swift
 //  PhotoViewer
 //
 //  Created by Vitor Mesquita on 30/11/18.
@@ -10,7 +10,7 @@ import UIKit
 
 private let imageCache = NSCache<NSString, UIImage>()
 
-class PresentationHelper {
+class ImageDownloader {
     
     static func imageBy(url: URL?, completion: @escaping ((UIImage) -> Void)) {
         guard let url = url else { return }

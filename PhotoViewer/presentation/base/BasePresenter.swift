@@ -14,5 +14,8 @@ protocol BasePresenterProtocol {
 
 class BasePresenter: NSObject {
 
+    deinit {
+        print("dealloc ---> \(String(describing: type(of: self)))")
+    }
 }
 
