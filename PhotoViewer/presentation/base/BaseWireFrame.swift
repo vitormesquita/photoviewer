@@ -54,7 +54,7 @@ class BaseWireFrame: NSObject {
     
     func presentWithNavigationOn(viewController: UIViewController, callback: WireFrameCallbackProtocol?) {
         self.callback = callback
-        navigationController = UINavigationController(rootViewController: self.viewController)
+        navigationController = BaseNavigationController(rootViewController: self.viewController)
         viewController.present(navigationController!, animated: true)
         bind()
     }

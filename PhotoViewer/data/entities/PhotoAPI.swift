@@ -18,6 +18,7 @@ class PhotoAPI: Codable {
     var pictures: PictureAPI?
     var height: Float?
     var user: UserAPI?
+    var links: LinksAPI?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -28,5 +29,10 @@ class PhotoAPI: Codable {
         case pictures = "urls"
         case height = "height"
         case user = "user"
+        case links = "links"
     }
+}
+
+class LinksAPI: Codable {
+    var download: URL?
 }

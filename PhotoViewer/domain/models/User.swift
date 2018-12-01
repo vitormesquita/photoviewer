@@ -13,6 +13,7 @@ struct User {
     var id: String
     var userName: String
     var name: String
+    var totalPhotos: Int
     var bio: String?
     var thumbURL: URL?
 }
@@ -30,6 +31,7 @@ extension User {
         return User(id: id,
                     userName: userName,
                     name: name,
+                    totalPhotos: userAPI.totalPhotos ?? 0,
                     bio: userAPI.bio,
                     thumbURL: userAPI.profilePicutes?.medium)
     }

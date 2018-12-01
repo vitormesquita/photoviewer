@@ -13,6 +13,7 @@ class UserAPI: Codable {
     var id: String?
     var userName: String?
     var name: String?
+    var totalPhotos: Int?
     var profilePicutes: ProfilePictureAPI?
     var bio: String?
     
@@ -20,6 +21,7 @@ class UserAPI: Codable {
         case id = "id"
         case userName = "username"
         case name = "name"
+        case totalPhotos = "total_photos"
         case profilePicutes = "profile_image"
         case bio = "bio"
     }

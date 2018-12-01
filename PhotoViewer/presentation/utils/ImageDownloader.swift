@@ -23,7 +23,10 @@ class ImageDownloader {
                 .dataTask(with: url) { (data, response, error) in
                     guard let data = data, let image = UIImage(data: data) else { return }
                     imageCache.setObject(image, forKey: url.absoluteString as NSString)
-                    completion(image)
+                    
+                    DispatchQueue.main.async {
+                        completion(image)
+                    }
                 }
                 .resume()
         }

@@ -8,11 +8,21 @@
 
 import UIKit
 
+protocol PhotoDetailsWireFrameProtocol: class {
+    
+    func dismiss()
+}
+
 class PhotoDetailsWireFrame: BaseWireFrame {
 
     init(photo: Photo) {
-        let presenter = PhotoDetailsPresenter()
+        let presenter = PhotoDetailsPresenter(photo: photo)
         let viewController = PhotoDetailsViewController(presenter: presenter)
         super.init(viewController: viewController)
+        presenter.router = self
     }
+}
+
+extension PhotoDetailsWireFrame: PhotoDetailsWireFrameProtocol {
+    
 }
