@@ -60,6 +60,17 @@ class SearchPhotosViewController: BaseCollectionViewController {
             self.presenter.didScrollAtEnd()
         }
         
+        presenter.searchIsEmpty
+            .subscribe(onNext: {[weak self] (isEmpty) in
+                guard let self = self else { return }
+                if isEmpty {
+                    self.showEmptyViewWith(text: "There aren't any results for search")
+                } else {
+                    self.hidePlaceholders()
+                }
+            })
+            .disposed(by: disposeBag)
+        
         presenter.photosResults
             .subscribe(onNext: {[weak self] (viewModels) in
                 guard let self = self else { return }
@@ -92,7 +103,7 @@ class SearchPhotosViewController: BaseCollectionViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
     }
-
+    
     
     @objc private func closeButtonDidTap() {
         presenter.dismissDidTap()

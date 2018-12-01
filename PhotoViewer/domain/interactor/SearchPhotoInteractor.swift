@@ -41,7 +41,7 @@ extension SearchPhotoInteractor: SearchPhotoInteractorProtocol {
     
     var photos: Observable<RequestResponse<[Photo]>> {
         return querySubject
-            .debounce(0.4, scheduler: MainScheduler.instance)
+            .debounce(0.8, scheduler: MainScheduler.instance)
             .flatMap {[weak self] (query) -> Observable<RequestResponse<[Photo]>> in
                 guard let self = self else { return Observable.empty() }
                 
@@ -69,9 +69,9 @@ extension SearchPhotoInteractor: SearchPhotoInteractorProtocol {
                         case .completed:
                             return .completed
                         }
-                }
-            }
-            .startWith(.loading)
+                    }                
+                    .startWith(.loading)
+        }
     }
     
     func loadMorePage() {

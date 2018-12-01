@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol BasePresenterProtocol {
     
+    func isLoading() -> Observable<Bool>
 }
 
-class BasePresenter: NSObject {
+class BasePresenter: NSObject, BasePresenterProtocol {
 
     deinit {
         print("dealloc ---> \(String(describing: type(of: self)))")
+    }
+    
+    func isLoading() -> Observable<Bool> {
+        return Observable.empty()
     }
 }
 

@@ -8,9 +8,9 @@
 
 import UIKit
 
-private let imageCache = NSCache<NSString, UIImage>()
-
 class ImageDownloader {
+    
+    static let imageCache = NSCache<NSString, UIImage>()
     
     static func imageBy(url: URL?, completion: @escaping ((UIImage) -> Void)) {
         guard let url = url else { return }

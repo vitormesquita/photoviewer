@@ -10,9 +10,7 @@ import RxSwift
 
 protocol PhotosPresenterProtocol: BasePresenterProtocol, PhotosHeaderViewModelProtocol {
     
-    var isLoading: Observable<Bool> { get }
-    var insertedItems: Observable<Void> { get }
-    
+    var insertedItems: Observable<Void> { get }    
     var viewModels: [PhotoCollectionViewModelProtocol] { get }
     
     func didScrollAtEnd()
@@ -28,26 +26,25 @@ class PhotosPresenter: BasePresenter {
         self.interactor = interactor
         super.init()
     }
+    
+    override func isLoading() -> Observable<Bool> {
+        return interactor.photos
+            .map {[unowned self] (response) -> Bool in
+                switch response {
+                case .loading:
+                    return self.cachedViewModels.isEmpty
+                default:
+                    return false
+                }
+            }
+            .distinctUntilChanged()
+    }
 }
 
 extension PhotosPresenter: PhotosPresenterProtocol {
     
-    var isLoading: Observable<Bool> {
-        return interactor.photos.map {[weak self] (response) -> Bool in
-            guard let self = self else { return false }
-            
-            switch response {
-            case .loading:
-                return self.cachedViewModels.isEmpty
-            default:
-                return false
-            }
-        }
-    }
-    
     var insertedItems: Observable<Void> {
-        return interactor.photos.flatMap {[weak self] (response) -> Observable<Void> in
-            guard let self = self else { return Observable.empty() }
+        return interactor.photos.flatMap {[unowned self] (response) -> Observable<Void> in
             
             switch response {
             case .success(let photo):
