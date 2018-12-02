@@ -334,7 +334,6 @@
 		FC951A5021B0324F00ABF0E1 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
-				FCBBF65C21B1E73400EFC595 /* animations */,
 				FC62F31A21B0B1B200E1A7F6 /* utils */,
 				FC62F32521B0CB7F00E1A7F6 /* view */,
 				FC951A5421B0352C00ABF0E1 /* base */,
@@ -387,13 +386,6 @@
 				FC9B25CD21B2E6730016A465 /* PhotoDetailsView.xib */,
 			);
 			path = view;
-			sourceTree = "<group>";
-		};
-		FCBBF65C21B1E73400EFC595 /* animations */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = animations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
