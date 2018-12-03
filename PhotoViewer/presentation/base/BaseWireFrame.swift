@@ -26,7 +26,7 @@ class BaseWireFrame: NSObject {
         super.init()
     }
     
-    private func bind() {
+    internal func bind() {
         guard let navigationController = navigationController else { return }
         
         _ = navigationController.rx

@@ -12,6 +12,7 @@ protocol SearchPhotosWireFrameProtocol: class {
     
     func dismiss()
     func showPhotoDetails(photo: Photo)
+    func getPhotoDetailsViewControllerBy(photo: Photo) -> UIViewController
 }
 
 class SearchPhotosWireFrame: BaseWireFrame {
@@ -38,5 +39,10 @@ extension SearchPhotosWireFrame: SearchPhotosWireFrameProtocol {
         }
         
         presentedWireFrame = photoDetailsWireFrame
+    }
+    
+    func getPhotoDetailsViewControllerBy(photo: Photo) -> UIViewController {
+        let photoDetailsPresenter = PhotoDetailsPresenter(photo: photo)
+        return PhotoDetailsViewController(presenter: photoDetailsPresenter)
     }
 }

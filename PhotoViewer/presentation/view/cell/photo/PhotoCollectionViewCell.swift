@@ -12,6 +12,8 @@ import RxSwift
 protocol PhotoCollectionViewModelProtocol {
     
     var userName: String { get }
+    var backgroundColor: UIColor { get }
+    
     var photoURL: Observable<URL> { get }
     var userImage: Observable<UIImage?> { get }
 }
@@ -23,7 +25,6 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var infoContainerView: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     private let gradient = CAGradientLayer()
     private var viewModel: PhotoCollectionViewModelProtocol?
@@ -53,7 +54,7 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
     
     private func applyLayout() {
         containerView.clipsToBounds = true
-        containerView.layer.cornerRadius = 4
+        containerView.layer.cornerRadius = 8
         containerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
         
         imageView.contentMode = .scaleAspectFill
@@ -76,13 +77,11 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
         userNameLabel.numberOfLines = 2
         userNameLabel.textColor = .white
         userNameLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
-        
-        activityIndicatorView.style = .white
-        activityIndicatorView.hidesWhenStopped = true
     }
     
     func bindIn(viewModel: PhotoCollectionViewModelProtocol) {
         userNameLabel.text = viewModel.userName
+        containerView.backgroundColor = viewModel.backgroundColor
         
         viewModel.userImage
             .bind(to: userImageView.rx.image)
@@ -116,13 +115,8 @@ extension PhotoCollectionViewCell {
             setImage(cachedImage)
             
         } else {
-            activityIndicatorView.startAnimating()            
             imageDataTask = URLSession.shared.dataTask(with: url) {[weak self] (data, response, error) in
-                guard let self = self else { return }                
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-                }
-                
+                guard let self = self else { return }
                 if let data = data, let image = UIImage(data: data) {
                     ImageDownloader.shared.setImageToCache(url: url, image: image)
                     DispatchQueue.main.async {

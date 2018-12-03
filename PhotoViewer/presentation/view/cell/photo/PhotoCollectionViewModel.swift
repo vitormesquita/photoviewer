@@ -34,6 +34,10 @@ extension PhotoCollectionViewModel: PhotoCollectionViewModelProtocol {
         return photo.description
     }
     
+    var backgroundColor: UIColor {
+        return UIColor.colorFrom(hex: photo.color)
+    }
+    
     var userImage: Observable<UIImage?> {
         return userImageSubject.asObservable()
     }

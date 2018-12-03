@@ -12,6 +12,8 @@ protocol PhotosWireFrameProtocol: class {
  
     func goToSearch()
     func showPhotoDetails(photo: Photo)
+    
+    func getPhotoDetailsViewControllerBy(photo: Photo) -> UIViewController
 }
 
 class PhotosWireFrame: BaseWireFrame {
@@ -28,8 +30,10 @@ class PhotosWireFrame: BaseWireFrame {
     }
     
     func presentOn(window: UIWindow) {
-        window.rootViewController = viewController
+        self.navigationController = BaseNavigationController(rootViewController: viewController)
+        window.rootViewController = navigationController!
         window.makeKeyAndVisible()
+        bind()
     }
 }
 
@@ -43,7 +47,18 @@ extension PhotosWireFrame: PhotosWireFrameProtocol {
     
     func showPhotoDetails(photo: Photo) {
         let photoDetailsWireFrame = PhotoDetailsWireFrame(photo: photo)
-        photoDetailsWireFrame.presentWithNavigationOn(viewController: viewController, callback: self)
+        
+        if let navigationController = navigationController {
+            photoDetailsWireFrame.presentOn(navigationController: navigationController, callback: self)
+        } else {
+            photoDetailsWireFrame.presentWithNavigationOn(viewController: viewController, callback: self)
+        }
+        
         presentedWireFrame = photoDetailsWireFrame
+    }
+    
+    func getPhotoDetailsViewControllerBy(photo: Photo) -> UIViewController {
+        let photoDetailsPresenter = PhotoDetailsPresenter(photo: photo)
+        return PhotoDetailsViewController(presenter: photoDetailsPresenter)
     }
 }

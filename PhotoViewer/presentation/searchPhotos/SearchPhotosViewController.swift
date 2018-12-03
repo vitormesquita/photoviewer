@@ -14,13 +14,8 @@ class SearchPhotosViewController: BaseCollectionViewController {
         return basePresenter as! SearchPhotosPresenterProtocol
     }
     
-    private var isLoadedOnce: Bool = false
-    private var viewModels: [PhotoCollectionViewModelProtocol] = []
-    
     private let searchBar = UISearchBar()
-    private lazy var closeButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonDidTap))
-    }()
+    private var viewModels: [PhotoCollectionViewModelProtocol] = []
     
     override func loadView() {
         super.loadView()        
@@ -34,15 +29,11 @@ class SearchPhotosViewController: BaseCollectionViewController {
         
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
-        navigationItem.leftBarButtonItem = closeButton
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        if !isLoadedOnce {
-            isLoadedOnce = true
-            searchBar.becomeFirstResponder()
+        searchBar.becomeFirstResponder()
+        
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: collectionView)
         }
     }
     
@@ -50,8 +41,13 @@ class SearchPhotosViewController: BaseCollectionViewController {
         super.bind()
         
         searchBar.rx.text
-            .filter {[unowned self] _ in return self.searchBar.textField?.isEditing ?? false }
-            .bind(to: presenter.queryObserver)
+            .bind(to: presenter.queryRelay)
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.cancelButtonClicked
+            .bind {[unowned self] in
+                self.presenter.dismissDidTap()
+            }
             .disposed(by: disposeBag)
         
         collectionView.addInfinityScrollRefreshView {[unowned self] in
@@ -73,27 +69,18 @@ class SearchPhotosViewController: BaseCollectionViewController {
     }
     
     private func applyLayout() {
+        searchBar.placeholder = "Search photos"
         searchBar.tintColor = .gray
+        searchBar.showsCancelButton = true
         searchBar.textField?.textColor = .gray
         searchBar.textField?.backgroundColor = .searchBar
         searchBar.setImage(UIImage(named: "ic_search")?.withRenderingMode(.alwaysTemplate), for: .search, state: .normal)
-        
-        if let navigationController = navigationController {
-            navigationController.navigationBar.tintColor = .gray
-            navigationController.navigationBar.barTintColor = .white
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
     }
     
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
-    }
-    
-    
-    @objc private func closeButtonDidTap() {
-        presenter.dismissDidTap()
     }
 }
 
@@ -110,6 +97,28 @@ extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelected(item: indexPath.item)
+    }
+}
+
+extension SearchPhotosViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = collectionView.indexPathForItem(at: location),
+            let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell  else {
+                return nil
+        }
+        
+        let viewRect = collectionView.convert(cell.frame, to: cell.superview!)
+        previewingContext.sourceRect = viewRect
+        
+        let viewController = presenter.viewControllerBy(index: indexPath.item)
+        viewController?.preferredContentSize = CGSize(width: 0, height: 360)
+        return viewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        guard let indexPath = collectionView.indexPathForItem(at: previewingContext.sourceRect.origin) else { return }
         presenter.didSelected(item: indexPath.item)
     }
 }

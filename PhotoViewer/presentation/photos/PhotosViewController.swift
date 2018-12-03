@@ -14,34 +14,24 @@ class PhotosViewController: BaseCollectionViewController {
         return basePresenter as! PhotosPresenterProtocol
     }
     
-    private lazy var headerView: PhotosHeaderView = {
-        let view = PhotosHeaderView.loadNibName(viewModel: presenter)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let searchBar = UISearchBar()
     
     override func loadView() {
         super.loadView()
-        addHeaderView()
-        
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
-        ]
-        
-        addCollectionView(constraints: constraints)
+        addCollectionView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyLayout()
         configureCollectionView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        collectionView.contentInset = UIEdgeInsets(top: headerView.bounds.size.height, left: 0, bottom: 0, right: 0)
+        
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+        
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: collectionView)
+        }
     }
     
     override func bind() {
@@ -69,6 +59,15 @@ class PhotosViewController: BaseCollectionViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
     }
+    
+    private func applyLayout() {
+        searchBar.delegate = self
+        searchBar.placeholder = "Search photos"
+        searchBar.tintColor = .gray
+        searchBar.textField?.textColor = .gray
+        searchBar.textField?.backgroundColor = .searchBar
+        searchBar.setImage(UIImage(named: "ic_search")?.withRenderingMode(.alwaysTemplate), for: .search, state: .normal)
+    }
 }
 
 extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -88,17 +87,32 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
-extension PhotosViewController {
+extension PhotosViewController: UISearchBarDelegate {
     
-    private func addHeaderView() {
-        self.view.addSubview(headerView)
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        presenter.searchDidTap()
+        return false
+    }
+}
+
+extension PhotosViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = collectionView.indexPathForItem(at: location),
+            let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell  else {
+                return nil
+        }
         
-        let constraints = [
-            headerView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-        ]
+        let viewRect = collectionView.convert(cell.frame, to: cell.superview!)
+        previewingContext.sourceRect = viewRect
         
-        NSLayoutConstraint.activate(constraints)
+        let viewController = presenter.viewControllerBy(index: indexPath.item)
+        viewController?.preferredContentSize = CGSize(width: 0, height: 360)
+        return viewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        guard let indexPath = collectionView.indexPathForItem(at: previewingContext.sourceRect.origin) else { return }
+        presenter.didSelected(item: indexPath.item)
     }
 }

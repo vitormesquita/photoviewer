@@ -20,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         photosWireFrame = PhotosWireFrame()
         photosWireFrame?.presentOn(window: window!)
         
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .searchBar
-        
         return true
     }
 

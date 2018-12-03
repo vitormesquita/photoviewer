@@ -8,13 +8,16 @@
 
 import RxSwift
 
-protocol PhotosPresenterProtocol: BasePresenterProtocol, PhotosHeaderViewModelProtocol {
+protocol PhotosPresenterProtocol: BasePresenterProtocol {
     
     var insertedItems: Observable<Void> { get }    
     var viewModels: [PhotoCollectionViewModelProtocol] { get }
     
+    func searchDidTap()
+    
     func didScrollAtEnd()
     func didSelected(item: Int)
+    func viewControllerBy(index: Int) -> UIViewController?
 }
 
 class PhotosPresenter: BasePresenter {
@@ -75,5 +78,10 @@ extension PhotosPresenter: PhotosPresenterProtocol {
     
     func searchDidTap() {
         router?.goToSearch()
+    }
+    
+    func viewControllerBy(index: Int) -> UIViewController? {
+        guard index < cachedViewModels.count else { return nil }
+        return router?.getPhotoDetailsViewControllerBy(photo: cachedViewModels[index].photo)
     }
 }

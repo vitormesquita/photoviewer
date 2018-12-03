@@ -7,15 +7,18 @@
 //
 
 import RxSwift
+import RxCocoa
 
 protocol SearchPhotosPresenterProtocol: BasePresenterProtocol {
     
-    var queryObserver: AnyObserver<String?> { get }
+    var queryRelay: BehaviorRelay<String?> { get }
     var photosResults: Observable<[PhotoCollectionViewModelProtocol]> { get }
     
     func didScrollAtEnd()
     func didSelected(item: Int)
     func dismissDidTap()
+    
+    func viewControllerBy(index: Int) -> UIViewController?
 }
 
 class SearchPhotosPresenter: BasePresenter {
@@ -34,8 +37,8 @@ class SearchPhotosPresenter: BasePresenter {
 
 extension SearchPhotosPresenter: SearchPhotosPresenterProtocol {
     
-    var queryObserver: AnyObserver<String?> {
-        return interactor.querySubject.asObserver()
+    var queryRelay: BehaviorRelay<String?> {
+        return interactor.queryRelay
     }
     
     var photosResults: Observable<[PhotoCollectionViewModelProtocol]> {
@@ -58,7 +61,7 @@ extension SearchPhotosPresenter: SearchPhotosPresenterProtocol {
                 }
                 
                 if self.cachedViewModels.isEmpty {
-                    self.viewStateSubject.onNext(.empty(text: "There aren't any results for search"))
+                    self.viewStateSubject.onNext(.empty(text: "There are no results for \"\(self.queryRelay.value ?? "")\""))
                 }
                 
                 return Observable.just(self.cachedViewModels)
@@ -66,7 +69,7 @@ extension SearchPhotosPresenter: SearchPhotosPresenterProtocol {
             case .new:
                 self.cachedViewModels = []
                 return Observable.just(self.cachedViewModels)
-
+                
             default:
                 break
             }
@@ -86,5 +89,10 @@ extension SearchPhotosPresenter: SearchPhotosPresenterProtocol {
     
     func dismissDidTap() {
         router?.dismiss()
+    }
+    
+    func viewControllerBy(index: Int) -> UIViewController? {
+        guard index < cachedViewModels.count else { return nil }
+        return router?.getPhotoDetailsViewControllerBy(photo: cachedViewModels[index].photo)
     }
 }

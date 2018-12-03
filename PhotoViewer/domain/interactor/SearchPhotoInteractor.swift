@@ -8,11 +8,12 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol SearchPhotoInteractorProtocol {
     
     var shouldClearCache: Bool { get }
-    var querySubject: BehaviorSubject<String?> { get }
+    var queryRelay: BehaviorRelay<String?> { get }
     var photos: Observable<RequestResponse<[Photo]>> { get }
     
     func loadMorePage()
@@ -22,7 +23,7 @@ class SearchPhotoInteractor: BaseInteractor {
     
     private let repository: PhotoRepositoryProtocol
     
-    let querySubject = BehaviorSubject<String?>(value: nil)
+    let queryRelay = BehaviorRelay<String?>(value: nil)
     
     private var oldQuery: String?
     private var page: Int = 1
@@ -40,8 +41,8 @@ extension SearchPhotoInteractor: SearchPhotoInteractorProtocol {
     }
     
     var photos: Observable<RequestResponse<[Photo]>> {
-        return querySubject
-            .debounce(0.8, scheduler: MainScheduler.instance)
+        return queryRelay
+            .debounce(0.5, scheduler: MainScheduler.instance)
             .flatMap {[weak self] (query) -> Observable<RequestResponse<[Photo]>> in
                 guard let self = self else { return Observable.empty() }
                 
@@ -77,6 +78,6 @@ extension SearchPhotoInteractor: SearchPhotoInteractorProtocol {
     
     func loadMorePage() {
         page += 1
-        querySubject.onNext(oldQuery)
+        queryRelay.accept(oldQuery)
     }
 }

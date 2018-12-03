@@ -53,17 +53,12 @@
                                     <constraint firstItem="ql0-bs-rrz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="wcu-Vt-rVE" secondAttribute="top" constant="16" id="ykn-lH-GcX"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RqV-iP-Ygv">
-                                <rect key="frame" x="97.5" y="137.5" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="RqV-iP-Ygv" firstAttribute="centerX" secondItem="ch1-9o-XI6" secondAttribute="centerX" id="73F-4w-6Xx"/>
                             <constraint firstAttribute="bottom" secondItem="wcu-Vt-rVE" secondAttribute="bottom" id="A76-cr-s8w"/>
                             <constraint firstAttribute="trailing" secondItem="wcu-Vt-rVE" secondAttribute="trailing" id="IqM-bL-GDt"/>
                             <constraint firstItem="wcu-Vt-rVE" firstAttribute="leading" secondItem="ch1-9o-XI6" secondAttribute="leading" id="PqD-UG-bMK"/>
-                            <constraint firstItem="RqV-iP-Ygv" firstAttribute="centerY" secondItem="ch1-9o-XI6" secondAttribute="centerY" id="XVT-Nw-gxy"/>
                             <constraint firstAttribute="trailing" secondItem="GZd-tb-alb" secondAttribute="trailing" id="bM2-X6-RkC"/>
                             <constraint firstItem="GZd-tb-alb" firstAttribute="leading" secondItem="ch1-9o-XI6" secondAttribute="leading" id="iUT-GU-so3"/>
                             <constraint firstItem="GZd-tb-alb" firstAttribute="top" secondItem="ch1-9o-XI6" secondAttribute="top" id="icN-w7-osi"/>
@@ -81,7 +76,6 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="231" height="311"/>
             <connections>
-                <outlet property="activityIndicatorView" destination="RqV-iP-Ygv" id="EQY-Lq-SNl"/>
                 <outlet property="containerView" destination="ch1-9o-XI6" id="5kV-En-xFr"/>
                 <outlet property="imageView" destination="GZd-tb-alb" id="4lu-4J-8pd"/>
                 <outlet property="infoContainerView" destination="wcu-Vt-rVE" id="h0u-4a-a7A"/>
