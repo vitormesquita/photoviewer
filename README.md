@@ -2,7 +2,7 @@
 
 A photo viewer application which consumes a third-party photos API. Basically the application has 3 features:
 
-- List the newests photos uploaded on API
+- List the newest photos uploaded on API
 - Search by a photo 
 - Show the photo's details which can be downloaded to your photo library. 
 
@@ -13,7 +13,7 @@ There are some improvies that I would like to do if I have more time. Which are:
 - A section of favorites photos (maybe save in a local database)
 - User session to interact more with API for example likes photos, upload new photos and follow people 
 
-The API that I've used to build these project is from [https://unsplash.com](https://unsplash.com) and I've used just requests that don't need to be authenticated.
+The API that I've used to build these project is from [https://unsplash.com](https://unsplash.com) and I've used just requests that don't need to be authenticated. It returns to me not optimized photos, so the app on debug can appear consuming more memory than others photo viewer apps.
 
 In this project the iOS stack was:
 
