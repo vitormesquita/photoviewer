@@ -102,13 +102,21 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
 
 extension PhotoCollectionViewCell {
     
+    private func setImage(_ image: UIImage) {
+        self.imageView.alpha = 0
+        self.imageView.image = image
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            self.imageView.alpha = 1
+        })
+    }
+    
     private func downloadImageBy(url: URL) {
         if let cachedImage = ImageDownloader.shared.getImageFromCacheBy(url: url) {
             setImage(cachedImage)
             
         } else {
-            activityIndicatorView.startAnimating()
-            
+            activityIndicatorView.startAnimating()            
             imageDataTask = URLSession.shared.dataTask(with: url) {[weak self] (data, response, error) in
                 guard let self = self else { return }                
                 DispatchQueue.main.async {
@@ -125,14 +133,5 @@ extension PhotoCollectionViewCell {
             
             imageDataTask?.resume()
         }
-    }
-    
-    private func setImage(_ image: UIImage) {
-        self.imageView.alpha = 0
-        self.imageView.image = image
-        
-        UIView.animate(withDuration: 0.4, animations: {
-            self.imageView.alpha = 1
-        })
     }
 }
