@@ -44,7 +44,7 @@ In VIPER it's normal to use `Input` and `Output` protocols to comunicate between
 
 So the flow is:
 
-![VIPER flow](/images/logo.png)
+![VIPER flow](https://github.com/vitormesquita/photoviewer/blob/develop/Assets/viper-oneway-flow.png)
 
 I'm using `RxSwift` to implement this flow without `Input`/`Output` protocols, because I think to use one way binging becomes the code clearer, flexible, light and maintainable.
 
