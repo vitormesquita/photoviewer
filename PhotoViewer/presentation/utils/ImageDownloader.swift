@@ -30,7 +30,7 @@ class ImageDownloader {
         return imageCache.object(forKey: url.absoluteString as NSString)
     }
     
-    func imageBy(url: URL?, completion: @escaping ((UIImage?) -> Void)) {
+    func imageBy(url: URL?, saveInCache: Bool = true, completion: @escaping ((UIImage?) -> Void)) {
         guard let url = url else { return }
         
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
@@ -45,7 +45,10 @@ class ImageDownloader {
                     
                     if let data = data, let imageByData = UIImage(data: data) {
                         image = imageByData
-                        self.imageCache.setObject(imageByData, forKey: url.absoluteString as NSString)
+                        
+                        if saveInCache {
+                            self.imageCache.setObject(imageByData, forKey: url.absoluteString as NSString)
+                        }
                     }
                     
                     DispatchQueue.main.async {

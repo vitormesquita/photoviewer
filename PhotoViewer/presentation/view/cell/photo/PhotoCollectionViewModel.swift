@@ -17,7 +17,7 @@ class PhotoCollectionViewModel {
     init(photo: Photo) {
         self.photo = photo
         
-        ImageDownloader.shared.imageBy(url: photo.user.thumbURL) {[weak self] (image) in
+        ImageDownloader.shared.imageBy(url: photo.user.thumbURL, saveInCache: false) {[weak self] (image) in
             guard let self = self else { return }
             self.userImageSubject.onNext(image)
         }
