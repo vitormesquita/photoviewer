@@ -46,7 +46,7 @@ extension BaseCollectionViewController {
             collectionConstraints = constraints
         } else {
             collectionConstraints = [
-                collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
                 collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
                 collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
                 collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8)

@@ -23,16 +23,8 @@ class SearchPhotosViewController: BaseCollectionViewController {
     }()
     
     override func loadView() {
-        super.loadView()
-        
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
-        ]
-        
-        addCollectionView(constraints: constraints)
+        super.loadView()        
+        addCollectionView()
     }
     
     override func viewDidLoad() {

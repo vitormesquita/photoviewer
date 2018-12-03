@@ -34,12 +34,12 @@ class PhotoDetailsPresenter: BasePresenter {
     }
     
     private func downloadImages() {
-        ImageDownloader.imageBy(url: photo.pictures.regular) {[weak self] (image) in
+        ImageDownloader.shared.imageBy(url: photo.pictures.regular) {[weak self] (image) in
             guard let self = self else { return }
             self.photoImageSubject.onNext(image)
         }
         
-        ImageDownloader.imageBy(url: photo.user.thumbURL) {[weak self] (image) in
+        ImageDownloader.shared.imageBy(url: photo.user.thumbURL) {[weak self] (image) in
             guard let self = self else { return }
             self.userImageSubject.onNext(image)
         }
@@ -79,9 +79,11 @@ extension PhotoDetailsPresenter: PhotoDetailsPresenterProtocol {
     
     func downloadDidTap() {
         viewStateSubject.onNext(.loading)
-        ImageDownloader.imageBy(url: photo.downloadURL) {[weak self] (image) in
+        ImageDownloader.shared.imageBy(url: photo.downloadURL) {[weak self] (image) in
             guard let self = self else { return }
             self.viewStateSubject.onNext(.normal)
+            
+            guard let image = image else { return }
             self.imageDownloadedSubject.onNext(image)
         }
     }

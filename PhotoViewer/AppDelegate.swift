@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        ImageDownloader.imageCache.removeAllObjects()
+        ImageDownloader.shared.clearCache()
     }
 }
 

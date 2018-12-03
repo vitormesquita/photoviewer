@@ -22,7 +22,6 @@ extension UIColor {
     }
 }
 
-
 extension UIScrollView {
     
     func addInfinityScrollRefreshView(handler: @escaping () -> Void) {
