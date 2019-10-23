@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '9.0'
+ platform :ios, '10.0'
 
 target 'PhotoViewer' do
   use_frameworks!
@@ -14,6 +14,6 @@ target 'PhotoViewer' do
   pod 'RxCocoa'
 
   #API
-  pod 'Moya/RxSwift'
+  pod 'Moya/RxSwift', '~> 14.0.0-beta.4'
   
 end

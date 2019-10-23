@@ -1,50 +1,47 @@
 PODS:
-  - Alamofire (4.8.0)
+  - Alamofire (5.0.0-rc.2)
   - INSPullToRefresh (1.2.0)
-  - Mextension (0.2):
-    - Mextension/All (= 0.2)
-  - Mextension/All (0.2)
-  - Moya/Core (11.0.2):
-    - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - Moya/RxSwift (11.0.2):
+  - Mextension (0.5.1):
+    - Mextension/All (= 0.5.1)
+  - Mextension/All (0.5.1)
+  - Moya/Core (14.0.0-beta.4):
+    - Alamofire (= 5.0.0-rc.2)
+  - Moya/RxSwift (14.0.0-beta.4):
     - Moya/Core
-    - RxSwift (~> 4.0)
-  - Result (3.2.4)
-  - RxAtomic (4.4.0)
-  - RxCocoa (4.4.0):
-    - RxSwift (~> 4.0)
-  - RxSwift (4.4.0):
-    - RxAtomic (~> 4.4)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
 
 DEPENDENCIES:
   - INSPullToRefresh
   - Mextension
-  - Moya/RxSwift
+  - Moya/RxSwift (~> 14.0.0-beta.4)
   - RxCocoa
   - RxSwift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - INSPullToRefresh
     - Mextension
     - Moya
-    - Result
-    - RxAtomic
     - RxCocoa
+    - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
   INSPullToRefresh: d34f0046ccca6b32f6386f053d730ef41b3f35b7
-  Mextension: 99e7252eacb7050d4c2d0d9655b6b476682ca8d7
-  Moya: a725035953bc1c0eb1be505ab903984501d82440
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
-  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
-  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  Mextension: afd544fa723329bcabdd29b729a42d1deda93ab3
+  Moya: 53fa45a72929809e0b8bba44a0a53d8d0827bcfe
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
 
-PODFILE CHECKSUM: 1b818992f5d8f19450609f1fc7399c069c607e49
+PODFILE CHECKSUM: 5a990b3952e34e41b4434ff985f13d4b8bc9bf63
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.0

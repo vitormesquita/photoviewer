@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,8 +21,6 @@
 		FC62F2F121B0414700E1A7F6 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2F021B0414700E1A7F6 /* APIClient.swift */; };
 		FC62F2F421B0441100E1A7F6 /* PhotoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2F321B0441100E1A7F6 /* PhotoAPI.swift */; };
 		FC62F2F821B06BB000E1A7F6 /* PictureAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2F721B06BB000E1A7F6 /* PictureAPI.swift */; };
-		FC62F2FB21B07DC000E1A7F6 /* Single+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2FA21B07DC000E1A7F6 /* Single+Codable.swift */; };
-		FC62F2FD21B07F6B00E1A7F6 /* Response+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2FC21B07F6B00E1A7F6 /* Response+Codable.swift */; };
 		FC62F30121B0820D00E1A7F6 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F2FF21B0820D00E1A7F6 /* PhotoCollectionViewCell.swift */; };
 		FC62F30221B0820D00E1A7F6 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC62F30021B0820D00E1A7F6 /* PhotoCollectionViewCell.xib */; };
 		FC62F30421B099E700E1A7F6 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F30321B099E700E1A7F6 /* BaseCollectionViewCell.swift */; };
@@ -73,8 +71,6 @@
 		FC62F2F021B0414700E1A7F6 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		FC62F2F321B0441100E1A7F6 /* PhotoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPI.swift; sourceTree = "<group>"; };
 		FC62F2F721B06BB000E1A7F6 /* PictureAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureAPI.swift; sourceTree = "<group>"; };
-		FC62F2FA21B07DC000E1A7F6 /* Single+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Single+Codable.swift"; sourceTree = "<group>"; };
-		FC62F2FC21B07F6B00E1A7F6 /* Response+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+Codable.swift"; sourceTree = "<group>"; };
 		FC62F2FF21B0820D00E1A7F6 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC62F30021B0820D00E1A7F6 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC62F30321B099E700E1A7F6 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -192,15 +188,6 @@
 			path = entities;
 			sourceTree = "<group>";
 		};
-		FC62F2F921B07DA800E1A7F6 /* utils */ = {
-			isa = PBXGroup;
-			children = (
-				FC62F2FC21B07F6B00E1A7F6 /* Response+Codable.swift */,
-				FC62F2FA21B07DC000E1A7F6 /* Single+Codable.swift */,
-			);
-			path = utils;
-			sourceTree = "<group>";
-		};
 		FC62F2FE21B081F700E1A7F6 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,7 +287,6 @@
 		FC951A4E21B0324300ABF0E1 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				FC62F2F921B07DA800E1A7F6 /* utils */,
 				FC62F2ED21B0411C00E1A7F6 /* api */,
 				FC62F2F221B043EF00E1A7F6 /* entities */,
 				FC62F30A21B09F1600E1A7F6 /* repositories */,
@@ -474,34 +460,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/INSPullToRefresh/INSPullToRefresh.framework",
-				"${BUILT_PRODUCTS_DIR}/Mextension/Mextension.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/INSPullToRefresh.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mextension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -517,7 +484,6 @@
 				FC62F2E821B03C4500E1A7F6 /* PhotosWireFrame.swift in Sources */,
 				FC951A5621B0353F00ABF0E1 /* BaseWireFrame.swift in Sources */,
 				FC39ECED21B2C1D800B63F6C /* LoadingView.swift in Sources */,
-				FC62F2FB21B07DC000E1A7F6 /* Single+Codable.swift in Sources */,
 				FC951A5A21B0355B00ABF0E1 /* BasePresenter.swift in Sources */,
 				FC9B25C721B2D4A90016A465 /* PhotoDetailsWireFrame.swift in Sources */,
 				FC62F2F421B0441100E1A7F6 /* PhotoAPI.swift in Sources */,
@@ -531,7 +497,6 @@
 				FCBBF66221B1F7F600EFC595 /* SearchPhotoResultAPI.swift in Sources */,
 				FC62F30421B099E700E1A7F6 /* BaseCollectionViewCell.swift in Sources */,
 				FC62F31121B09FFB00E1A7F6 /* RequestResponse.swift in Sources */,
-				FC62F2FD21B07F6B00E1A7F6 /* Response+Codable.swift in Sources */,
 				FC62F2EF21B0413500E1A7F6 /* APITarget.swift in Sources */,
 				FC62F30E21B09F6600E1A7F6 /* PhotoRepository.swift in Sources */,
 				FC62F2F821B06BB000E1A7F6 /* PictureAPI.swift in Sources */,
@@ -700,7 +665,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = vitormesquita.PhotoViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -720,7 +685,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = vitormesquita.PhotoViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -50,6 +50,8 @@ extension InifiteScrollView: INSInfiniteScrollBackgroundViewDelegate {
             activityIndicatorView.stopAnimating()
         case .loading:
             activityIndicatorView.startAnimating()
-        }
+        @unknown default:
+         break
+      }
     }
 }

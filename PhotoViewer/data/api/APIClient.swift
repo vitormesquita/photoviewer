@@ -6,27 +6,26 @@
 //  Copyright © 2018 Vitor Mesquita. All rights reserved.
 //
 
-import RxSwift
 import Moya
-import Result
+import RxSwift
 
 protocol APIClientProtocol {
-    
-    func getPhotos(page: Int) -> Single<[PhotoAPI]>
-    func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI>
+   
+   func getPhotos(page: Int) -> Single<[PhotoAPI]>
+   func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI>
 }
 
 class APIClient: APIClientProtocol {
-    
-    func getPhotos(page: Int) -> Single<[PhotoAPI]> {
-        return provider.rx
-            .request(.photos(page: page))
-            .mapArray(PhotoAPI.self)
-    }
-    
-    func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI> {
-        return provider.rx
-            .request(.searchPhotos(query: query, page: page))
-            .mapObject(SearchPhotoResultAPI.self)
-    }
+   
+   func getPhotos(page: Int) -> Single<[PhotoAPI]> {
+      return provider.rx
+         .request(.photos(page: page))
+         .map([PhotoAPI].self)
+   }
+   
+   func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI> {
+      return provider.rx
+         .request(.searchPhotos(query: query, page: page))
+         .map(SearchPhotoResultAPI.self)
+   }
 }
