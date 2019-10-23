@@ -25,7 +25,7 @@ let provider = MoyaProvider<APITarget>( endpointClosure: { (target) -> Endpoint 
          case .ended:
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
          }
-      }      
+      }
    },
    NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration(logOptions: .verbose))
 ])
