@@ -10,41 +10,41 @@ import Foundation
 import Mextension
 
 struct Photo {
-    
-    var id: String
-    var createdAt: Date
-    var color: String
-    var likes: Int
-    var pictures: Picture
-    var user: User
-    var downloadURL: URL
-    var description: String?
+   
+   var id: String
+   var createdAt: Date
+   var color: String
+   var likes: Int
+   var pictures: Picture
+   var user: User
+   var downloadURL: URL
+   var description: String?
 }
 
 extension Photo {
-    
-    static func map(photoAPI: PhotoAPI) -> Photo? {
-        guard let id = photoAPI.id,
-            let createdAt = Date.dateFrom(string: photoAPI.createdAt),
-            let color = photoAPI.color,
-            let likes = photoAPI.likes,
-            let picture = Picture.map(pictureAPI: photoAPI.pictures),
-            let user = User.map(userAPI: photoAPI.user),
-            let downloadURL = photoAPI.links?.download else {
-                return nil
-        }
-        
-        return Photo(id: id,
-                     createdAt: createdAt,
-                     color: color,
-                     likes: likes,
-                     pictures: picture,
-                     user: user,
-                     downloadURL: downloadURL,
-                     description: photoAPI.description)
-    }
-    
-    static func mapArray(photoAPI: [PhotoAPI]) -> [Photo] {
-        return photoAPI.compactMap(map(photoAPI:))
-    }
+   
+   static func map(photoAPI: PhotoAPI) -> Photo? {
+      guard let id = photoAPI.id,
+         let createdAt = Date.dateFrom(string: photoAPI.createdAt),
+         let color = photoAPI.color,
+         let likes = photoAPI.likes,
+         let picture = Picture.map(pictureAPI: photoAPI.pictures),
+         let user = User.map(userAPI: photoAPI.user),
+         let downloadURL = photoAPI.links?.download else {
+            return nil
+      }
+      
+      return Photo(id: id,
+                   createdAt: createdAt,
+                   color: color,
+                   likes: likes,
+                   pictures: picture,
+                   user: user,
+                   downloadURL: downloadURL,
+                   description: photoAPI.description)
+   }
+   
+   static func mapArray(photoAPI: [PhotoAPI]) -> [Photo] {
+      return photoAPI.compactMap(map(photoAPI:))
+   }
 }

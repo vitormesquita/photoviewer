@@ -9,8 +9,8 @@
 import Foundation
 
 enum RequestResponse<T> {
-    case new
-    case loading
-    case failure(Error)
-    case success(T)
+   case new
+   case loading
+   case failure(Error)
+   case success(T)
 }

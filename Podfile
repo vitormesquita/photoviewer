@@ -16,4 +16,8 @@ target 'PhotoViewer' do
   #API
   pod 'Moya/RxSwift', '~> 14.0.0-beta.4'
   
+  target 'PhotoViewerTests' do
+  end  
 end
+
+
