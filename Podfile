@@ -17,6 +17,8 @@ target 'PhotoViewer' do
   pod 'Moya/RxSwift', '~> 14.0.0-beta.4'
   
   target 'PhotoViewerTests' do
+    pod 'Quick'
+    pod 'Nimble'
   end  
 end
 

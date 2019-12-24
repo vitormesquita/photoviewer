@@ -9,21 +9,21 @@
 import UIKit
 
 class BaseNavigationController: UINavigationController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        applyLayout()
-    }
-    
-    private func applyLayout() {
-        navigationBar.tintColor = .gray
-        navigationBar.barTintColor = .white
-        navigationBar.shadowImage = UIImage()
-        
-        let textAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.gray
-        ]
-        
-        navigationBar.titleTextAttributes = textAttributes
-    }
+   
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      applyLayout()
+   }
+   
+   private func applyLayout() {
+      navigationBar.tintColor = .gray
+      navigationBar.barTintColor = .white
+      navigationBar.shadowImage = UIImage()
+      
+      let textAttributes = [
+         NSAttributedString.Key.foregroundColor: UIColor.gray
+      ]
+      
+      navigationBar.titleTextAttributes = textAttributes
+   }
 }

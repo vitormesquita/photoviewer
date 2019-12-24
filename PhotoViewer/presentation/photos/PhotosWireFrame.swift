@@ -8,14 +8,6 @@
 
 import UIKit
 
-protocol PhotosWireFrameProtocol: class {
- 
-    func goToSearch()
-    func showPhotoDetails(photo: Photo)
-    
-    func getPhotoDetailsViewControllerBy(photo: Photo) -> UIViewController
-}
-
 class PhotosWireFrame: BaseWireFrame {
 
     init() {
@@ -37,7 +29,7 @@ class PhotosWireFrame: BaseWireFrame {
     }
 }
 
-extension PhotosWireFrame: PhotosWireFrameProtocol {
+extension PhotosWireFrame: PhotosRouterProtocol {
     
     func goToSearch() {
         let searchPhotoWireFrame = SearchPhotosWireFrame()
