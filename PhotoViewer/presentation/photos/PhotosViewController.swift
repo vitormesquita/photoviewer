@@ -13,8 +13,9 @@ class PhotosViewController: BaseCollectionViewController {
    var presenter: PhotosPresenterProtocol {
       return basePresenter as! PhotosPresenterProtocol
    }
-   
-   private let searchBar = UISearchBar()
+
+   private var viewModels: [PhotoCollectionViewModelProtocol] = []
+   private let searchController = UISearchController(searchResultsController: nil)
    
    override func loadView() {
       super.loadView()
@@ -23,33 +24,38 @@ class PhotosViewController: BaseCollectionViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      applyLayout()
+      bind()
       configureCollectionView()
+            
+      searchController.searchResultsUpdater = self
       
-      searchBar.sizeToFit()
-      navigationItem.titleView = searchBar
+      navigationItem.title = "Photos"
+      navigationItem.largeTitleDisplayMode = .automatic
+      navigationItem.hidesSearchBarWhenScrolling = false
+      navigationItem.searchController = searchController
       
-      //      if traitCollection.forceTouchCapability == .available {
-      //         registerForPreviewing(with: self, sourceView: collectionView)
-      //      }
+      navigationController?.navigationBar.prefersLargeTitles = true
    }
    
-   override func bind() {
-      super.bind()
-      
+   private func bind() {
       collectionView.addInfinityScrollRefreshView {[unowned self] in
          self.presenter.didScrollAtEnd()
       }
       
-      presenter.insertedItems
-         .subscribe(onNext: {[weak self] in
+      presenter.viewModels
+         .drive(onNext: { [weak self] (viewModels) in
             guard let self = self else { return }
-            
-            self.collectionView.performBatchUpdates({
-               self.collectionView.reloadSections(IndexSet(integer: 0))
-            }, completion: { (finished) in
-               self.collectionView.ins_endInfinityScroll()
-            })
+            self.viewModels = viewModels
+            self.reloadCollectionView()
+         })
+         .disposed(by: disposeBag)
+      
+      presenter.error
+         .drive(onNext: { [weak self] (error) in
+            guard let self = self else { return }
+            self.reloadCollectionView()
+            print("TEM ERRO ---------->")
+            print(error)
          })
          .disposed(by: disposeBag)
    }
@@ -60,25 +66,24 @@ class PhotosViewController: BaseCollectionViewController {
       collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
    }
    
-   private func applyLayout() {
-      searchBar.delegate = self
-      searchBar.placeholder = "Search photos"
-      searchBar.tintColor = .gray
-      searchBar.textField?.textColor = .gray
-      searchBar.textField?.backgroundColor = .searchBar
-      searchBar.setImage(UIImage(named: "ic_search")?.withRenderingMode(.alwaysTemplate), for: .search, state: .normal)
+   private func reloadCollectionView() {
+      self.collectionView.performBatchUpdates({
+         self.collectionView.reloadSections(IndexSet(integer: 0))
+      }, completion: { (finished) in
+         self.collectionView.ins_endInfinityScroll()
+      })
    }
 }
 
 extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSource {
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return presenter.viewModels.count
+      return viewModels.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.nibName, for: indexPath) as! PhotoCollectionViewCell
-      cell.bindIn(viewModel: presenter.viewModels[indexPath.item])
+      cell.bindIn(viewModel: viewModels[indexPath.item])
       return cell
    }
    
@@ -87,31 +92,9 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSo
    }
 }
 
-extension PhotosViewController: UISearchBarDelegate {
+extension PhotosViewController: UISearchResultsUpdating {
    
-   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-      presenter.searchDidTap()
-      return false
+   func updateSearchResults(for searchController: UISearchController) {
+      print(searchController.searchBar.text ?? "")
    }
 }
-
-//extension PhotosViewController: UIViewControllerPreviewingDelegate {
-//   func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-//      guard let indexPath = collectionView.indexPathForItem(at: location),
-//         let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell  else {
-//            return nil
-//      }
-//
-//      let viewRect = collectionView.convert(cell.frame, to: cell.superview!)
-//      previewingContext.sourceRect = viewRect
-//
-//      let viewController = presenter.viewControllerBy(index: indexPath.item)
-//      viewController?.preferredContentSize = CGSize(width: 0, height: 360)
-//      return viewController
-//   }
-//
-//   func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-//      guard let indexPath = collectionView.indexPathForItem(at: previewingContext.sourceRect.origin) else { return }
-//      presenter.didSelected(item: indexPath.item)
-//   }
-//}

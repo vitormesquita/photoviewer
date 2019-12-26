@@ -19,6 +19,9 @@ target 'PhotoViewer' do
   target 'PhotoViewerTests' do
     pod 'Quick'
     pod 'Nimble'
+    pod 'RxTest'
+    pod 'RxBlocking'
+    pod 'RxNimble', subspecs: ['RxBlocking', 'RxTest']
   end  
 end
 

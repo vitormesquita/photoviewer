@@ -9,40 +9,44 @@
 import UIKit
 import RxSwift
 
-class PhotoCollectionViewModel {
-    
-    let photo: Photo
-    private let userImageSubject = BehaviorSubject<UIImage?>(value: nil)
-    
-    init(photo: Photo) {
-        self.photo = photo
-        
-        ImageDownloader.shared.imageBy(url: photo.user.thumbURL, saveInCache: false) {[weak self] (image) in
-            guard let self = self else { return }
-            self.userImageSubject.onNext(image)
-        }
-    }
+class PhotoCollectionViewModel: Equatable {
+
+   let photo: Photo
+   private let userImageSubject = BehaviorSubject<UIImage?>(value: nil)
+   
+   init(photo: Photo) {
+      self.photo = photo
+      
+      ImageDownloader.shared.imageBy(url: photo.user.thumbURL, saveInCache: false) {[weak self] (image) in
+         guard let self = self else { return }
+         self.userImageSubject.onNext(image)
+      }
+   }
+   
+   static func == (lhs: PhotoCollectionViewModel, rhs: PhotoCollectionViewModel) -> Bool {
+      return lhs.photo == rhs.photo
+   }
 }
 
 extension PhotoCollectionViewModel: PhotoCollectionViewModelProtocol {
-    
-    var userName: String {
-        return photo.user.name
-    }
-    
-    var description: String? {
-        return photo.description
-    }
-    
-    var backgroundColor: UIColor {
-        return UIColor.colorFrom(hex: photo.color)
-    }
-    
-    var userImage: Observable<UIImage?> {
-        return userImageSubject.asObservable()
-    }
-    
-    var photoURL: Observable<URL> {
-        return Observable.just(photo.pictures.regular)
-    }
+   
+   var userName: String {
+      return photo.user.name
+   }
+   
+   var description: String? {
+      return photo.description
+   }
+   
+   var backgroundColor: UIColor {
+      return UIColor.colorFrom(hex: photo.color)
+   }
+   
+   var userImage: Observable<UIImage?> {
+      return userImageSubject.asObservable()
+   }
+   
+   var photoURL: Observable<URL> {
+      return Observable.just(photo.pictures.regular)
+   }
 }

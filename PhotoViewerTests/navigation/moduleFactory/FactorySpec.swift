@@ -20,15 +20,10 @@ class FactorySpec: QuickSpec {
             //Arrange
             let expectType = PhotosViewController.self
             //Act
-            let viewController = PhotoFactory.photos(router: MockRouter())
+            let viewController = PhotoFactory.photos(router: PhotosRouterMock())
             //Assert
             expect(viewController).to(beAKindOf(expectType))
          }
       }
    }
-}
-
-class MockRouter: PhotosRouterProtocol {   
-   func goToSearch() { }
-   func showPhotoDetails(photo: Photo) { }
 }

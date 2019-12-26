@@ -9,8 +9,8 @@
 import Foundation
 import Mextension
 
-struct Photo {
-   
+struct Photo: Equatable {
+
    var id: String
    var createdAt: Date
    var color: String
@@ -19,6 +19,10 @@ struct Photo {
    var user: User
    var downloadURL: URL
    var description: String?
+   
+   static func == (lhs: Photo, rhs: Photo) -> Bool {
+      return lhs.id == rhs.id && lhs.user.id == rhs.user.id
+   }
 }
 
 extension Photo {

@@ -7,31 +7,25 @@
 //
 
 import RxSwift
+import RxCocoa
 
 protocol PhotosRouterProtocol: class {
-   
-   func goToSearch()
    func showPhotoDetails(photo: Photo)
 }
 
 protocol PhotosPresenterProtocol: BasePresenterProtocol {
    
-   var insertedItems: Observable<Void> { get }
-   var viewModels: [PhotoCollectionViewModelProtocol] { get }
-   
-   func searchDidTap()
+   var error: Driver<String> { get }
+   var viewModels: Driver<[PhotoCollectionViewModel]> { get }
    
    func didScrollAtEnd()
    func didSelected(item: Int)
-   //   func viewControllerBy(index: Int) -> UIViewController?
 }
 
 class PhotosPresenter: BasePresenter {
    
    weak var router: PhotosRouterProtocol?
    let interactor: PhotosInteractorProtocol
-   
-   private var cachedViewModels = [PhotoCollectionViewModel]()
    
    init(interactor: PhotosInteractorProtocol) {
       self.interactor = interactor
@@ -41,37 +35,24 @@ class PhotosPresenter: BasePresenter {
 
 extension PhotosPresenter: PhotosPresenterProtocol {
    
-   var insertedItems: Observable<Void> {
-      return interactor.photos.flatMap {[unowned self] (response) -> Observable<Void> in
-         self.viewStateSubject.onNext(.normal)
-         
-         switch response {
-         case .success(let photo):
-            let viewModels = photo.map { PhotoCollectionViewModel(photo: $0)}
-            self.cachedViewModels.append(contentsOf: viewModels)
-            return Observable.just(())
-            
-         case .failure(let error):
-            print(error.localizedDescription)
-            guard self.cachedViewModels.isEmpty else {
-               return Observable.just(())
-            }
-            
-         case .loading:
-            if self.cachedViewModels.isEmpty {
-               self.viewStateSubject.onNext(.loading)
-            }
-            
-         default:
-            break
-         }
-         
-         return Observable.empty()
+   var error: Driver<String> {
+      return interactor.photos
+         .filter { $0.isError }
+         .map { response -> String in
+            guard case .failure(let error) = response else { return "" }
+            return error.localizedDescription
       }
+      .asDriver(onErrorJustReturn: "")
    }
    
-   var viewModels: [PhotoCollectionViewModelProtocol] {
-      return cachedViewModels
+   var viewModels: Driver<[PhotoCollectionViewModel]> {
+      return interactor.photos
+         .filter { $0.isSuccess }
+         .map { (response) -> [PhotoCollectionViewModel] in
+            guard case .success(let photos) = response else { return [] }
+            return photos.map { PhotoCollectionViewModel(photo: $0) }
+      }
+      .asDriver(onErrorJustReturn: [])
    }
    
    func didScrollAtEnd() {
@@ -79,16 +60,7 @@ extension PhotosPresenter: PhotosPresenterProtocol {
    }
    
    func didSelected(item: Int) {
-      guard item < cachedViewModels.count else { return }
-      router?.showPhotoDetails(photo: cachedViewModels[item].photo)
+      guard let photo = interactor.getPhotoBy(index: item) else { return }
+      router?.showPhotoDetails(photo: photo)
    }
-   
-   func searchDidTap() {
-      router?.goToSearch()
-   }
-   
-   //   func viewControllerBy(index: Int) -> UIViewController? {
-   //      guard index < cachedViewModels.count else { return nil }
-   //      return router?.getPhotoDetailsViewControllerBy(photo: cachedViewModels[index].photo)
-   //   }
 }

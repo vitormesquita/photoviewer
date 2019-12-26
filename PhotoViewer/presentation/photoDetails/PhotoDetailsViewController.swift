@@ -51,9 +51,7 @@ class PhotoDetailsViewController: BaseViewController {
         navigationItem.rightBarButtonItem = actionsButton
     }
     
-    override func bind() {
-        super.bind()
-        
+    func bind() {        
         presenter.imageDownloaded
             .subscribe(onNext: {[weak self] (image) in
                 guard let self = self else { return }

@@ -14,3 +14,10 @@ enum RequestResponse<T> {
    case failure(Error)
    case success(T)
 }
+
+//enum ViewResponse<T> {
+//   case new
+//   case loading
+//   case failure(String)
+//   case success(T)
+//}
