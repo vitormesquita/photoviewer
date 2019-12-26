@@ -17,20 +17,35 @@ The API that I've used to build these project is from [https://unsplash.com](htt
 
 In this project the iOS stack was:
 
-- Swift 4.2
-- Xcode 10.1
+- Swift 5.0
+- Xcode 11.3
 - VIPER architecture
-- Rective programming using `RxSwift`
+- Rective programming using `RxSwift` and  `RxCocoa`
 
 ## Installation
 
-To build the project you have to install [Cocoapods](https://cocoapods.org/) to manage all dependenciesm, run this command line on your shell:
+To manage all dependencies the project is using [Cocoapods](https://cocoapods.org/). 
+
+To install cocoapods you need set your `gemset` on [RVM](https://rvm.io/), run these commands lines on your shell:
 
 ```
-$ sudo gem install cocoapods
+$ echo photo-viewer-ios > .ruby-gemset && echo 2.6.3 > .ruby-version
+$ cd .
 ```
 
-After installing cocoapods enter the project and run this command:
+After install `bundler` to install all gem dependencies:
+
+```
+$ gem install bundler
+```
+
+Run `bundler`
+
+```
+$ bundle
+```
+
+After installing cocoapods run this command to install all project's dependencies:
 
 ```
 $ pod install
@@ -44,7 +59,7 @@ In VIPER it's normal to use `Input` and `Output` protocols to comunicate between
 
 So the flow is:
 
-![VIPER flow](https://github.com/vitormesquita/photoviewer/blob/develop/Assets/viper-oneway-flow.png)
+![VIPER flow](./Assets/viper-oneway-flow.png)
 
 I'm using `RxSwift` to implement this flow without `Input`/`Output` protocols, because I think to use one way binging becomes the code clearer, flexible, light and maintainable.
 
