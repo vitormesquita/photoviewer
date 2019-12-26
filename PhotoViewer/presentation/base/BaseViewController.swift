@@ -12,9 +12,6 @@ import RxSwift
 class BaseViewController: UIViewController {
    
    let basePresenter: BasePresenterProtocol
-   let disposeBag = DisposeBag()
-   
-   private var placeholderView: UIView?
    
    init(presenter: BasePresenterProtocol) {
       self.basePresenter = presenter
@@ -40,44 +37,85 @@ class BaseViewController: UIViewController {
    }
 }
 
-extension BaseViewController {
+protocol LoadingPresentable {
+   func showLoading()
+   func hideLoading()
+}
+
+extension LoadingPresentable where Self: UIViewController {
    
-   func hidePlaceholders() {
-      guard let placeholderView = placeholderView else { return }
-      placeholderView.removeFromSuperview()
+   private func findLoadingView() -> LoadingView? {
+      return view.subviews.compactMap { $0 as? LoadingView }.first
    }
    
    func showLoading() {
-      hidePlaceholders()
-      let loadingView = LoadingView.loadNibName()
-      showPlaceholderWith(view: loadingView)
-      loadingView.startAnimating()
-   }
-   
-   func showEmptyViewWith(text: String) {
-      hidePlaceholders()
-      let emptyView = EmptyView.loadNibName()
-      showPlaceholderWith(view: emptyView)
-      emptyView.setText(text)
-   }
-   
-   private func showPlaceholderWith(view: UIView) {
-      view.alpha = 0
-      view.translatesAutoresizingMaskIntoConstraints = false
-      self.view.addSubview(view)
+      if let loadingView = findLoadingView() {
+         view.bringSubviewToFront(loadingView)
+         return
+      }
       
-      let constraints = [
+      let loadingView = LoadingView.loadNibName()
+      loadingView.alpha = 0
+      loadingView.translatesAutoresizingMaskIntoConstraints = false
+      self.view.addSubview(loadingView)
+      
+      NSLayoutConstraint.activate([
          view.topAnchor.constraint(equalTo: self.view.topAnchor),
          view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
          view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
          view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-      ]
-      
-      NSLayoutConstraint.activate(constraints)
-      self.placeholderView = view
-      
+      ])
+            
       UIView.animate(withDuration: 0.5) {
-         view.alpha = 1
+         loadingView.alpha = 1
+      }
+   }
+   
+   func hideLoading() {
+      guard let loadingView = findLoadingView() else { return }
+      loadingView.removeFromSuperview()
+   }
+   
+   func isLoadingVisible(_ isVisible: Bool) {
+      if isVisible {
+         showLoading()
+      } else {
+         hideLoading()
       }
    }
 }
+
+//extension BaseViewController {
+//
+//   func hidePlaceholders() {
+//      guard let placeholderView = placeholderView else { return }
+//      placeholderView.removeFromSuperview()
+//   }
+//
+//   func showEmptyViewWith(text: String) {
+//      hidePlaceholders()
+//      let emptyView = EmptyView.loadNibName()
+//      showPlaceholderWith(view: emptyView)
+//      emptyView.setText(text)
+//   }
+//
+//   private func showPlaceholderWith(view: UIView) {
+//      view.alpha = 0
+//      view.translatesAutoresizingMaskIntoConstraints = false
+//      self.view.addSubview(view)
+//
+//      let constraints = [
+//         view.topAnchor.constraint(equalTo: self.view.topAnchor),
+//         view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+//         view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+//         view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+//      ]
+//
+//      NSLayoutConstraint.activate(constraints)
+//      self.placeholderView = view
+//
+//      UIView.animate(withDuration: 0.5) {
+//         view.alpha = 1
+//      }
+//   }
+//}

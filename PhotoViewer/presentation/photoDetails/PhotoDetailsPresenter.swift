@@ -8,6 +8,10 @@
 
 import RxSwift
 
+protocol PhotoDetailsWireFrameProtocol: class {
+    func dismiss()
+}
+
 protocol PhotoDetailsPresenterProtocol: BasePresenterProtocol, PhotoDetailsViewModelProtocol {
     
     var imageDownloaded: Observable<UIImage> { get }
@@ -78,10 +82,10 @@ extension PhotoDetailsPresenter: PhotoDetailsPresenterProtocol {
     }
     
     func downloadDidTap() {
-        viewStateSubject.onNext(.loading)
+//        viewStateSubject.onNext(.loading)
         ImageDownloader.shared.imageBy(url: photo.downloadURL) {[weak self] (image) in
             guard let self = self else { return }
-            self.viewStateSubject.onNext(.normal)
+//            self.viewStateSubject.onNext(.normal)
             
             guard let image = image else { return }
             self.imageDownloadedSubject.onNext(image)

@@ -16,6 +16,7 @@ protocol PhotosRouterProtocol: class {
 protocol PhotosPresenterProtocol: BasePresenterProtocol {
    
    var error: Driver<String> { get }
+   var isLoading: Driver<Bool> { get }
    var viewModels: Driver<[PhotoCollectionViewModel]> { get }
    
    func didScrollAtEnd()
@@ -43,6 +44,12 @@ extension PhotosPresenter: PhotosPresenterProtocol {
             return error.localizedDescription
       }
       .asDriver(onErrorJustReturn: "")
+   }
+   
+   var isLoading: Driver<Bool> {
+      return interactor.photos
+         .map { $0.isLoading }
+         .asDriver(onErrorJustReturn: false)
    }
    
    var viewModels: Driver<[PhotoCollectionViewModel]> {

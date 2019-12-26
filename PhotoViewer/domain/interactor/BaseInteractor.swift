@@ -31,6 +31,15 @@ enum Response<T> {
          return false
       }
    }
+   
+   var isLoading: Bool {
+      switch self {
+      case .loading:
+         return true
+      default:
+         return false
+      }
+   }
 }
 
 class BaseInteractor: NSObject {

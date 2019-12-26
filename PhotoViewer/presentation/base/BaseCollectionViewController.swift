@@ -29,9 +29,6 @@ class BaseCollectionViewController: BaseViewController {
       collection.showsVerticalScrollIndicator = false
       return collection
    }()
-}
-
-extension BaseCollectionViewController {
    
    func addCollectionView(constraints: [NSLayoutConstraint]? = nil) {
       self.view.insertSubview(collectionView, at: 0)
@@ -50,5 +47,13 @@ extension BaseCollectionViewController {
       }
       
       NSLayoutConstraint.activate(collectionConstraints)
+   }
+   
+   func reloadCollectionView() {
+      self.collectionView.performBatchUpdates({
+         self.collectionView.reloadSections(IndexSet(integer: 0))
+      }, completion: { (finished) in
+         self.collectionView.ins_endInfinityScroll()
+      })
    }
 }

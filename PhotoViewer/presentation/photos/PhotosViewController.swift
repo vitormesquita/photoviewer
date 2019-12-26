@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import RxSwift
 
-class PhotosViewController: BaseCollectionViewController {
+class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    
    var presenter: PhotosPresenterProtocol {
       return basePresenter as! PhotosPresenterProtocol
    }
-
+   
+   private let disposeBag = DisposeBag()
    private var viewModels: [PhotoCollectionViewModelProtocol] = []
    private let searchController = UISearchController(searchResultsController: nil)
    
@@ -26,14 +28,12 @@ class PhotosViewController: BaseCollectionViewController {
       super.viewDidLoad()
       bind()
       configureCollectionView()
-            
-      searchController.searchResultsUpdater = self
       
       navigationItem.title = "Photos"
       navigationItem.largeTitleDisplayMode = .automatic
       navigationItem.hidesSearchBarWhenScrolling = false
       navigationItem.searchController = searchController
-      
+      searchController.searchResultsUpdater = self
       navigationController?.navigationBar.prefersLargeTitles = true
    }
    
@@ -54,8 +54,14 @@ class PhotosViewController: BaseCollectionViewController {
          .drive(onNext: { [weak self] (error) in
             guard let self = self else { return }
             self.reloadCollectionView()
-            print("TEM ERRO ---------->")
-            print(error)
+            print("TEM ERRO ----------> \(error)")
+         })
+         .disposed(by: disposeBag)
+      
+      presenter.isLoading
+         .drive(onNext: { [weak self] (isLoading) in
+            guard let self = self else { return }
+            self.isLoadingVisible(isLoading)
          })
          .disposed(by: disposeBag)
    }
@@ -64,14 +70,6 @@ class PhotosViewController: BaseCollectionViewController {
       collectionView.delegate = self
       collectionView.dataSource = self
       collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
-   }
-   
-   private func reloadCollectionView() {
-      self.collectionView.performBatchUpdates({
-         self.collectionView.reloadSections(IndexSet(integer: 0))
-      }, completion: { (finished) in
-         self.collectionView.ins_endInfinityScroll()
-      })
    }
 }
 

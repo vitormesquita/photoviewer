@@ -83,6 +83,26 @@ class PhotosPresenterSpec: QuickSpec {
             }
          }
          
+         context("when photos request is loading") {
+            beforeEach {
+               interactor.response = .loading
+            }
+            
+            it("check isLoading observable") {
+               expect(presenter.isLoading).first.to(beTrue())
+            }
+            
+            it("check not send other events") {
+               expect(presenter.error)
+                  .events(scheduler: TestScheduler(initialClock: 0), disposeBag: disposeBag)
+                  .to(equal([Recorded.completed(0)]))
+               
+               expect(presenter.viewModels)
+                  .events(scheduler: TestScheduler(initialClock: 0), disposeBag: disposeBag)
+                  .to(equal([Recorded.completed(0)]))
+            }
+         }
+         
          context("when scroll list at end") {
             it("check call load more page") {
                //Act

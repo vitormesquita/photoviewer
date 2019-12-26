@@ -52,12 +52,12 @@ class PhotoDetailsViewController: BaseViewController {
     }
     
     func bind() {        
-        presenter.imageDownloaded
-            .subscribe(onNext: {[weak self] (image) in
-                guard let self = self else { return }
-                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:contextInfo:)), nil)
-            })
-            .disposed(by: disposeBag)
+//        presenter.imageDownloaded
+//            .subscribe(onNext: {[weak self] (image) in
+//                guard let self = self else { return }
+//                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:contextInfo:)), nil)
+//            })
+//            .disposed(by: disposeBag)
     }
     
     @objc private func closeButtonDidTap() {

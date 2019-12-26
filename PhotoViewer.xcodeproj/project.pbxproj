@@ -46,7 +46,6 @@
 		FC951A3D21B0301D00ABF0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC951A3C21B0301D00ABF0E1 /* AppDelegate.swift */; };
 		FC951A4421B0301E00ABF0E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC951A4321B0301E00ABF0E1 /* Assets.xcassets */; };
 		FC951A4721B0301E00ABF0E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC951A4521B0301E00ABF0E1 /* LaunchScreen.storyboard */; };
-		FC951A5621B0353F00ABF0E1 /* BaseWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC951A5521B0353F00ABF0E1 /* BaseWireFrame.swift */; };
 		FC951A5821B0354D00ABF0E1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC951A5721B0354D00ABF0E1 /* BaseViewController.swift */; };
 		FC951A5A21B0355B00ABF0E1 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC951A5921B0355B00ABF0E1 /* BasePresenter.swift */; };
 		FC9B25BC21B2C7530016A465 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC9B25BB21B2C7530016A465 /* LoadingView.xib */; };
@@ -120,7 +119,6 @@
 		FC951A4321B0301E00ABF0E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC951A4621B0301E00ABF0E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC951A4821B0301E00ABF0E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC951A5521B0353F00ABF0E1 /* BaseWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWireFrame.swift; sourceTree = "<group>"; };
 		FC951A5721B0354D00ABF0E1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FC951A5921B0355B00ABF0E1 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		FC9B25BB21B2C7530016A465 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -478,7 +476,6 @@
 			children = (
 				FC951A5921B0355B00ABF0E1 /* BasePresenter.swift */,
 				FC951A5721B0354D00ABF0E1 /* BaseViewController.swift */,
-				FC951A5521B0353F00ABF0E1 /* BaseWireFrame.swift */,
 				FC62F30321B099E700E1A7F6 /* BaseCollectionViewCell.swift */,
 				FC2F562B21B1C00E00C2D51C /* BaseCollectionViewController.swift */,
 				FC9B25C921B2E3230016A465 /* BaseNavigationController.swift */,
@@ -713,7 +710,6 @@
 				FC62F32221B0C58200E1A7F6 /* User.swift in Sources */,
 				FC62F31821B0A4D500E1A7F6 /* PhotoCollectionViewModel.swift in Sources */,
 				FC62F31421B0A05200E1A7F6 /* Photo.swift in Sources */,
-				FC951A5621B0353F00ABF0E1 /* BaseWireFrame.swift in Sources */,
 				FC39ECED21B2C1D800B63F6C /* LoadingView.swift in Sources */,
 				FC951A5A21B0355B00ABF0E1 /* BasePresenter.swift in Sources */,
 				FC9B25C721B2D4A90016A465 /* PhotoDetailsWireFrame.swift in Sources */,
