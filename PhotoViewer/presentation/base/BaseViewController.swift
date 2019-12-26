@@ -55,16 +55,19 @@ extension LoadingPresentable where Self: UIViewController {
       }
       
       let loadingView = LoadingView.loadNibName()
+      loadingView.startAnimating()
       loadingView.alpha = 0
       loadingView.translatesAutoresizingMaskIntoConstraints = false
       self.view.addSubview(loadingView)
       
-      NSLayoutConstraint.activate([
-         view.topAnchor.constraint(equalTo: self.view.topAnchor),
-         view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-         view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-         view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-      ])
+      let constraints = [
+         loadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+         loadingView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+         loadingView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+         loadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+      ]
+
+      NSLayoutConstraint.activate(constraints)
             
       UIView.animate(withDuration: 0.5) {
          loadingView.alpha = 1

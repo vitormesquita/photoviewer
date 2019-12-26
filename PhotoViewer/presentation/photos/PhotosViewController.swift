@@ -30,7 +30,7 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       configureCollectionView()
       
       navigationItem.title = "Photos"
-      navigationItem.largeTitleDisplayMode = .automatic
+      navigationItem.largeTitleDisplayMode = .always
       navigationItem.hidesSearchBarWhenScrolling = false
       navigationItem.searchController = searchController
       searchController.searchResultsUpdater = self

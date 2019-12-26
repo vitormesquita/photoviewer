@@ -9,27 +9,27 @@
 import UIKit
 
 class LoadingView: UIView {
-
-    @IBOutlet weak var activitiIndicatorView: UIActivityIndicatorView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        applyLayout()
-    }
-    
-    private func applyLayout() {
-        activitiIndicatorView.color = .gray
-        activitiIndicatorView.hidesWhenStopped = true
-    }
-    
-    func startAnimating() {
-        activitiIndicatorView.startAnimating()
-    }
+   
+   @IBOutlet weak var activitiIndicatorView: UIActivityIndicatorView!
+   
+   override func awakeFromNib() {
+      super.awakeFromNib()
+      applyLayout()
+   }
+   
+   private func applyLayout() {
+      activitiIndicatorView.color = .gray
+      activitiIndicatorView.hidesWhenStopped = true
+   }
+   
+   func startAnimating() {
+      activitiIndicatorView.startAnimating()
+   }
 }
 
 extension LoadingView {
-    
-    static func loadNibName() -> LoadingView {
-        return Bundle.main.loadNibNamed("LoadingView", owner: nil, options: nil)?.first! as! LoadingView
-    }
+   
+   static func loadNibName() -> LoadingView {
+      return Bundle.main.loadNibNamed("LoadingView", owner: nil, options: nil)?.first! as! LoadingView
+   }
 }
