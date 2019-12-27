@@ -19,31 +19,15 @@ protocol PhotosInteractorProtocol {
 
 class PhotosInteractor: BaseInteractor {
    
-   private let repository: PhotoRepositoryProtocol
+   private let paginatedWorker: PaginatedPhotosWorkerProtocol
    
-   private var cachedPhotos = [Photo]()
-   private let pageRelay = BehaviorRelay<Int>(value: 1)
-   
-   init(repository: PhotoRepositoryProtocol) {
-      self.repository = repository
+   init(paginatedWorker: PaginatedPhotosWorkerProtocol) {
+      self.paginatedWorker = paginatedWorker
       super.init()
    }
    
-   private func cachePhotos(photosAPI: [PhotoAPI]) -> [Photo] {
-      let photos = Photo.mapArray(photoAPI: photosAPI)
-      self.cachedPhotos.append(contentsOf: photos)
-      return self.cachedPhotos
-   }
-   
    lazy var photos: Observable<Response<[Photo]>> = {
-      return pageRelay
-         .flatMapLatest { [unowned self] page in
-            return self.repository.getPhotos(page: page)
-               .map { (photosAPI) in self.cachePhotos(photosAPI: photosAPI) }
-               .map { Response.success($0) }
-               .catchError { .just(Response.failure($0)) }
-      }
-      .startWith(cachedPhotos.isEmpty ? .loading : .success(cachedPhotos))
+      return paginatedWorker.pagedPhotos
       .share(replay: 1, scope: .whileConnected)
    }()
 }
@@ -51,11 +35,10 @@ class PhotosInteractor: BaseInteractor {
 extension PhotosInteractor: PhotosInteractorProtocol {
    
    func loadMorePage() {
-      pageRelay.accept(pageRelay.value + 1)
+      paginatedWorker.loadMorePhotos()
    }
    
    func getPhotoBy(index: Int) -> Photo? {
-      guard index < cachedPhotos.count else { return nil }
-      return cachedPhotos[index]
+      return paginatedWorker.getPhotoBy(index: index)
    }
 }
