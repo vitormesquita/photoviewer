@@ -52,9 +52,7 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
          .disposed(by: disposeBag)
        
       presenter.error
-         .drive(onNext: { [weak self] (error) in
-            guard let self = self else { return }
-            self.reloadCollectionView()
+         .drive(onNext: {(error) in
             print("TEM ERRO ----------> \(error)")
          })
          .disposed(by: disposeBag)
