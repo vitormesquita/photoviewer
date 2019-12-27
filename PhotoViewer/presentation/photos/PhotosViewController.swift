@@ -14,10 +14,11 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    var presenter: PhotosPresenterProtocol {
       return basePresenter as! PhotosPresenterProtocol
    }
-   
+      
    private let disposeBag = DisposeBag()
-   private var viewModels: [PhotoCollectionViewModelProtocol] = []
    private let searchController = UISearchController(searchResultsController: nil)
+   
+   private(set) var viewModels: [PhotoCollectionViewModelProtocol] = []
    
    override func loadView() {
       super.loadView()
@@ -49,7 +50,7 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
             self.reloadCollectionView()
          })
          .disposed(by: disposeBag)
-      
+       
       presenter.error
          .drive(onNext: { [weak self] (error) in
             guard let self = self else { return }
@@ -61,7 +62,9 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       presenter.isLoading
          .drive(onNext: { [weak self] (isLoading) in
             guard let self = self else { return }
-            self.isLoadingVisible(isLoading)
+            let isLoadingVisible = isLoading && self.viewModels.isEmpty
+            self.collectionView.isHidden = isLoadingVisible
+            self.isLoadingVisible(isLoadingVisible)
          })
          .disposed(by: disposeBag)
    }

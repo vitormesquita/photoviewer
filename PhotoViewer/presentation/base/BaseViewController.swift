@@ -44,7 +44,7 @@ protocol LoadingPresentable {
 
 extension LoadingPresentable where Self: UIViewController {
    
-   private func findLoadingView() -> LoadingView? {
+   func findLoadingView() -> LoadingView? {
       return view.subviews.compactMap { $0 as? LoadingView }.first
    }
    
