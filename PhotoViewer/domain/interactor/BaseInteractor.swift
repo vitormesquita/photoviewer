@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Response<T> {
+public enum Response<T> {
    case new
    case loading
    case failure(Error)

@@ -51,13 +51,22 @@ class PhotosViewControllerSpec: QuickSpec {
          }
          
          context("when has photos items") {
+            let photos = [Photo(id: 0), Photo(id: 1)]
+            
+            beforeEach {
+               presenterMock._viewModels.onNext(photos.map(PhotoCollectionViewModel.init))
+            }
             
             it("check all photos is on list") {
-               let photos = [Photo(id: 0), Photo(id: 1)]
-               presenterMock._viewModels.onNext(photos.map(PhotoCollectionViewModel.init))
-                              
                expect(viewController.viewModels.count).to(be(photos.count))
                expect(viewController.collectionView.numberOfItems(inSection: 0)).to(be(photos.count))
+            }
+            
+            it("click in a photo") {
+               let indexPath = IndexPath(item: 0, section: 0)
+               viewController.collectionView(viewController.collectionView, didSelectItemAt: indexPath)
+               
+               expect(presenterMock._selectedItem).to(be(indexPath.item))
             }
          }
       }

@@ -18,5 +18,4 @@ enum PhotoFactory {
       presenter.router = router
       return PhotosViewController(presenter: presenter)
    }
-   
 }

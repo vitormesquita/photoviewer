@@ -12,6 +12,7 @@ import Foundation
 
 protocol PaginatedPhotosWorkerProtocol {
    
+   var page: Int { get }
    var pagedPhotos: Observable<Response<[Photo]>> { get }
    
    func loadMorePhotos()
@@ -20,9 +21,9 @@ protocol PaginatedPhotosWorkerProtocol {
 
 class PaginatedPhotosWorker {
    
-   private let repository: PhotoRepositoryProtocol
+   let repository: PhotoRepositoryProtocol
    
-   private var cachedPhotos = [Photo]()
+   private(set) var cachedPhotos = [Photo]()
    private let pageRelay = BehaviorRelay<Int>(value: 1)
    
    init(repository: PhotoRepositoryProtocol) {
@@ -37,6 +38,10 @@ class PaginatedPhotosWorker {
 }
 
 extension PaginatedPhotosWorker: PaginatedPhotosWorkerProtocol {
+   
+   var page: Int {
+      return pageRelay.value
+   }
    
    var pagedPhotos: Observable<Response<[Photo]>> {
       return pageRelay
