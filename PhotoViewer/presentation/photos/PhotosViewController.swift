@@ -14,7 +14,7 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    var presenter: PhotosPresenterProtocol {
       return basePresenter as! PhotosPresenterProtocol
    }
-      
+   
    private let disposeBag = DisposeBag()
    private let searchController = UISearchController(searchResultsController: nil)
    
@@ -50,11 +50,9 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
             self.reloadCollectionView()
          })
          .disposed(by: disposeBag)
-       
+      
       presenter.error
-         .drive(onNext: {(error) in
-            print("TEM ERRO ----------> \(error)")
-         })
+         .drive()
          .disposed(by: disposeBag)
       
       presenter.isLoading

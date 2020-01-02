@@ -72,7 +72,19 @@ class PaginatedPhotosWorkerSpec: QuickSpec {
          }
          
          context("when fetch next page") {
+            it("load more pages") {
+               worker.loadMorePhotos()
+               expect(worker.page).to(be(2))
+            }
             
+            it("get photo on cache") {
+               mockRepository.photos = PhotoAPI.dummyPhotos()
+               worker.pagedPhotos
+                  .subscribe()
+                  .disposed(by: disposeBag)
+               
+               expect(worker.getPhotoBy(index: 0)).toNot(beNil())
+            }
          }
       }
    }
