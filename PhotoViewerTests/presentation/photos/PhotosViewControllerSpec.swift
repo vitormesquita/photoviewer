@@ -69,6 +69,17 @@ class PhotosViewControllerSpec: QuickSpec {
                expect(presenterMock._selectedItem).to(be(indexPath.item))
             }
          }
+         
+//         context("when search by term") {
+//            it("check") {
+//               let query = "Query"
+//               viewController.searchController.searchBar.text = query
+//
+//               waitUntil(timeout: 2) { _ in
+//                  expect(presenterMock._termSearched).to(be(query))
+//               }
+//            }
+//         }
       }
    }
 }

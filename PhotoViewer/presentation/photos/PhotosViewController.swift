@@ -16,7 +16,7 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    }
    
    private let disposeBag = DisposeBag()
-   private let searchController = UISearchController(searchResultsController: nil)
+   let searchController = UISearchController(searchResultsController: nil)
    
    private(set) var viewModels: [PhotoCollectionViewModelProtocol] = []
    
@@ -36,7 +36,6 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       navigationItem.largeTitleDisplayMode = .always
       navigationItem.hidesSearchBarWhenScrolling = false
       navigationItem.searchController = searchController
-      //      searchController.searchResultsUpdater = self
       navigationController?.navigationBar.prefersLargeTitles = true
    }
    

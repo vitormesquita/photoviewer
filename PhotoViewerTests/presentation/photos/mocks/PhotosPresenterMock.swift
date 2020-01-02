@@ -12,8 +12,9 @@ import RxCocoa
 @testable import PhotoViewer
 
 class PhotosPresenterMock: PhotosPresenterProtocol {
- 
+    
    var _selectedItem: Int?
+   var _termSearched: String?
    var _loading = BehaviorSubject<Bool>(value: false)
    var _viewModels = BehaviorSubject<[PhotoCollectionViewModel]>(value: [])
    
@@ -38,6 +39,6 @@ class PhotosPresenterMock: PhotosPresenterProtocol {
    }
    
    func didSearchWith(term: String?) {
-       
+      self._termSearched = term
     }
 }
