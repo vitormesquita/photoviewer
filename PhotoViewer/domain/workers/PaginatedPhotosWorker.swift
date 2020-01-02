@@ -15,7 +15,7 @@ protocol PaginatedPhotosWorkerProtocol {
    var page: Int { get }
    var pagedPhotos: Observable<Response<[Photo]>> { get }
    
-   func clear()
+   func reload()
    func loadMorePhotos()
    func getPhotoBy(index: Int) -> Photo?
 }
@@ -24,17 +24,17 @@ class PaginatedPhotosWorker {
    
    let repository: PhotoRepositoryProtocol
    
-   private(set) var cachedPhotos = [Photo]()
+   private(set) var cachePhotos = [Photo]()
    private let pageRelay = BehaviorRelay<Int>(value: 1)
    
    init(repository: PhotoRepositoryProtocol) {
       self.repository = repository
    }
    
-   private func cachePhotos(photosAPI: [PhotoAPI]) -> [Photo] {
-      let photos = Photo.mapArray(photoAPI: photosAPI)
-      self.cachedPhotos.append(contentsOf: photos)
-      return self.cachedPhotos
+   private func transformPhotos(photosAPI: [PhotoAPI]?) -> [Photo] {
+      let photos = Photo.mapArray(photoAPI: photosAPI ?? [])
+      self.cachePhotos.append(contentsOf: photos)
+      return self.cachePhotos
    }
 }
 
@@ -48,16 +48,16 @@ extension PaginatedPhotosWorker: PaginatedPhotosWorkerProtocol {
       return pageRelay
          .flatMapLatest { [unowned self] page in
             return self.repository.getPhotos(page: page)
-               .map { (photosAPI) in self.cachePhotos(photosAPI: photosAPI) }
+               .map { (photosAPI) in self.transformPhotos(photosAPI: photosAPI) }
                .map { Response.success($0) }
                .catchError { .just(Response.failure($0)) }
       }
-      .startWith(cachedPhotos.isEmpty ? .loading : .success(cachedPhotos))
+      .startWith(cachePhotos.isEmpty ? .loading : .success(cachePhotos))
    }
    
-   func clear() {
+   func reload() {
       pageRelay.accept(1)
-      cachedPhotos = []
+      cachePhotos = []
    }
    
    func loadMorePhotos() {
@@ -65,7 +65,7 @@ extension PaginatedPhotosWorker: PaginatedPhotosWorkerProtocol {
    }
    
    func getPhotoBy(index: Int) -> Photo? {
-      guard index < cachedPhotos.count else { return nil }
-      return cachedPhotos[index]
+      guard index < cachePhotos.count else { return nil }
+      return cachePhotos[index]
    }
 }

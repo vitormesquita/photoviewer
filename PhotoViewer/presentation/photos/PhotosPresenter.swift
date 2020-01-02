@@ -21,6 +21,7 @@ protocol PhotosPresenterProtocol: BasePresenterProtocol {
    
    func didScrollAtEnd()
    func didSelected(item: Int)
+   func didSearchWith(term: String?)
 }
 
 class PhotosPresenter: BasePresenter {
@@ -69,5 +70,9 @@ extension PhotosPresenter: PhotosPresenterProtocol {
    func didSelected(item: Int) {
       guard let photo = interactor.getPhotoBy(index: item) else { return }
       router?.showPhotoDetails(photo: photo)
+   }
+   
+   func didSearchWith(term: String?) {
+      interactor.searchPhotosBy(term: term)
    }
 }

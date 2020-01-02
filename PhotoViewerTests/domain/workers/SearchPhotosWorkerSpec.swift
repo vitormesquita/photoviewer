@@ -54,7 +54,7 @@ class SearchPhotosWorkerSpec: QuickSpec {
                   .to(equal([]))
             }
             
-            it("emit event when query has more 3 chars") {
+            it("emit event when query has more 2 chars") {
                let query = "abcdf"
                worker.searchBy(query: query)
                

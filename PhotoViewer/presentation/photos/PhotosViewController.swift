@@ -30,6 +30,8 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       bind()
       configureCollectionView()
       
+      searchController.obscuresBackgroundDuringPresentation = false
+      
       navigationItem.title = "Photos"
       navigationItem.largeTitleDisplayMode = .always
       navigationItem.hidesSearchBarWhenScrolling = false
@@ -65,9 +67,10 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
          .disposed(by: disposeBag)
       
       searchController.searchBar.rx.text
-         .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
-         .bind { (text) in
-            print(text)
+         .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
+         .bind { [weak self] (text) in
+            guard let self = self else { return }
+            self.presenter.didSearchWith(term: text)
       }
       .disposed(by: disposeBag)
    }

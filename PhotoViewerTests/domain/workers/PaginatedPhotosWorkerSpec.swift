@@ -32,16 +32,16 @@ class PaginatedPhotosWorkerSpec: QuickSpec {
          }
          
          it("check clear paginated") {
-            worker.clear()
+            worker.reload()
             expect(worker.page).to(be(1))
-            expect(worker.cachedPhotos).to(beEmpty())
+            expect(worker.cachePhotos).to(beEmpty())
          }
          
          context("when fetch first page") {
             
             it("check initial instances") {
                expect(worker.page).to(be(1))
-               expect(worker.cachedPhotos).to(beEmpty())
+               expect(worker.cachePhotos).to(beEmpty())
             }
             
             it("get photo by index without cache") {
