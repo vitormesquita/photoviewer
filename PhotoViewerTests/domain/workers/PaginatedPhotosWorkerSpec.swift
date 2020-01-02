@@ -31,6 +31,12 @@ class PaginatedPhotosWorkerSpec: QuickSpec {
             expect(worker.repository).to(beAnInstanceOf(PhotoRepositoryMock.self))
          }
          
+         it("check clear paginated") {
+            worker.clear()
+            expect(worker.page).to(be(1))
+            expect(worker.cachedPhotos).to(beEmpty())
+         }
+         
          context("when fetch first page") {
             
             it("check initial instances") {

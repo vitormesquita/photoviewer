@@ -35,4 +35,8 @@ class PhotosInteractorMock: PhotosInteractorProtocol {
       guard index < cachedPhotos.count else { return nil }
       return cachedPhotos[index]
    }
+   
+   func searchPhotosBy(term: String?) {
+      
+   }   
 }

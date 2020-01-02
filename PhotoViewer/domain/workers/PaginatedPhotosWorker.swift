@@ -15,6 +15,7 @@ protocol PaginatedPhotosWorkerProtocol {
    var page: Int { get }
    var pagedPhotos: Observable<Response<[Photo]>> { get }
    
+   func clear()
    func loadMorePhotos()
    func getPhotoBy(index: Int) -> Photo?
 }
@@ -52,6 +53,11 @@ extension PaginatedPhotosWorker: PaginatedPhotosWorkerProtocol {
                .catchError { .just(Response.failure($0)) }
       }
       .startWith(cachedPhotos.isEmpty ? .loading : .success(cachedPhotos))
+   }
+   
+   func clear() {
+      pageRelay.accept(1)
+      cachedPhotos = []
    }
    
    func loadMorePhotos() {

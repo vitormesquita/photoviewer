@@ -13,7 +13,8 @@ enum PhotoFactory {
    static func photos(router: PhotosRouterProtocol) -> UIViewController {
       let repository = PhotoRepository(apiClient: APIClient())
       let paginatedWorker = PaginatedPhotosWorker(repository: repository)
-      let interactor = PhotosInteractor(paginatedWorker: paginatedWorker)
+      let searchWorker = SearchPhotosWorker(repository: repository)
+      let interactor = PhotosInteractor(paginatedWorker: paginatedWorker, searchWorker: searchWorker)
       let presenter = PhotosPresenter(interactor: interactor)
       presenter.router = router
       return PhotosViewController(presenter: presenter)

@@ -34,7 +34,7 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       navigationItem.largeTitleDisplayMode = .always
       navigationItem.hidesSearchBarWhenScrolling = false
       navigationItem.searchController = searchController
-      searchController.searchResultsUpdater = self
+      //      searchController.searchResultsUpdater = self
       navigationController?.navigationBar.prefersLargeTitles = true
    }
    
@@ -63,6 +63,13 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
             self.isLoadingVisible(isLoadingVisible)
          })
          .disposed(by: disposeBag)
+      
+      searchController.searchBar.rx.text
+         .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+         .bind { (text) in
+            print(text)
+      }
+      .disposed(by: disposeBag)
    }
    
    private func configureCollectionView() {
@@ -86,12 +93,5 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSo
    
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       presenter.didSelected(item: indexPath.item)
-   }
-}
-
-extension PhotosViewController: UISearchResultsUpdating {
-   
-   func updateSearchResults(for searchController: UISearchController) {
-      print(searchController.searchBar.text ?? "")
    }
 }

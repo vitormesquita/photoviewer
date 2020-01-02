@@ -13,6 +13,7 @@ class PhotoRepositoryMock: PhotoRepositoryProtocol {
    
    enum MockError: Swift.Error {
       case failureGetPhotos
+      case failureSearchPhotos
    }
    
    var photos: [PhotoAPI] = []
@@ -30,7 +31,7 @@ class PhotoRepositoryMock: PhotoRepositoryProtocol {
    
    func searchPhotos(query: String, page: Int) -> Single<SearchPhotoResultAPI> {
       guard let search = searchPhotoResult else {
-         return Single.error(NSError(domain: "", code: -10, userInfo: [:]))
+         return Single.error(MockError.failureSearchPhotos)
       }
       
       return Single.just(search)
