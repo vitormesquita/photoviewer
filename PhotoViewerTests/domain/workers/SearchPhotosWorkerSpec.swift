@@ -60,6 +60,7 @@ class SearchPhotosWorkerSpec: QuickSpec {
                
                let scheduler = TestScheduler(initialClock: 0)
                
+               expect(worker.page).to(be(1))
                expect(worker.query)
                   .events(scheduler: scheduler, disposeBag: disposeBag)
                   .to(equal([.next(0, query)]))
@@ -102,6 +103,38 @@ class SearchPhotosWorkerSpec: QuickSpec {
                      .next(0, .loading),
                      .next(0, .failure(PhotoRepositoryMock.MockError.failureGetPhotos))
                   ]))
+            }
+         }
+         
+         context("paginate search") {
+            let result = SearchPhotoResultAPI()
+            
+            beforeEach {
+               result.total = 10
+               result.totalPages = 10
+               result.results = PhotoAPI.dummyPhotos()
+               mockRepository.searchPhotoResult = result
+               
+               worker.photos
+                  .subscribe()
+                  .disposed(by: disposeBag)
+               
+               worker.searchBy(query: "lalalal")
+            }
+            
+            it("clear old search") {
+               worker.clear()
+               
+               expect(worker.page).to(be(1))
+               expect(worker.cachePhotos).to(beEmpty())
+            }
+            
+            it("load more page") {
+               let expectCacheCount = worker.cachePhotos.count * 2
+               worker.loadMorePhotos()
+               
+               expect(worker.page).to(be(2))
+               expect(worker.cachePhotos.count).to(be(expectCacheCount))
             }
          }
       }
