@@ -16,6 +16,7 @@ protocol SearchPhotosWorkerProtocol {
    func clear()
    func loadMorePhotos()
    func searchBy(query: String?)
+   func getPhotoBy(index: Int) -> Photo?
 }
 
 class SearchPhotosWorker {
@@ -71,5 +72,10 @@ extension SearchPhotosWorker: SearchPhotosWorkerProtocol {
       page = 1
       cachePhotos = []
       queryRelay.accept(query)
+   }
+   
+   func getPhotoBy(index: Int) -> Photo? {
+      guard index < cachePhotos.count else { return nil }
+      return cachePhotos[index]
    }
 }

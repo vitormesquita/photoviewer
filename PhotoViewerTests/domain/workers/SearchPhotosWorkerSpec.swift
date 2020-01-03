@@ -104,6 +104,11 @@ class SearchPhotosWorkerSpec: QuickSpec {
                      .next(0, .failure(PhotoRepositoryMock.MockError.failureGetPhotos))
                   ]))
             }
+            
+            it("get photo by index without cache") {
+               let photo = worker.getPhotoBy(index: 1)
+               expect(photo).to(beNil())
+            }
          }
          
          context("paginate search") {
@@ -135,6 +140,22 @@ class SearchPhotosWorkerSpec: QuickSpec {
                
                expect(worker.page).to(be(2))
                expect(worker.cachePhotos.count).to(be(expectCacheCount))
+            }
+            
+            it("search result empty") {
+               let expectCacheCount = worker.cachePhotos.count
+               
+               result.results = nil
+               mockRepository.searchPhotoResult = result
+               
+               worker.loadMorePhotos()
+               
+               expect(worker.page).to(be(2))
+               expect(worker.cachePhotos.count).to(be(expectCacheCount))
+            }
+            
+            it("get photo on cache") {
+               expect(worker.getPhotoBy(index: 0)).toNot(beNil())
             }
          }
       }

@@ -18,10 +18,10 @@ protocol PhotosInteractorProtocol {
    func searchPhotosBy(term: String?)
 }
 
-class PhotosInteractor: BaseInteractor {
+final class PhotosInteractor: BaseInteractor {
    
-   private let paginatedWorker: PaginatedPhotosWorkerProtocol
-   private let searchWorker: SearchPhotosWorkerProtocol
+   let searchWorker: SearchPhotosWorkerProtocol
+   let paginatedWorker: PaginatedPhotosWorkerProtocol
    
    var isSearching: Bool = false
    
@@ -61,6 +61,10 @@ extension PhotosInteractor: PhotosInteractorProtocol {
    }
    
    func getPhotoBy(index: Int) -> Photo? {
+      if isSearching {
+         return searchWorker.getPhotoBy(index: index)
+      }
+      
       return paginatedWorker.getPhotoBy(index: index)
    }
    

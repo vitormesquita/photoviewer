@@ -65,8 +65,9 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
          })
          .disposed(by: disposeBag)
       
-      searchController.searchBar.rx.text
-         .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
+      searchController.searchBar
+         .rx.text
+         .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
          .bind { [weak self] (text) in
             guard let self = self else { return }
             self.presenter.didSearchWith(term: text)

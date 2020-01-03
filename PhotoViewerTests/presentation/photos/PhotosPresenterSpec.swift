@@ -108,7 +108,7 @@ class PhotosPresenterSpec: QuickSpec {
                //Act
                presenter.didScrollAtEnd()
                //Assert
-               expect(interactor.hasLoadMorePage).to(beTrue())
+               expect(interactor._loadedMorePage).to(beTrue())
             }
          }
          
@@ -121,7 +121,7 @@ class PhotosPresenterSpec: QuickSpec {
                //Act
                presenter.didSelected(item: itemSelected)
                //Assert
-               expect(router.selectedPhoto).to(equal(photos[itemSelected]))
+               expect(router._selectedPhoto).to(equal(photos[itemSelected]))
             }
             
             it("check selected item out of range") {
@@ -132,7 +132,7 @@ class PhotosPresenterSpec: QuickSpec {
                //Act
                presenter.didSelected(item: itemSelected)
                //Assert
-               expect(router.selectedPhoto).to(beNil())
+               expect(router._selectedPhoto).to(beNil())
             }
          }
       }

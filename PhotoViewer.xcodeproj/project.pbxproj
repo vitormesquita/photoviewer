@@ -17,6 +17,9 @@
 		648762C023B521B4005A7EB2 /* PhotosInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648762BF23B521B4005A7EB2 /* PhotosInteractorMock.swift */; };
 		648762C223B52383005A7EB2 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648762C123B52383005A7EB2 /* Models.swift */; };
 		648762C423B566DC005A7EB2 /* PhotosViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648762C323B566DC005A7EB2 /* PhotosViewControllerSpec.swift */; };
+		6491577023BFA9F3000EDB60 /* PhotosInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491576F23BFA9F3000EDB60 /* PhotosInteractorSpec.swift */; };
+		6491577223BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491577123BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift */; };
+		6491577423BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491577323BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift */; };
 		64D0D5C723BE2B420065793B /* SearchPhotosWorkerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D0D5C623BE2B420065793B /* SearchPhotosWorkerSpec.swift */; };
 		64F1C89123B246A900AB6B92 /* PhotoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89023B246A900AB6B92 /* PhotoFactory.swift */; };
 		64F1C89723B248B600AB6B92 /* FactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89623B248B600AB6B92 /* FactorySpec.swift */; };
@@ -88,6 +91,9 @@
 		648762BF23B521B4005A7EB2 /* PhotosInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosInteractorMock.swift; sourceTree = "<group>"; };
 		648762C123B52383005A7EB2 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		648762C323B566DC005A7EB2 /* PhotosViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewControllerSpec.swift; sourceTree = "<group>"; };
+		6491576F23BFA9F3000EDB60 /* PhotosInteractorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosInteractorSpec.swift; sourceTree = "<group>"; };
+		6491577123BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedPhotosWorkerMock.swift; sourceTree = "<group>"; };
+		6491577323BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosWorkerMock.swift; sourceTree = "<group>"; };
 		64D0D5C623BE2B420065793B /* SearchPhotosWorkerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosWorkerSpec.swift; sourceTree = "<group>"; };
 		64F1C89023B246A900AB6B92 /* PhotoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFactory.swift; sourceTree = "<group>"; };
 		64F1C89623B248B600AB6B92 /* FactorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpec.swift; sourceTree = "<group>"; };
@@ -232,6 +238,14 @@
 			path = mocks;
 			sourceTree = "<group>";
 		};
+		6491576E23BFA8A2000EDB60 /* interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6491576F23BFA9F3000EDB60 /* PhotosInteractorSpec.swift */,
+			);
+			path = interactor;
+			sourceTree = "<group>";
+		};
 		64F1C88B23B2463700AB6B92 /* navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +301,7 @@
 			children = (
 				64FECE8623BA672000C98F4B /* mocks */,
 				64FECE8323BA62CC00C98F4B /* workers */,
+				6491576E23BFA8A2000EDB60 /* interactor */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -304,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				64FECE8723BA673B00C98F4B /* PhotoRepositoryMock.swift */,
+				6491577323BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift */,
+				6491577123BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift */,
 			);
 			path = mocks;
 			sourceTree = "<group>";
@@ -731,9 +748,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				64F1C89D23B24DE700AB6B92 /* PhotosCoordinatorSpec.swift in Sources */,
+				6491577223BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift in Sources */,
 				64D0D5C723BE2B420065793B /* SearchPhotosWorkerSpec.swift in Sources */,
 				648762BD23B4F5C9005A7EB2 /* PhotosRouterMock.swift in Sources */,
+				6491577423BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift in Sources */,
 				64FECE8823BA673B00C98F4B /* PhotoRepositoryMock.swift in Sources */,
+				6491577023BFA9F3000EDB60 /* PhotosInteractorSpec.swift in Sources */,
 				648762C023B521B4005A7EB2 /* PhotosInteractorMock.swift in Sources */,
 				64FECE8523BA634D00C98F4B /* PaginatedPhotosWorkerSpec.swift in Sources */,
 				6482272A23B66F9F0058ABA8 /* PhotosPresenterMock.swift in Sources */,

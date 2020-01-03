@@ -11,9 +11,9 @@ import UIKit
 
 class PhotosRouterMock: PhotosRouterProtocol {
 
-   var selectedPhoto: Photo?
+   var _selectedPhoto: Photo?
    
    func showPhotoDetails(photo: Photo) {
-      selectedPhoto = photo
+      _selectedPhoto = photo
    }
 }

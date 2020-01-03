@@ -13,7 +13,7 @@ class PhotosInteractorMock: PhotosInteractorProtocol {
 
    private var cachedPhotos = [Photo]()
    
-   var hasLoadMorePage = false
+   var _loadedMorePage = false
    
    var response = Response<[Photo]>.new {
       didSet {
@@ -28,7 +28,7 @@ class PhotosInteractorMock: PhotosInteractorProtocol {
    }
    
    func loadMorePage() {
-      hasLoadMorePage = true
+      _loadedMorePage = true
    }
    
    func getPhotoBy(index: Int) -> Photo? {
