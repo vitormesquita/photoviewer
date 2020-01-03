@@ -22,8 +22,8 @@ class SearchPhotosWorker {
    
    let repository: PhotoRepositoryProtocol
    
+   private(set) var page = 1
    private(set) var cachePhotos = [Photo]()
-   private let pageRelay = BehaviorRelay<Int>(value: 1)
    private let queryRelay = BehaviorRelay<String?>(value: nil)
    
    init(repository: PhotoRepositoryProtocol) {
@@ -46,9 +46,9 @@ class SearchPhotosWorker {
 extension SearchPhotosWorker: SearchPhotosWorkerProtocol {
    
    var photos: Observable<Response<[Photo]>> {
-      return Observable.zip(pageRelay, query)
-         .flatMapLatest { [unowned self] (page, query) in
-            return self.repository.searchPhotos(query: query, page: page)
+      return query
+         .flatMap { [unowned self] (query) in
+            return self.repository.searchPhotos(query: query, page: self.page)
                .map { [unowned self] in self.transformPhotos(photosAPI: $0.results) }
                .map { Response.success($0) }
                .catchError { .just(.failure($0)) }
@@ -57,19 +57,19 @@ extension SearchPhotosWorker: SearchPhotosWorkerProtocol {
    }
    
    func clear() {
+      page = 1
       cachePhotos = []
-      pageRelay.accept(1)
       queryRelay.accept(nil)
    }
    
    func loadMorePhotos() {
-      pageRelay.accept(pageRelay.value + 1)
+      page += 1
       queryRelay.accept(queryRelay.value)
    }
    
    func searchBy(query: String?) {
+      page = 1
       cachePhotos = []
-      pageRelay.accept(1)
       queryRelay.accept(query)
    }
 }
