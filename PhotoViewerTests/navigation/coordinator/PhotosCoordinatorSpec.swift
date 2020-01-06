@@ -19,35 +19,39 @@ class PhotosCoordinatorSpec: QuickSpec {
          let window = UIWindow(frame: UIScreen.main.bounds)
          
          beforeEach {
-            photosCoodinator = PhotosCoordinator(window: window)
+            photosCoodinator = PhotosCoordinator(window: window, animated: false)
+            photosCoodinator.start()
          }
-
-         context("when start coordinator flow") {
-            it("firt screen is photos list") {
-               //arrange
-               let expectVCType = PhotosViewController.self
-               
-               //act
-               photosCoodinator.start()
-               
-               //assert
-               let viewControllers = photosCoodinator.navigationController.viewControllers
-               
-               expect(viewControllers.count).to(be(1))
-               expect(viewControllers.first).to(beAKindOf(expectVCType))
-            }
+         
+         it("firt screen is photos list") {
+            let expectVCType = PhotosViewController.self
+            let viewControllers = photosCoodinator.navigationController.viewControllers
             
-            it("rootViewController from window is coordinator nav") {
-               //act
-               photosCoodinator.start()
-               //assert
-               let navigationController = photosCoodinator.navigationController
-               
-               expect(photosCoodinator.window).to(be(window))
-               expect(photosCoodinator.window.isKeyWindow).to(beTrue())
-               expect(photosCoodinator.window.rootViewController).to(be(navigationController))
-            }
+            expect(viewControllers.count).to(be(1))
+            expect(viewControllers.first).to(beAKindOf(expectVCType))
          }
+         
+         it("rootViewController from window is coordinator nav") {
+            //Act
+            photosCoodinator.start()
+            //Assert
+            let navigationController = photosCoodinator.navigationController
+            expect(photosCoodinator.window).to(be(window))
+            expect(photosCoodinator.window.isKeyWindow).to(beTrue())
+            expect(photosCoodinator.window.rootViewController).to(be(navigationController))
+         }
+         
+         it("photo details flow navigation") {
+            //Arrange
+            let photo = Photo(id: 0)
+            let expectedVCType = PhotoDetailsViewController.self
+            //Act
+            photosCoodinator.showPhotoDetails(photo: photo)
+            //Assert
+            let viewController = photosCoodinator.navigationController.visibleViewController
+            expect(viewController).to(beAKindOf(expectedVCType))
+         }
+         
       }
    }
 }

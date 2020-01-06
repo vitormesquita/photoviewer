@@ -14,13 +14,25 @@ class FactorySpec: QuickSpec {
 
    override func spec() {
       
-      describe("photo factory") {
+      describe("photo factory module instance") {
          
-         it("check photo list module instance") {
+         it("check photo list") {
             //Arrange
-            let expectType = PhotosViewController.self
+            let routerMock = PhotosRouterMock()
+            let expectType = PhotosViewController.self            
             //Act
-            let viewController = PhotoFactory.photos(router: PhotosRouterMock())
+            let viewController = PhotoFactory.photos(router: routerMock)
+            //Assert
+            expect(viewController).to(beAKindOf(expectType))
+         }
+         
+         it("check photo details") {
+            //Arrange
+            let photo = Photo(id: 0)
+            let routerMock = PhotoDetailsRouterMock()
+            let expectType = PhotoDetailsViewController.self
+            //Act
+            let viewController = PhotoFactory.details(photo: photo, router: routerMock)
             //Assert
             expect(viewController).to(beAKindOf(expectType))
          }
