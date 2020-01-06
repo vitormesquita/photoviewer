@@ -9,10 +9,10 @@
 import Foundation
 
 class PictureAPI: Codable {
-
-    var raw: URL?
-    var full: URL?
-    var regular: URL?
-    var small: URL?
-    var thumb: URL?
+   
+   var raw: URL?
+   var full: URL?
+   var regular: URL?
+   var small: URL?
+   var thumb: URL?
 }

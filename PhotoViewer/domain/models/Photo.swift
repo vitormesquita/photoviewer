@@ -17,7 +17,7 @@ struct Photo: Equatable {
    var likes: Int
    var pictures: Picture
    var user: User
-   var downloadURL: URL
+   var downloadURL: URL?
    var description: String?
    
    static func == (lhs: Photo, rhs: Photo) -> Bool {
@@ -33,8 +33,7 @@ extension Photo {
          let color = photoAPI.color,
          let likes = photoAPI.likes,
          let picture = Picture.map(pictureAPI: photoAPI.pictures),
-         let user = User.map(userAPI: photoAPI.user),
-         let downloadURL = photoAPI.links?.download else {
+         let user = User.map(userAPI: photoAPI.user) else {
             return nil
       }
       
@@ -44,7 +43,7 @@ extension Photo {
                    likes: likes,
                    pictures: picture,
                    user: user,
-                   downloadURL: downloadURL,
+                   downloadURL: photoAPI.links?.download,
                    description: photoAPI.description)
    }
    

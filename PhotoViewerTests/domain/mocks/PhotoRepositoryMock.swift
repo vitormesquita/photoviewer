@@ -37,30 +37,3 @@ class PhotoRepositoryMock: PhotoRepositoryProtocol {
       return Single.just(search)
    }
 }
-
-extension PhotoAPI {
-   
-   static func dummyPhotos() -> [PhotoAPI] {
-      let path = Bundle(for: PhotoRepositoryMock.self).path(forResource: "photos", ofType: "json")
-      
-      do {
-         let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""))
-         let photos = try JSONDecoder().decode([PhotoAPI].self, from: data)
-         return photos
-      } catch {
-         return []
-      }
-   }
-}
-
-extension Response: Equatable where T == [Photo] {
-   
-   public static func == (lhs: Response<[Photo]>, rhs: Response<[Photo]>) -> Bool {
-      switch (lhs, rhs) {
-      case (.loading, .loading): return true
-      case (.success(let photos1), .success(let photos2)): return photos1.count == photos2.count
-      case (.failure, .failure): return true
-      default: return false
-      }
-   }
-}
