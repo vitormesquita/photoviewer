@@ -13,50 +13,24 @@ protocol PhotoDetailsRouterProtocol: class {
 }
 
 protocol PhotoDetailsPresenterProtocol: BasePresenterProtocol, PhotoDetailsViewModelProtocol {
-   
-   var imageDownloaded: Observable<UIImage> { get }
-   
    func downloadDidTap()
 }
 
 class PhotoDetailsPresenter: BasePresenter {
    
+   let photo: Photo
    weak var router: PhotoDetailsRouterProtocol?
-   private let photo: Photo
-   
-   private let photoImageSubject = BehaviorSubject<UIImage?>(value: nil)
-   private let userImageSubject = BehaviorSubject<UIImage?>(value: nil)
-   
-   private let imageDownloadedSubject = PublishSubject<UIImage>()
    
    init(photo: Photo) {
       self.photo = photo
       super.init()
-      
-      downloadImages()
-   }
-   
-   private func downloadImages() {
-      ImageDownloader.shared.imageBy(url: photo.pictures.regular) {[weak self] (image) in
-         guard let self = self else { return }
-         self.photoImageSubject.onNext(image)
-      }
-      
-      ImageDownloader.shared.imageBy(url: photo.user.thumbURL, saveInCache: false) {[weak self] (image) in
-         guard let self = self else { return }
-         self.userImageSubject.onNext(image)
-      }
    }
 }
 
 extension PhotoDetailsPresenter: PhotoDetailsPresenterProtocol {
    
-   var photoImage: Observable<UIImage?> {
-      return  photoImageSubject
-   }
-   
-   var userImage: Observable<UIImage?> {
-      return userImageSubject
+   var likes: String {
+      return photo.likes.description
    }
    
    var userName: String {
@@ -68,26 +42,19 @@ extension PhotoDetailsPresenter: PhotoDetailsPresenterProtocol {
       return photosCount == 1 ? "1 photo" : "\(photosCount) photos"
    }
    
-   var likes: String {
-      return "\(photo.likes)"
+   var userURL: URL? {
+      return photo.user.thumbURL
+   }
+   
+   var imageURL: URL? {
+      return photo.pictures.regular
    }
    
    var photoDescription: String? {
       return photo.description
    }
    
-   var imageDownloaded: Observable<UIImage> {
-      return imageDownloadedSubject
-   }
-   
    func downloadDidTap() {
-      //        viewStateSubject.onNext(.loading)
-      ImageDownloader.shared.imageBy(url: photo.downloadURL) {[weak self] (image) in
-         guard let self = self else { return }
-         //            self.viewStateSubject.onNext(.normal)
-         
-         guard let image = image else { return }
-         self.imageDownloadedSubject.onNext(image)
-      }
+      //TODO
    }
 }

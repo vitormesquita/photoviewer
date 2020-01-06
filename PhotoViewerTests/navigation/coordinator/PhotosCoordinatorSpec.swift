@@ -51,7 +51,6 @@ class PhotosCoordinatorSpec: QuickSpec {
             let viewController = photosCoodinator.navigationController.visibleViewController
             expect(viewController).to(beAKindOf(expectedVCType))
          }
-         
       }
    }
 }

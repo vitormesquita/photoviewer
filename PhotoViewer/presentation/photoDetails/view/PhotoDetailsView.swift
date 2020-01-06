@@ -12,12 +12,12 @@ import RxSwift
 
 protocol PhotoDetailsViewModelProtocol {
    
-   var photoImage: Observable<UIImage?> { get }
-   var userImage: Observable<UIImage?> { get }
-   
+   var likes: String { get }
    var userName: String { get }
    var userPhotos: String { get }
-   var likes: String { get }
+   
+   var userURL: URL? { get }
+   var imageURL: URL? { get }
    var photoDescription: String? { get }
 }
 
@@ -78,24 +78,11 @@ class PhotoDetailsView: UIView {
    }
    
    private func bindIn(viewModel: PhotoDetailsViewModelProtocol) {
-      
-      viewModel.photoImage
-         .bind(to: photoImageView.rx.image)
-         .disposed(by: disposeBag)
-      
-      viewModel.photoImage
-         .bind(to: blurImageView.rx.image)
-         .disposed(by: disposeBag)
-      
-      viewModel.userImage
-         .bind(to: userImageView.rx.image)
-         .disposed(by: disposeBag)
-      
+      likeLabel.text = viewModel.likes
       userNameLabel.text = viewModel.userName
       userPhotosLabel.text = viewModel.userPhotos
-      likeLabel.text = viewModel.likes
       descriptionLabel.text = viewModel.photoDescription
-      
+     
       self.viewModel = viewModel
    }
 }

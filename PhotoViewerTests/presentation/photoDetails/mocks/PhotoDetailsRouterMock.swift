@@ -11,7 +11,4 @@ import UIKit
 
 class PhotoDetailsRouterMock: PhotoDetailsRouterProtocol {
    
-   func pop() {
-      
-   }
 }

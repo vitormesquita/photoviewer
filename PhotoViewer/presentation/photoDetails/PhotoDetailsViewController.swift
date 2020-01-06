@@ -32,7 +32,7 @@ class PhotoDetailsViewController: BaseViewController {
    
    override func loadView() {
       super.loadView()
-      addScrollView()
+      setupViews()
    }
    
    override func viewDidLoad() {
@@ -66,7 +66,7 @@ class PhotoDetailsViewController: BaseViewController {
 
 extension PhotoDetailsViewController {
    
-   private func addScrollView() {
+   private func setupViews() {
       self.view.addSubview(scrollView)
       
       let scrollViewConstraints = [
