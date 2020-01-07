@@ -8,6 +8,7 @@ target 'PhotoViewer' do
   #Utils
   pod 'Mextension'
   pod 'INSPullToRefresh' #OBJC
+  pod 'Kingfisher'
   
   #Rx
   pod 'RxSwift'

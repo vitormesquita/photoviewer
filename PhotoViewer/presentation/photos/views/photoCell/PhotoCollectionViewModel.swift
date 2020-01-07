@@ -10,17 +10,11 @@ import UIKit
 import RxSwift
 
 class PhotoCollectionViewModel: Equatable {
-
+   
    let photo: Photo
-   private let userImageSubject = BehaviorSubject<UIImage?>(value: nil)
    
    init(photo: Photo) {
       self.photo = photo
-      
-      ImageDownloader.shared.imageBy(url: photo.user.thumbURL, saveInCache: false) {[weak self] (image) in
-         guard let self = self else { return }
-         self.userImageSubject.onNext(image)
-      }
    }
    
    static func == (lhs: PhotoCollectionViewModel, rhs: PhotoCollectionViewModel) -> Bool {
@@ -42,11 +36,11 @@ extension PhotoCollectionViewModel: PhotoCollectionViewModelProtocol {
       return UIColor.colorFrom(hex: photo.color)
    }
    
-   var userImage: Observable<UIImage?> {
-      return userImageSubject.asObservable()
+   var userURL: URL? {
+      return photo.user.thumbURL
    }
    
-   var photoURL: Observable<URL> {
-      return Observable.just(photo.pictures.regular)
+   var photoURL: URL? {
+      return photo.pictures.regular
    }
 }

@@ -8,14 +8,13 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 protocol PhotoCollectionViewModelProtocol {
-   
+   var userURL: URL? { get }
+   var photoURL: URL? { get }
    var userName: String { get }
    var backgroundColor: UIColor { get }
-   
-   var photoURL: Observable<URL> { get }
-   var userImage: Observable<UIImage?> { get }
 }
 
 class PhotoCollectionViewCell: BaseCollectionViewCell {
@@ -28,7 +27,6 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
    
    private let gradient = CAGradientLayer()
    private var viewModel: PhotoCollectionViewModelProtocol?
-   private var imageDataTask: URLSessionDataTask?
    
    override func awakeFromNib() {
       super.awakeFromNib()
@@ -38,18 +36,6 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
    override func layoutIfNeeded() {
       super.layoutIfNeeded()
       gradient.frame = infoContainerView.bounds
-   }
-   
-   override func prepareForReuse() {
-      super.prepareForReuse()
-      
-      imageView.image = nil
-      
-      if let imageDataTask = imageDataTask, !imageDataTask.progress.isFinished {
-         imageDataTask.cancel()
-      }
-      
-      imageDataTask = nil
    }
    
    private func applyLayout() {
@@ -83,49 +69,14 @@ class PhotoCollectionViewCell: BaseCollectionViewCell {
       userNameLabel.text = viewModel.userName
       containerView.backgroundColor = viewModel.backgroundColor
       
-      viewModel.userImage
-         .bind(to: userImageView.rx.image)
-         .disposed(by: viewModelDisposeBag)
+      let options: KingfisherOptionsInfo = [
+         .transition(.fade(0.5))
+      ]
       
-      viewModel.photoURL
-         .bind {[weak self] (url) in
-            guard let self = self else { return }
-            self.downloadImageBy(url: url)
-      }
-      .disposed(by: viewModelDisposeBag)
+      imageView.kf.setImage(with: viewModel.photoURL, options: options)
+      userImageView.kf.setImage(with: viewModel.userURL, options: options)
       
       self.viewModel = viewModel
       self.layoutIfNeeded()
-   }
-}
-
-extension PhotoCollectionViewCell {
-   
-   private func setImage(_ image: UIImage) {
-      self.imageView.alpha = 0
-      self.imageView.image = image
-      
-      UIView.animate(withDuration: 0.4, animations: {
-         self.imageView.alpha = 1
-      })
-   }
-   
-   private func downloadImageBy(url: URL) {
-      if let cachedImage = ImageDownloader.shared.getImageFromCacheBy(url: url) {
-         setImage(cachedImage)
-         
-      } else {
-         imageDataTask = URLSession.shared.dataTask(with: url) {[weak self] (data, response, error) in
-            guard let self = self else { return }
-            if let data = data, let image = UIImage(data: data) {
-               ImageDownloader.shared.setImageToCache(url: url, image: image)
-               DispatchQueue.main.async {
-                  self.setImage(image)
-               }
-            }
-         }
-         
-         imageDataTask?.resume()
-      }
    }
 }

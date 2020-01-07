@@ -1,6 +1,9 @@
 PODS:
   - Alamofire (5.0.0-rc.2)
   - INSPullToRefresh (1.2.0)
+  - Kingfisher (5.12.0):
+    - Kingfisher/Core (= 5.12.0)
+  - Kingfisher/Core (5.12.0)
   - Mextension (0.5.1):
     - Mextension/All (= 0.5.1)
   - Mextension/All (0.5.1)
@@ -33,6 +36,7 @@ PODS:
 
 DEPENDENCIES:
   - INSPullToRefresh
+  - Kingfisher
   - Mextension
   - Moya/RxSwift (~> 14.0.0-beta.4)
   - Nimble
@@ -48,6 +52,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - INSPullToRefresh
+    - Kingfisher
     - Mextension
     - Moya
     - Nimble
@@ -62,6 +67,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
   INSPullToRefresh: d34f0046ccca6b32f6386f053d730ef41b3f35b7
+  Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
   Mextension: afd544fa723329bcabdd29b729a42d1deda93ab3
   Moya: 53fa45a72929809e0b8bba44a0a53d8d0827bcfe
   Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
@@ -73,6 +79,6 @@ SPEC CHECKSUMS:
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   RxTest: 0132f952a61da82d5233abedaa559df91e5330e5
 
-PODFILE CHECKSUM: 3403aba16b84c15906166086127c0a4c1581a09b
+PODFILE CHECKSUM: 11b991070d30c67ee3cdcd1f75f1f8e986dfde47
 
 COCOAPODS: 1.8.4
