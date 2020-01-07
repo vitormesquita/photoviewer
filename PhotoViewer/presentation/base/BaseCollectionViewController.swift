@@ -16,7 +16,7 @@ class BaseCollectionViewController: BaseViewController {
       collectionLayout.minimumInteritemSpacing = 0
       collectionLayout.scrollDirection = .vertical
       let screenWidth = UIScreen.main.bounds.size.width-16
-      collectionLayout.itemSize = CGSize(width: (screenWidth/2), height: screenWidth)
+      collectionLayout.itemSize = CGSize(width: (screenWidth), height: screenWidth)
       return collectionLayout
    }()
    

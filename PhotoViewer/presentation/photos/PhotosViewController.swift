@@ -16,9 +16,9 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    }
    
    private let disposeBag = DisposeBag()
-   let searchController = UISearchController(searchResultsController: nil)
-   
    private(set) var viewModels: [PhotoCollectionViewModelProtocol] = []
+   
+   let searchController = UISearchController(searchResultsController: nil)
    
    override func loadView() {
       super.loadView()
@@ -28,18 +28,8 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    override func viewDidLoad() {
       super.viewDidLoad()
       bind()
-      configureCollectionView()
-      
-      searchController.obscuresBackgroundDuringPresentation = false
-      
-      navigationItem.title = "Photos"
-      navigationItem.hidesSearchBarWhenScrolling = false
-      navigationItem.searchController = searchController
-      navigationController?.navigationBar.prefersLargeTitles = true
-      
-      if #available(iOS 13.0, *) {
-         navigationItem.scrollEdgeAppearance = navigationController?.navigationBar.compactAppearance
-      }
+      setupNavigationBar()
+      setupCollectionView()
    }
    
    private func bind() {
@@ -78,7 +68,20 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       .disposed(by: disposeBag)
    }
    
-   private func configureCollectionView() {
+   private func setupNavigationBar() {
+      searchController.obscuresBackgroundDuringPresentation = false
+      
+      navigationItem.title = "Photos"
+      navigationItem.hidesSearchBarWhenScrolling = false
+      navigationItem.searchController = searchController
+      navigationController?.navigationBar.prefersLargeTitles = true
+      
+      if #available(iOS 13.0, *) {
+         navigationItem.scrollEdgeAppearance = navigationController?.navigationBar.compactAppearance
+      }
+   }
+   
+   private func setupCollectionView() {
       collectionView.delegate = self
       collectionView.dataSource = self
       collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
