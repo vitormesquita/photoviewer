@@ -23,7 +23,7 @@ class PhotoSpec: QuickSpec {
             photoAPI.createdAt = "2020-06-06"
             photoAPI.color = "#fcba03"
             photoAPI.likes = 321
-            photoAPI.pictures = PictureAPI(url: "https://google.com.br")
+            photoAPI.pictures = PictureAPI(url: "https://i.picsum.photos/id/232/200/200.jpg")
             photoAPI.user = UserAPI(id: 10)
             
             let date = Date.dateFrom(string: photoAPI.createdAt)

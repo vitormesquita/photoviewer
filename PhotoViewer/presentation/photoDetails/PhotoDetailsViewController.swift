@@ -40,22 +40,14 @@ class PhotoDetailsViewController: BaseViewController {
       
       title = "Details"
       navigationItem.rightBarButtonItem = actionsButton
-   }
-   
-   func bind() {
-      //        presenter.imageDownloaded
-      //            .subscribe(onNext: {[weak self] (image) in
-      //                guard let self = self else { return }
-      //                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:contextInfo:)), nil)
-      //            })
-      //            .disposed(by: disposeBag)
+      //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:contextInfo:)), nil)
    }
    
    @objc private func actionsDidTap() {
       showActionsActionSheet()
    }
    
-   @objc func didFinishSaving(_ image: UIImage, error: Error?, contextInfo: UnsafeRawPointer) {
+   @objc private func didFinishSaving(_ image: UIImage, error: Error?, contextInfo: UnsafeRawPointer) {
       if let error = error {
          showOkAlertWith(title: "Save error", message: error.localizedDescription)
       } else {
@@ -97,7 +89,7 @@ extension PhotoDetailsViewController {
    private func showActionsActionSheet() {
       let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
       
-      actionSheet.addAction(UIAlertAction(title: "Download", style: .default, handler: {[unowned self] (_) in
+      actionSheet.addAction(UIAlertAction(title: "Download", style: .default, handler: { [unowned self] (_) in
          self.presenter.downloadDidTap()
       }))
       

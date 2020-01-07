@@ -19,11 +19,11 @@ class PictureSpec: QuickSpec {
          it("mapping sucess") {
             //Arrange
             let pictureAPI = PictureAPI()
-            pictureAPI.raw = URL(string: "https://google.com")
-            pictureAPI.full = URL(string: "https://faceebook.com")
-            pictureAPI.regular = URL(string: "https://globo.com")
-            pictureAPI.small = URL(string: "https://google.com")
-            pictureAPI.thumb = URL(string: "https://facebook.com")
+            pictureAPI.raw = URL(string: "https://i.picsum.photos/id/1/200/200.jpg")
+            pictureAPI.full = URL(string: "https://i.picsum.photos/id/2/200/200.jpg")
+            pictureAPI.regular = URL(string: "https://i.picsum.photos/id/3/200/200.jpg")
+            pictureAPI.small = URL(string: "https://i.picsum.photos/id/4/200/200.jpg")
+            pictureAPI.thumb = URL(string: "https://i.picsum.photos/id/5/200/200.jpg")
             
             //Act
             let picture = Picture.map(pictureAPI: pictureAPI)

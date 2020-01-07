@@ -19,13 +19,15 @@ extension Picture {
 extension User {
    
    init(id: Int) {
+      let thumbURL = URL(string: "https://i.picsum.photos/id/\(id)/200/200.jpg")
+      
       self.init(
          id: id.description,
          userName: "User name \(id)",
          name: "Name \(id)",
          totalPhotos: id,
          bio: nil,
-         thumbURL: nil
+         thumbURL: thumbURL
       )
    }
 }
@@ -33,7 +35,7 @@ extension User {
 extension Photo {
    
    init(id: Int) {
-      let url = URL(string: "https://i.picsum.photos/id/253/200/200.jpg")!
+      let url = URL(string: "https://i.picsum.photos/id/\(id)/200/200.jpg")!
       
       self.init(
          id: id.description,
@@ -43,7 +45,7 @@ extension Photo {
          pictures: Picture(url: url),
          user: User(id: id),
          downloadURL: url,
-         description: nil
+         description: "Photo description"
       )
    }
 }

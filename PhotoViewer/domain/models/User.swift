@@ -16,6 +16,10 @@ struct User {
    var totalPhotos: Int
    var bio: String?
    var thumbURL: URL?
+   
+   var totalPhotosDescription: String {
+      return totalPhotos == 1 ? "1 photo" : "\(totalPhotos) photos"
+   }
 }
 
 extension User {

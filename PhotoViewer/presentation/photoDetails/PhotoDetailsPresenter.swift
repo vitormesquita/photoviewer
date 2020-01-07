@@ -38,8 +38,7 @@ extension PhotoDetailsPresenter: PhotoDetailsPresenterProtocol {
    }
    
    var userPhotos: String {
-      let photosCount = photo.user.totalPhotos
-      return photosCount == 1 ? "1 photo" : "\(photosCount) photos"
+      return photo.user.totalPhotosDescription
    }
    
    var userURL: URL? {

@@ -30,6 +30,15 @@ class PhotoDetailsPresenterSpec: QuickSpec {
             expect(presenter.photo).to(equal(photo))
             expect(presenter.router).to(beAKindOf(PhotoDetailsRouterMock.self))            
          }
+         
+         it("details protocol conform by photo") {
+            expect(presenter.likes).to(equal(photo.likes.description))
+            expect(presenter.userName).to(equal(photo.user.name))
+            expect(presenter.userPhotos).to(equal(photo.user.totalPhotosDescription))
+            expect(presenter.userURL).to(equal(photo.user.thumbURL))
+            expect(presenter.imageURL).to(equal(photo.pictures.regular))
+            expect(presenter.photoDescription).to(equal(photo.description))
+         }
       }
    }
 }
