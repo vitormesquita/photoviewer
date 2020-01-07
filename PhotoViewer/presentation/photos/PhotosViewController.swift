@@ -37,6 +37,10 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       navigationItem.hidesSearchBarWhenScrolling = false
       navigationItem.searchController = searchController
       navigationController?.navigationBar.prefersLargeTitles = true
+      
+      if #available(iOS 13.0, *) {
+         navigationItem.scrollEdgeAppearance = navigationController?.navigationBar.compactAppearance
+      }
    }
    
    private func bind() {

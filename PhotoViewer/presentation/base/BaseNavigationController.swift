@@ -16,14 +16,9 @@ class BaseNavigationController: UINavigationController {
    }
    
    private func applyLayout() {
-      navigationBar.tintColor = .black
-      navigationBar.barTintColor = .white
+      navigationBar.isTranslucent = false
       navigationBar.shadowImage = UIImage()
-      
-      let textAttributes = [
-         NSAttributedString.Key.foregroundColor: UIColor.black
-      ]
-      
-      navigationBar.titleTextAttributes = textAttributes
+      navigationBar.tintColor = .textPrimary
+      navigationBar.barTintColor = .background
    }
 }

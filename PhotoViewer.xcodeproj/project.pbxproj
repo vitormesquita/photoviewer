@@ -22,6 +22,8 @@
 		6491577423BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491577323BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift */; };
 		64D0D5C723BE2B420065793B /* SearchPhotosWorkerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D0D5C623BE2B420065793B /* SearchPhotosWorkerSpec.swift */; };
 		64E22F0E23C4C5C9003DF3C9 /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E22F0D23C4C5C9003DF3C9 /* UserSpec.swift */; };
+		64E22F1123C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E22F1023C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift */; };
+		64E22F1323C512C9003DF3C9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E22F1223C512C9003DF3C9 /* Colors.swift */; };
 		64F1C89123B246A900AB6B92 /* PhotoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89023B246A900AB6B92 /* PhotoFactory.swift */; };
 		64F1C89723B248B600AB6B92 /* FactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89623B248B600AB6B92 /* FactorySpec.swift */; };
 		64F1C89B23B24DD200AB6B92 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89A23B24DD200AB6B92 /* PhotosCoordinator.swift */; };
@@ -100,6 +102,8 @@
 		6491577323BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosWorkerMock.swift; sourceTree = "<group>"; };
 		64D0D5C623BE2B420065793B /* SearchPhotosWorkerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosWorkerSpec.swift; sourceTree = "<group>"; };
 		64E22F0D23C4C5C9003DF3C9 /* UserSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
+		64E22F1023C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewControllerSpec.swift; sourceTree = "<group>"; };
+		64E22F1223C512C9003DF3C9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		64F1C89023B246A900AB6B92 /* PhotoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFactory.swift; sourceTree = "<group>"; };
 		64F1C89623B248B600AB6B92 /* FactorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpec.swift; sourceTree = "<group>"; };
 		64F1C89A23B24DD200AB6B92 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 			children = (
 				64F92AEC23C3B3C00071D9E2 /* mocks */,
 				64F92AEF23C3E6F50071D9E2 /* PhotoDetailsPresenterSpec.swift */,
+				64E22F1023C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift */,
 			);
 			path = photoDetails;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 		FC62F31A21B0B1B200E1A7F6 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				64E22F1223C512C9003DF3C9 /* Colors.swift */,
 				FCBBF65D21B1EBB800EFC595 /* Extensions.swift */,
 			);
 			path = utils;
@@ -786,6 +792,7 @@
 				64F92AE623C364AC0071D9E2 /* PhotoSpec.swift in Sources */,
 				64F1C89D23B24DE700AB6B92 /* PhotosCoordinatorSpec.swift in Sources */,
 				6491577223BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift in Sources */,
+				64E22F1123C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift in Sources */,
 				64D0D5C723BE2B420065793B /* SearchPhotosWorkerSpec.swift in Sources */,
 				64F92AE823C3677A0071D9E2 /* Entity.swift in Sources */,
 				648762BD23B4F5C9005A7EB2 /* PhotosRouterMock.swift in Sources */,
@@ -811,6 +818,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64F1C89123B246A900AB6B92 /* PhotoFactory.swift in Sources */,
+				64E22F1323C512C9003DF3C9 /* Colors.swift in Sources */,
 				FC62F32221B0C58200E1A7F6 /* User.swift in Sources */,
 				FC62F31821B0A4D500E1A7F6 /* PhotoCollectionViewModel.swift in Sources */,
 				FC62F31421B0A05200E1A7F6 /* Photo.swift in Sources */,
@@ -877,6 +885,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KXWH4SC5H2;
 				INFOPLIST_FILE = PhotoViewerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -900,6 +909,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KXWH4SC5H2;
 				INFOPLIST_FILE = PhotoViewerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (

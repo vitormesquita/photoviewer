@@ -29,7 +29,7 @@ class BaseViewController: UIViewController {
    
    override func loadView() {
       super.loadView()
-      view.backgroundColor = .white
+      view.backgroundColor = UIColor(named: "background")
    }
    
    deinit {
