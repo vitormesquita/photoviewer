@@ -21,4 +21,12 @@ class BaseNavigationController: UINavigationController {
       navigationBar.tintColor = .textPrimary
       navigationBar.barTintColor = .background
    }
+   
+   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+      super.traitCollectionDidChange(previousTraitCollection)
+      
+      if #available(iOS 12.0, *) {
+         navigationBar.isTranslucent = previousTraitCollection?.userInterfaceStyle == .dark
+      }
+   }
 }

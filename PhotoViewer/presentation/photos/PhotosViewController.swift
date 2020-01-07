@@ -33,7 +33,6 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
       searchController.obscuresBackgroundDuringPresentation = false
       
       navigationItem.title = "Photos"
-      navigationItem.largeTitleDisplayMode = .always
       navigationItem.hidesSearchBarWhenScrolling = false
       navigationItem.searchController = searchController
       navigationController?.navigationBar.prefersLargeTitles = true

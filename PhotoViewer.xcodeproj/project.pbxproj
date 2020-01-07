@@ -24,6 +24,7 @@
 		64E22F0E23C4C5C9003DF3C9 /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E22F0D23C4C5C9003DF3C9 /* UserSpec.swift */; };
 		64E22F1123C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E22F1023C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift */; };
 		64E22F1323C512C9003DF3C9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E22F1223C512C9003DF3C9 /* Colors.swift */; };
+		64E22F1723C51728003DF3C9 /* UIViewController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E22F1623C51728003DF3C9 /* UIViewController+Loading.swift */; };
 		64F1C89123B246A900AB6B92 /* PhotoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89023B246A900AB6B92 /* PhotoFactory.swift */; };
 		64F1C89723B248B600AB6B92 /* FactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89623B248B600AB6B92 /* FactorySpec.swift */; };
 		64F1C89B23B24DD200AB6B92 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F1C89A23B24DD200AB6B92 /* PhotosCoordinator.swift */; };
@@ -104,6 +105,7 @@
 		64E22F0D23C4C5C9003DF3C9 /* UserSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
 		64E22F1023C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewControllerSpec.swift; sourceTree = "<group>"; };
 		64E22F1223C512C9003DF3C9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		64E22F1623C51728003DF3C9 /* UIViewController+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Loading.swift"; sourceTree = "<group>"; };
 		64F1C89023B246A900AB6B92 /* PhotoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFactory.swift; sourceTree = "<group>"; };
 		64F1C89623B248B600AB6B92 /* FactorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpec.swift; sourceTree = "<group>"; };
 		64F1C89A23B24DD200AB6B92 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -268,6 +270,25 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		64E22F1423C516FE003DF3C9 /* loading */ = {
+			isa = PBXGroup;
+			children = (
+				FC39ECEC21B2C1D800B63F6C /* LoadingView.swift */,
+				FC9B25BB21B2C7530016A465 /* LoadingView.xib */,
+				64E22F1623C51728003DF3C9 /* UIViewController+Loading.swift */,
+			);
+			path = loading;
+			sourceTree = "<group>";
+		};
+		64E22F1523C51709003DF3C9 /* empty */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B25BD21B2CD940016A465 /* EmptyView.swift */,
+				FC9B25BF21B2CD9D0016A465 /* EmptyView.xib */,
+			);
+			path = empty;
+			sourceTree = "<group>";
+		};
 		64F1C88B23B2463700AB6B92 /* navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,10 +430,8 @@
 		FC39ECEB21B2C19600B63F6C /* placeholders */ = {
 			isa = PBXGroup;
 			children = (
-				FC39ECEC21B2C1D800B63F6C /* LoadingView.swift */,
-				FC9B25BB21B2C7530016A465 /* LoadingView.xib */,
-				FC9B25BD21B2CD940016A465 /* EmptyView.swift */,
-				FC9B25BF21B2CD9D0016A465 /* EmptyView.xib */,
+				64E22F1523C51709003DF3C9 /* empty */,
+				64E22F1423C516FE003DF3C9 /* loading */,
 			);
 			path = placeholders;
 			sourceTree = "<group>";
@@ -485,7 +504,6 @@
 		FC62F32521B0CB7F00E1A7F6 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				FC39ECEB21B2C19600B63F6C /* placeholders */,
 				FC62F32621B0CB9500E1A7F6 /* InifiteScrollView.swift */,
 			);
 			path = view;
@@ -549,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				FC62F31A21B0B1B200E1A7F6 /* utils */,
+				FC39ECEB21B2C19600B63F6C /* placeholders */,
 				FC62F32521B0CB7F00E1A7F6 /* view */,
 				FC951A5421B0352C00ABF0E1 /* base */,
 				FC951A5121B0350400ABF0E1 /* photos */,
@@ -838,6 +857,7 @@
 				FC62F2F821B06BB000E1A7F6 /* PictureAPI.swift in Sources */,
 				FC62F31621B0A08D00E1A7F6 /* Picture.swift in Sources */,
 				FC9B25BE21B2CD940016A465 /* EmptyView.swift in Sources */,
+				64E22F1723C51728003DF3C9 /* UIViewController+Loading.swift in Sources */,
 				FC62F2EA21B03C9E00E1A7F6 /* PhotosViewController.swift in Sources */,
 				FC9B25CA21B2E3230016A465 /* BaseNavigationController.swift in Sources */,
 				6482272F23B6A3B00058ABA8 /* SearchPhotosWorker.swift in Sources */,

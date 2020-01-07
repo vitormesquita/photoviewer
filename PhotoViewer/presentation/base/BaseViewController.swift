@@ -29,62 +29,11 @@ class BaseViewController: UIViewController {
    
    override func loadView() {
       super.loadView()
-      view.backgroundColor = UIColor(named: "background")
+      view.backgroundColor = .background
    }
    
    deinit {
       print("dealloc ---> \(String(describing: type(of: self)))")
-   }
-}
-
-protocol LoadingPresentable {
-   func showLoading()
-   func hideLoading()
-}
-
-extension LoadingPresentable where Self: UIViewController {
-   
-   func findLoadingView() -> LoadingView? {
-      return view.subviews.compactMap { $0 as? LoadingView }.first
-   }
-   
-   func showLoading() {
-      if let loadingView = findLoadingView() {
-         view.bringSubviewToFront(loadingView)
-         return
-      }
-      
-      let loadingView = LoadingView.loadNibName()
-      loadingView.startAnimating()
-      loadingView.alpha = 0
-      loadingView.translatesAutoresizingMaskIntoConstraints = false
-      self.view.addSubview(loadingView)
-      
-      let constraints = [
-         loadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-         loadingView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-         loadingView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-         loadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-      ]
-
-      NSLayoutConstraint.activate(constraints)
-            
-      UIView.animate(withDuration: 0.5) {
-         loadingView.alpha = 1
-      }
-   }
-   
-   func hideLoading() {
-      guard let loadingView = findLoadingView() else { return }
-      loadingView.removeFromSuperview()
-   }
-   
-   func isLoadingVisible(_ isVisible: Bool) {
-      if isVisible {
-         showLoading()
-      } else {
-         hideLoading()
-      }
    }
 }
 

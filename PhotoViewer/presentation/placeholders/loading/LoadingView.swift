@@ -18,7 +18,8 @@ class LoadingView: UIView {
    }
    
    private func applyLayout() {
-      activitiIndicatorView.color = .black
+      backgroundColor = .clear
+      activitiIndicatorView.color = .textPrimary
       activitiIndicatorView.hidesWhenStopped = true
    }
    
