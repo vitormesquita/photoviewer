@@ -39,7 +39,8 @@ class PhotoDetailsViewController: BaseViewController {
       super.viewDidLoad()
       
       title = "Details"
-      navigationItem.rightBarButtonItem = actionsButton
+      navigationItem.largeTitleDisplayMode = .never
+      navigationItem.rightBarButtonItem = actionsButton      
       //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:contextInfo:)), nil)
    }
    

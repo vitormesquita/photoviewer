@@ -11,28 +11,30 @@ import Foundation
 
 class PhotoDetailsPresenterMock: PhotoDetailsPresenterProtocol {
    
+   var photo: Photo?
+   
    var likes: String {
-      return ""
+      return photo?.likes.description ?? ""
    }
    
    var userName: String {
-      return ""
+      return photo?.user.name ?? ""
    }
    
    var userPhotos: String {
-      return ""
+      return photo?.user.totalPhotosDescription ?? ""
    }
    
    var userURL: URL? {
-      return nil
+      return photo?.user.thumbURL
    }
    
    var imageURL: URL? {
-      return nil
+      return photo?.pictures.regular
    }
    
    var photoDescription: String? {
-      return ""
+      return photo?.description
    }
    
    func downloadDidTap() {

@@ -37,6 +37,6 @@ extension User {
                   name: name,
                   totalPhotos: userAPI.totalPhotos ?? 0,
                   bio: userAPI.bio,
-                  thumbURL: userAPI.profilePicutes?.medium)
+                  thumbURL: userAPI.profilePicutes?.large)
    }
 }
