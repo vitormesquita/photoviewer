@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoDetailsViewController: BaseViewController {
    
-   private var presenter: PhotoDetailsPresenterProtocol {
+   var presenter: PhotoDetailsPresenterProtocol {
       return basePresenter as! PhotoDetailsPresenterProtocol
    }
    
@@ -18,13 +18,13 @@ class PhotoDetailsViewController: BaseViewController {
       return UIBarButtonItem(image: UIImage(named: "ic_more"), style: .plain, target: self, action: #selector(actionsDidTap))
    }()
    
-   private lazy var scrollView: UIScrollView = {
+   private(set) lazy var scrollView: UIScrollView = {
       let scrollView = UIScrollView()
       scrollView.translatesAutoresizingMaskIntoConstraints = false
       return scrollView
    }()
    
-   private lazy var detailsView: PhotoDetailsView = {
+   private(set) lazy var detailsView: PhotoDetailsView = {
       let view = PhotoDetailsView.loadNibName(viewModel: presenter)
       view.translatesAutoresizingMaskIntoConstraints = false
       return view

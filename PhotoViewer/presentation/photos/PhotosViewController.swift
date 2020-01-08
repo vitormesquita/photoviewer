@@ -58,14 +58,25 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
          })
          .disposed(by: disposeBag)
       
-      searchController.searchBar
-         .rx.text
+      let searchBar = searchController.searchBar.rx
+      
+      searchBar
+         .text
+         .distinctUntilChanged()
          .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
-         .bind { [weak self] (text) in
+         .subscribe(onNext: { [weak self] (text) in
             guard let self = self else { return }
             self.presenter.didSearchWith(term: text)
-      }
-      .disposed(by: disposeBag)
+         })
+         .disposed(by: disposeBag)
+      
+      searchBar
+         .cancelButtonClicked
+         .subscribe(onNext: { [weak self] (_) in
+            guard let self = self else { return }
+            self.presenter.didSearchWith(term: nil)
+         })
+         .disposed(by: disposeBag)
    }
    
    private func setupNavigationBar() {
@@ -83,8 +94,11 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    
    private func setupCollectionView() {
       collectionView.delegate = self
-      collectionView.dataSource = self
-      collectionView.register(UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName)
+      collectionView.dataSource = self      
+      collectionView.register(
+         UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil),
+         forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName
+      )
    }
 }
 

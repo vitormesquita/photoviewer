@@ -1,18 +1,18 @@
 PODS:
-  - Alamofire (5.0.0-rc.2)
+  - Alamofire (5.0.0-rc.3)
   - INSPullToRefresh (1.2.0)
   - Kingfisher (5.12.0):
     - Kingfisher/Core (= 5.12.0)
   - Kingfisher/Core (5.12.0)
-  - Mextension (0.5.1):
-    - Mextension/All (= 0.5.1)
-  - Mextension/All (0.5.1)
-  - Moya/Core (14.0.0-beta.4):
-    - Alamofire (= 5.0.0-rc.2)
-  - Moya/RxSwift (14.0.0-beta.4):
+  - Mextension (0.5.2):
+    - Mextension/All (= 0.5.2)
+  - Mextension/All (0.5.2)
+  - Moya/Core (14.0.0-beta.6):
+    - Alamofire (= 5.0.0-rc.3)
+  - Moya/RxSwift (14.0.0-beta.6):
     - Moya/Core
     - RxSwift (~> 5.0)
-  - Nimble (8.0.4)
+  - Nimble (8.0.5)
   - Quick (2.2.0)
   - RxBlocking (5.0.1):
     - RxSwift (~> 5)
@@ -65,12 +65,12 @@ SPEC REPOS:
     - RxTest
 
 SPEC CHECKSUMS:
-  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   INSPullToRefresh: d34f0046ccca6b32f6386f053d730ef41b3f35b7
   Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
-  Mextension: afd544fa723329bcabdd29b729a42d1deda93ab3
-  Moya: 53fa45a72929809e0b8bba44a0a53d8d0827bcfe
-  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  Mextension: 32b74704d8704110b110817d6c3a6d3cec690134
+  Moya: d4821fbcb3e784f34d2f82869e6855057a0b85d1
+  Nimble: 4ab1aeb9b45553c75b9687196b0fa0713170a332
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   RxBlocking: c5e090f42d046df8b0e7752742510f349963710f
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c

@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import Mextension
 
 class PhotoCollectionViewModel: Equatable {
    
