@@ -66,8 +66,10 @@ class PhotoDetailsView: UIView {
       
       userNameLabel.textColor = .textPrimary
       userNameLabel.font = UIFont.systemFont(ofSize: 18)
+      userNameLabel.accessibilityIdentifier = "photo_user_name_label"
       
       userPhotosLabel.textColor = .textPrimary
+      userPhotosLabel.accessibilityIdentifier = "photo_user_photos_label"
       userPhotosLabel.font = UIFont.systemFont(ofSize: 14, weight: .light)
       
       likeContainerView.backgroundColor = .clear
@@ -76,11 +78,13 @@ class PhotoDetailsView: UIView {
       likeImageView.image = UIImage(named: "ic_like")?.withRenderingMode(.alwaysTemplate)
       
       likeLabel.textColor = .textPrimary
+      likeLabel.accessibilityIdentifier = "photo_like_label"
       likeLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
       
-      descriptionLabel.textColor = .textPrimary
       descriptionLabel.numberOfLines = 0
+      descriptionLabel.textColor = .textPrimary
       descriptionLabel.font = UIFont.systemFont(ofSize: 20)
+      descriptionLabel.accessibilityIdentifier = "photo_description_label"
    }
    
    private func bindIn(viewModel: PhotoDetailsViewModelProtocol) {
