@@ -12,6 +12,17 @@ import Nimble
 
 class PhotoDetailsViewControllerSpec: QuickSpec {
    
+   enum Error: Swift.Error, LocalizedError {
+      case failureSaveImage
+      
+      var errorDescription: String? {
+         switch self {
+         case .failureSaveImage:
+            return "Failure to save image"
+         }
+      }
+   }
+   
    override func spec() {
       
       describe("photo details viewController") {
@@ -36,12 +47,61 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
             
             expect(scrollView.isDescendant(of: view!))
                .to(beTrue())
-         
+            
             expect(detailsView.isDescendant(of: scrollView))
                .to(beTrue())
             
             expect(scrollView.constraints).toNot(beEmpty())
             expect(detailsView.constraints).toNot(beEmpty())
+         }
+         
+         context("more actions") {
+            
+            beforeEach {
+               let window = UIWindow(frame: UIScreen.main.bounds)
+               window.rootViewController = viewController
+               window.makeKeyAndVisible()
+            }
+            
+            it("check button is on navigation bar") {
+               expect(viewController.navigationItem.rightBarButtonItem)
+                  .to(be(viewController.actionsButton))
+            }
+            
+            it("check show sheet when click in action") {
+               let button = viewController.actionsButton
+               _ = button.target?.perform(button.action, with: nil)
+               
+               expect(viewController.presentedViewController).toNot(beNil())
+               expect(viewController.presentedViewController).to(beAnInstanceOf(UIAlertController.self))
+            }
+         }
+         
+         context("when trying download image") {
+            
+            beforeEach {
+               let window = UIWindow(frame: UIScreen.main.bounds)
+               window.rootViewController = viewController
+               window.makeKeyAndVisible()
+            }
+            
+            it("success save image") {
+               viewController.didFinishSaving(UIImage(), error: nil)
+               
+               let alert = viewController.presentedViewController as? UIAlertController
+               expect(alert).toNot(beNil())
+               expect(alert?.title).to(equal("Saved!"))
+               expect(alert?.message).to(equal("This image has been saved to your photos."))
+            }
+            
+            it("failure save image") {
+               viewController.didFinishSaving(UIImage(), error: Error.failureSaveImage)
+               
+               let alert = viewController.presentedViewController as? UIAlertController
+               expect(alert).toNot(beNil())
+               expect(alert?.title).to(equal("Opss..."))
+               expect(alert?.message).to(equal(Error.failureSaveImage.localizedDescription))
+            }
          }
       }
    }

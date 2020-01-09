@@ -14,7 +14,7 @@ class PhotoDetailsViewController: BaseViewController {
       return basePresenter as! PhotoDetailsPresenterProtocol
    }
    
-   private lazy var actionsButton: UIBarButtonItem = {
+   private(set) lazy var actionsButton: UIBarButtonItem = {
       return UIBarButtonItem(image: UIImage(named: "ic_more"), style: .plain, target: self, action: #selector(actionsDidTap))
    }()
    
@@ -40,17 +40,17 @@ class PhotoDetailsViewController: BaseViewController {
       
       title = "Details"
       navigationItem.largeTitleDisplayMode = .never
-      navigationItem.rightBarButtonItem = actionsButton      
-      //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:contextInfo:)), nil)
+      navigationItem.rightBarButtonItem = actionsButton
+//      UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:)), nil)
    }
    
-   @objc private func actionsDidTap() {
+   @objc func actionsDidTap() {
       showActionsActionSheet()
    }
    
-   @objc private func didFinishSaving(_ image: UIImage, error: Error?, contextInfo: UnsafeRawPointer) {
+   @objc func didFinishSaving(_ image: UIImage, error: Error?) {
       if let error = error {
-         showOkAlertWith(title: "Save error", message: error.localizedDescription)
+         showOkAlertWith(title: "Opss...", message: error.localizedDescription)
       } else {
          showOkAlertWith(title: "Saved!", message: "This image has been saved to your photos.")
       }
