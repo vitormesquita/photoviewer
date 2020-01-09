@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
+class PhotosViewController: BaseViewController, LoadingPresentable, CollectionPresentable {
    
    var presenter: PhotosPresenterProtocol {
       return basePresenter as! PhotosPresenterProtocol
@@ -95,10 +95,17 @@ class PhotosViewController: BaseCollectionViewController, LoadingPresentable {
    private func setupCollectionView() {
       collectionView.delegate = self
       collectionView.dataSource = self      
-      collectionView.register(
-         UINib(nibName: PhotoCollectionViewCell.nibName, bundle: nil),
-         forCellWithReuseIdentifier: PhotoCollectionViewCell.nibName
-      )
+      collectionView.register(UINib(nibName: PhotoCollectionViewCell.className, bundle: nil),
+                              forCellWithReuseIdentifier: PhotoCollectionViewCell.className)
+      
+      if let collectionLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+         collectionLayout.minimumLineSpacing = 0
+         collectionLayout.minimumInteritemSpacing = 0
+         collectionLayout.scrollDirection = .vertical
+         let screenWidth = UIScreen.main.bounds.size.width-16
+         collectionLayout.itemSize = CGSize(width: (screenWidth), height: screenWidth)
+         collectionLayout.invalidateLayout()
+      }
    }
 }
 
@@ -109,7 +116,7 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSo
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.nibName, for: indexPath) as! PhotoCollectionViewCell
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.className, for: indexPath) as! PhotoCollectionViewCell
       cell.bindIn(viewModel: viewModels[indexPath.item])
       return cell
    }

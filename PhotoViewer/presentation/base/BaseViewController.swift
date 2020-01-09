@@ -36,38 +36,3 @@ class BaseViewController: UIViewController {
       print("dealloc ---> \(String(describing: type(of: self)))")
    }
 }
-
-//extension BaseViewController {
-//
-//   func hidePlaceholders() {
-//      guard let placeholderView = placeholderView else { return }
-//      placeholderView.removeFromSuperview()
-//   }
-//
-//   func showEmptyViewWith(text: String) {
-//      hidePlaceholders()
-//      let emptyView = EmptyView.loadNibName()
-//      showPlaceholderWith(view: emptyView)
-//      emptyView.setText(text)
-//   }
-//
-//   private func showPlaceholderWith(view: UIView) {
-//      view.alpha = 0
-//      view.translatesAutoresizingMaskIntoConstraints = false
-//      self.view.addSubview(view)
-//
-//      let constraints = [
-//         view.topAnchor.constraint(equalTo: self.view.topAnchor),
-//         view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-//         view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-//         view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-//      ]
-//
-//      NSLayoutConstraint.activate(constraints)
-//      self.placeholderView = view
-//
-//      UIView.animate(withDuration: 0.5) {
-//         view.alpha = 1
-//      }
-//   }
-//}

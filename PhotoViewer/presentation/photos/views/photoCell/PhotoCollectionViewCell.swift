@@ -17,7 +17,7 @@ protocol PhotoCollectionViewModelProtocol {
    var backgroundColor: UIColor { get }
 }
 
-class PhotoCollectionViewCell: BaseCollectionViewCell {
+class PhotoCollectionViewCell: UICollectionViewCell {
    
    @IBOutlet weak var containerView: UIView!
    @IBOutlet weak var imageView: UIImageView!
