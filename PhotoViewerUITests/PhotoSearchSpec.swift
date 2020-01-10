@@ -1,33 +1,31 @@
 //
-//  PhotoDetailsSpec.swift
+//  PhotoSearchSpec.swift
 //  PhotoViewerUITests
 //
-//  Created by mano on 09/01/20.
+//  Created by mano on 10/01/20.
 //  Copyright © 2020 Vitor Mesquita. All rights reserved.
 //
 
 import Quick
-import XCTest
 
-class PhotoDetailsSpec: QuickSpec {
+class PhotoSearchSpec: QuickSpec {
    
    override func spec() {
       
-      describe("photo details flow") {
+      describe("search photo flow") {
          var app: XCUIApplication!
          
          beforeEach {
             app = XCUIApplication()
          }
          
-         it("show a photo details") {
+         it("search and display result") {
+            
             PhotosRobot(app: app)
                .start()
-               .expectTitle("Photos")
+               .searchBy(term: "Sky")
                .swipeUp()
-               .clickPhoto()
-               .expectTitle("Details")
-               .expectDetails()
+            
          }
       }
    }

@@ -37,7 +37,7 @@ enum APITarget: TargetType {
    case searchPhotos(query: String, page: Int)
    
    var baseURL: URL {
-      return URL(string: "https://api.unsplash.com")!
+      return Settings.apiURL!
    }
    
    var path: String {

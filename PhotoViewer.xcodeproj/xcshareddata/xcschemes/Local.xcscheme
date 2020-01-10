@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FC951A3821B0301D00ABF0E1"
-               BuildableName = "PhotoViewer.app"
-               BlueprintName = "PhotoViewer"
+               BlueprintIdentifier = "64FB8C5923C8FC92001DD1FF"
+               BuildableName = "PhotoViewer-Local.app"
+               BlueprintName = "PhotoViewer-Local"
                ReferencedContainer = "container:PhotoViewer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,26 +26,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES">
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FC951A3821B0301D00ABF0E1"
-            BuildableName = "PhotoViewer.app"
-            BlueprintName = "PhotoViewer"
-            ReferencedContainer = "container:PhotoViewer.xcodeproj">
-         </BuildableReference>
-      </CodeCoverageTargets>
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6485607123B1463800C6A0D2"
-               BuildableName = "PhotoViewerTests.xctest"
-               BlueprintName = "PhotoViewerTests"
+               BlueprintIdentifier = "6484876423C7A7DA0012CBF2"
+               BuildableName = "PhotoViewerUITests.xctest"
+               BlueprintName = "PhotoViewerUITests"
                ReferencedContainer = "container:PhotoViewer.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -65,9 +54,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FC951A3821B0301D00ABF0E1"
-            BuildableName = "PhotoViewer.app"
-            BlueprintName = "PhotoViewer"
+            BlueprintIdentifier = "64FB8C5923C8FC92001DD1FF"
+            BuildableName = "PhotoViewer-Local.app"
+            BlueprintName = "PhotoViewer-Local"
             ReferencedContainer = "container:PhotoViewer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -82,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FC951A3821B0301D00ABF0E1"
-            BuildableName = "PhotoViewer.app"
-            BlueprintName = "PhotoViewer"
+            BlueprintIdentifier = "64FB8C5923C8FC92001DD1FF"
+            BuildableName = "PhotoViewer-Local.app"
+            BlueprintName = "PhotoViewer-Local"
             ReferencedContainer = "container:PhotoViewer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

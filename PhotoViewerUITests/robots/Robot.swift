@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Nimble
 
 class Robot {
    
@@ -14,5 +15,24 @@ class Robot {
 
    init(app: XCUIApplication) {
       self.app = app
+   }
+   
+   @discardableResult
+   func start() -> Self {
+      app.launch()
+      return self
+   }
+   
+   @discardableResult
+   func expectTitle(_ title: String) -> Self {
+      let navigationBar = app.navigationBars.firstMatch
+      expect(navigationBar.identifier).to(equal(title))
+      return self
+   }
+   
+   @discardableResult
+   func swipeUp() -> Self {
+      app.swipeUp()
+      return self
    }
 }
