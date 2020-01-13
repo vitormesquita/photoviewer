@@ -33,6 +33,7 @@ PODS:
   - RxSwift (5.0.1)
   - RxTest (5.0.1):
     - RxSwift (~> 5)
+  - Swifter (1.4.7)
 
 DEPENDENCIES:
   - INSPullToRefresh
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - RxNimble/RxTest
   - RxSwift
   - RxTest
+  - Swifter (~> 1.4.7)
 
 SPEC REPOS:
   trunk:
@@ -63,6 +65,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - RxTest
+    - Swifter
 
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
@@ -78,7 +81,8 @@ SPEC CHECKSUMS:
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   RxTest: 0132f952a61da82d5233abedaa559df91e5330e5
+  Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
 
-PODFILE CHECKSUM: 67f7f64bb47b2c9334431d0c0d7950442b899379
+PODFILE CHECKSUM: 68feaf817e9c171061f29e730c94c39f94b83505
 
 COCOAPODS: 1.8.4

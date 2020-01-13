@@ -24,6 +24,12 @@ class Robot {
    }
    
    @discardableResult
+   func sleepTime(_ time: UInt32) -> Self {
+      sleep(time)
+      return self
+   }
+   
+   @discardableResult
    func expectTitle(_ title: String) -> Self {
       let navigationBar = app.navigationBars.firstMatch
       expect(navigationBar.identifier).to(equal(title))
@@ -33,6 +39,12 @@ class Robot {
    @discardableResult
    func swipeUp() -> Self {
       app.swipeUp()
+      return self
+   }
+   
+   @discardableResult
+   func clickBackButton() -> Self {
+      app.navigationBars.buttons.element(boundBy: 0).tap()
       return self
    }
 }

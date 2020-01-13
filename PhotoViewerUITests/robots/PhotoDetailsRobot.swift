@@ -13,9 +13,10 @@ class PhotoDetailsRobot: Robot {
 
    @discardableResult
    func expectDetails() -> PhotoDetailsRobot {
-      expect(self.app.staticTexts["photo_user_name_label"].label).toNot(beEmpty())
-      expect(self.app.staticTexts["photo_user_photos_label"].label).toNot(beEmpty())
-      expect(self.app.staticTexts["photo_like_label"].label).toNot(beEmpty())
+      expect(self.app.images["PhotoDetailsImageView"].exists).to(beTrue())
+      expect(self.app.staticTexts["PhotoDetailsLikeLabel"].label).toNot(beEmpty())
+      expect(self.app.staticTexts["PhotoDetailsUserNameLabel"].label).toNot(beEmpty())
+      expect(self.app.staticTexts["PhotoDetailsUserPhotosLabel"].label).toNot(beEmpty())
       return self
    }
 }

@@ -29,4 +29,11 @@ class PhotosRobot: Robot {
       app.keyboards.firstMatch.buttons["search"].tap()
       return self
    }
+   
+   @discardableResult
+   func expectCellWith(identifier: String) -> Self {
+      let cells = app.collectionViews.cells
+      expect(cells[identifier].exists).to(beTrue())
+      return self
+   }
 }

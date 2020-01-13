@@ -66,6 +66,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
    }
    
    func bindIn(viewModel: PhotoCollectionViewModelProtocol) {
+      accessibilityIdentifier = viewModel.userName
+      
       userNameLabel.text = viewModel.userName
       containerView.backgroundColor = viewModel.backgroundColor
       

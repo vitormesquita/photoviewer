@@ -35,5 +35,6 @@ target 'PhotoViewer-Local' do
   target 'PhotoViewerUITests' do
     pod 'Quick'
     pod 'Nimble'
+    pod 'Swifter', '~> 1.4.7'
   end
 end

@@ -14,20 +14,30 @@ class PhotoDetailsSpec: QuickSpec {
    override func spec() {
       
       describe("photo details flow") {
+         let apiMock = BFFMock()
          var app: XCUIApplication!
          
          beforeEach {
+            apiMock.start()
             app = XCUIApplication()
          }
          
+         afterEach {
+            apiMock.stop()
+         }
+         
          it("show a photo details") {
+            apiMock.mockPhotosToNavigateToPhotosList()
+            
             PhotosRobot(app: app)
                .start()
                .expectTitle("Photos")
+               .sleepTime(3)
                .swipeUp()
                .clickPhoto()
                .expectTitle("Details")
-               .expectDetails()
+               .expectDetails()               
+               .clickBackButton()
          }
       }
    }
