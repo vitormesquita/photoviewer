@@ -60,10 +60,18 @@ class PhotosPresenterSpec: QuickSpec {
                expect(presenter.viewModels.map { $0.first?.photo }).first == photos.first
             }
             
-            it("check not send error event") {
-               expect(presenter.error)
+            it("check not send empty message event") {
+               expect(presenter.emptyText)
                   .events(scheduler: TestScheduler(initialClock: 0), disposeBag: disposeBag)
-                  .to(equal([.completed(0)]))
+                  .to(equal([.next(0, nil), .completed(0)]))
+            }
+            
+            it("check success with no results") {
+               interactor.response = .success([])
+               
+               expect(presenter.emptyText)
+                  .events(scheduler: TestScheduler(initialClock: 0), disposeBag: disposeBag)
+                  .to(equal([.next(0, "No results"), .completed(0)]))
             }
          }
          
@@ -72,8 +80,8 @@ class PhotosPresenterSpec: QuickSpec {
                interactor.response = .failure(DummyError.responseError("Response Error"))
             }
             
-            it("check error observable") {
-               expect(presenter.error).first == "Response Error"
+            it("check error in empty message observable") {
+               expect(presenter.emptyText).first == "Response Error"
             }
             
             it("check not send viewModels event") {
@@ -93,9 +101,9 @@ class PhotosPresenterSpec: QuickSpec {
             }
             
             it("check not send other events") {
-               expect(presenter.error)
+               expect(presenter.emptyText)
                   .events(scheduler: TestScheduler(initialClock: 0), disposeBag: disposeBag)
-                  .to(equal([Recorded.completed(0)]))
+                  .to(equal([.next(0, nil), .completed(0)]))
                
                expect(presenter.viewModels)
                   .events(scheduler: TestScheduler(initialClock: 0), disposeBag: disposeBag)

@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class PhotosViewController: BaseViewController, LoadingPresentable, CollectionPresentable {
+class PhotosViewController: BaseViewController, LoadingPresentable, EmptyPresentable, CollectionPresentable {
    
    var presenter: PhotosPresenterProtocol {
       return basePresenter as! PhotosPresenterProtocol
@@ -45,16 +45,22 @@ class PhotosViewController: BaseViewController, LoadingPresentable, CollectionPr
          })
          .disposed(by: disposeBag)
       
-      presenter.error
-         .drive()
+      presenter.emptyText
+         .drive(onNext: { [weak self] (text) in
+            guard let self = self else { return }
+            if let text = text, !text.isEmpty {
+               self.showEmptyWith(text: text)
+            } else {
+               self.hideEmpty()
+            }
+         })
          .disposed(by: disposeBag)
       
       presenter.isLoading
          .drive(onNext: { [weak self] (isLoading) in
             guard let self = self else { return }
-            let isLoadingVisible = isLoading && self.viewModels.isEmpty
-            self.collectionView.isHidden = isLoadingVisible
-            self.isLoadingVisible(isLoadingVisible)
+            let isVisible = isLoading && self.viewModels.isEmpty
+            self.isLoadingVisible(isVisible)
          })
          .disposed(by: disposeBag)
       

@@ -36,4 +36,10 @@ class PhotosRobot: Robot {
       expect(cells[identifier].exists).to(beTrue())
       return self
    }
+   
+   @discardableResult
+   func expectEmptyView() -> Self {
+      expect(self.app.otherElements["EmptyView"].exists).to(beTrue())
+      return self
+   }
 }

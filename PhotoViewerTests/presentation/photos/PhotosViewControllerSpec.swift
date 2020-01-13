@@ -31,13 +31,11 @@ class PhotosViewControllerSpec: QuickSpec {
             expect(viewController.presenter).to(beAKindOf(PhotosPresenterMock.self))
          }
          
-         context("when photos list is loading") {
+         context("when photo list is loading") {
             
-            it("check loading screen is showing") {
+            it("check loading is showing") {
                presenterMock._loading.onNext(true)
-               
                expect(viewController.findLoadingView()).toNot(beNil())
-               expect(viewController.collectionView.isHidden).to(beTrue())
             }
             
             it("check is loading when has viewModels") {
@@ -46,7 +44,15 @@ class PhotosViewControllerSpec: QuickSpec {
                presenterMock._loading.onNext(true)
                
                expect(viewController.findLoadingView()).to(beNil())
-               expect(viewController.collectionView.isHidden).to(beFalse())
+            }
+         }
+         
+         context("when photo list is empty") {
+            
+            it("check empty is showing") {
+               presenterMock._emptyMessage.onNext("A empty text")
+               let emptyView = viewController.findEmptyView()
+               expect(emptyView).toNot(beNil())
             }
          }
          
@@ -69,17 +75,6 @@ class PhotosViewControllerSpec: QuickSpec {
                expect(presenterMock._selectedItem).to(be(indexPath.item))
             }
          }
-         
-//         context("when search by term") {
-//            it("check") {
-//               let query = "Query"
-//               viewController.searchController.searchBar.text = query
-//
-//               waitUntil(timeout: 2) { _ in
-//                  expect(presenterMock._termSearched).to(be(query))
-//               }
-//            }
-//         }
       }
    }
 }

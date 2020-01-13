@@ -50,7 +50,7 @@ class PhotoSearchSpec: QuickSpec {
                .sleepTime(3)
                .searchBy(term: "lalalala")
                .sleepTime(3)
-               
+               .expectEmptyView()
          }
       }
    }

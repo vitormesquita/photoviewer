@@ -18,10 +18,13 @@ class EmptyView: UIView {
    }
    
    private func applyLayout() {
-      emptyLabel.textColor = .gray
+      backgroundColor = .clear
+      accessibilityIdentifier = "EmptyView"
+      
       emptyLabel.numberOfLines = 0
       emptyLabel.textAlignment = .center
-      emptyLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
+      emptyLabel.textColor = .textPrimary
+      emptyLabel.font = UIFont.systemFont(ofSize: 30, weight: .regular)      
    }
    
    func setText(_ text: String) {

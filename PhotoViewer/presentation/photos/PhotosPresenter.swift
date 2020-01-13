@@ -15,8 +15,8 @@ protocol PhotosRouterProtocol: class {
 
 protocol PhotosPresenterProtocol: BasePresenterProtocol {
    
-   var error: Driver<String> { get }
    var isLoading: Driver<Bool> { get }
+   var emptyText: Driver<String?> { get }
    var viewModels: Driver<[PhotoCollectionViewModel]> { get }
    
    func didScrollAtEnd()
@@ -33,24 +33,32 @@ class PhotosPresenter: BasePresenter {
       self.interactor = interactor
       super.init()
    }
+   
+   private func messageTextFromResponse(_ response: Response<[Photo]>) -> String? {
+      if case .failure(let error) = response {
+         return error.localizedDescription
+      }
+      
+      if case .success(let photos) = response, photos.isEmpty {
+         return "No results"
+      }
+      
+      return nil
+   }
 }
 
 extension PhotosPresenter: PhotosPresenterProtocol {
-   
-   var error: Driver<String> {
-      return interactor.photos
-         .filter { $0.isError }
-         .map { response -> String in
-            guard case .failure(let error) = response else { return "" }
-            return error.localizedDescription
-      }
-      .asDriver(onErrorJustReturn: "")
-   }
    
    var isLoading: Driver<Bool> {
       return interactor.photos
          .map { $0.isLoading }
          .asDriver(onErrorJustReturn: false)
+   }
+   
+   var emptyText: Driver<String?> {
+      return interactor.photos
+         .map(messageTextFromResponse)
+         .asDriver(onErrorJustReturn: nil)
    }
    
    var viewModels: Driver<[PhotoCollectionViewModel]> {

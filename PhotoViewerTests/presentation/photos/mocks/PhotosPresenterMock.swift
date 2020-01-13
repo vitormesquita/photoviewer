@@ -12,14 +12,15 @@ import RxCocoa
 @testable import PhotoViewer
 
 class PhotosPresenterMock: PhotosPresenterProtocol {
-    
+ 
    var _selectedItem: Int?
    var _termSearched: String?
    var _loading = BehaviorSubject<Bool>(value: false)
+   var _emptyMessage = BehaviorSubject<String?>(value: nil)
    var _viewModels = BehaviorSubject<[PhotoCollectionViewModel]>(value: [])
    
-   var error: Driver<String> {
-      return Driver.just("")
+   var emptyText: Driver<String?> {
+      return _emptyMessage.asDriver(onErrorJustReturn: nil)
    }
    
    var isLoading: Driver<Bool> {
