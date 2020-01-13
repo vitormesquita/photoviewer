@@ -20,7 +20,7 @@ In this project the iOS stack was:
 - Swift 5.0
 - Xcode 11.3
 - VIPER architecture
-- Rective programming using `RxSwift` and  `RxCocoa`
+- Coordinator pattern
 
 ## Installation
 
@@ -61,17 +61,31 @@ So the flow is:
 
 ![VIPER flow](./Assets/viper-oneway-flow.png)
 
-I'm using `RxSwift` to implement this flow without `Input`/`Output` protocols, because I think to use one way binging becomes the code clearer, flexible, light and maintainable.
+I'm using `RxSwift` and `RxCocoa` to implement this flow without `Input`/`Output` protocols.
 
 ## Outsource libraries
 
 I've used a couple of outsource libriries to save time to develop the main feature, which are:
 
-- `RxSwift` to have a more flexible code.
-- `RxCocoa` to make some cocoa components reactive to be easier integrate with RxSwift events;
-- `Moya/RxSwift` is an easy network abstration layer to make request to an API and transforming it to a Rx signal;
+### PhotoViewer target
+
+- `RxSwift` brings flexibility to code;
+- `RxCocoa` makes some cocoa components reactive to be easier integrate with RxSwift events;
+- `Moya/RxSwift` is an easy network abstration layer to make request to an API and transforming into a Rx signal;
 - `Mextension` my own library that contains a couple of extensions that I always use in my projects;
-- `INSPullToRefresh` to facilitate my infinity list pagination. 
+- `INSPullToRefresh` to create infinity scroll pagination;
+- `Kingfisher` downlod and cache images.
 
-I am fully capable of developing projects without these libraries, but I prefer to use them because I don't have much time and I think the code becomes clearer and easier to maintain. 
+### Tests targets (Unit and UI)
 
+- `Quick` a behavior-driven development framework to create tests inspired by RSpec
+- `Nimble` a framework to express the expected outcomes tests  and simplify the asserts
+- `RxTest` a framework to test RxSwift events
+- `RxBlocking` a framework to transform async RxSwift events in sync events, it's used to create tests and just for it
+- `RxNimble` a Nimble extensions to create unit tests easier
+- `Swifter` create a Http server to run mock requests 
+
+## Author
+
+Vitor Mesquita, vitor.mesquita09@gmail.com
+Brazil

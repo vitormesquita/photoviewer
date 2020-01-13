@@ -24,7 +24,7 @@ class EmptyView: UIView {
       emptyLabel.numberOfLines = 0
       emptyLabel.textAlignment = .center
       emptyLabel.textColor = .textPrimary
-      emptyLabel.font = UIFont.systemFont(ofSize: 30, weight: .regular)      
+      emptyLabel.font = UIFont.systemFont(ofSize: 30, weight: .regular)
    }
    
    func setText(_ text: String) {
