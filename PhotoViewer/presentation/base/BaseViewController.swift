@@ -30,6 +30,7 @@ class BaseViewController: UIViewController {
    override func loadView() {
       super.loadView()
       view.backgroundColor = .background
+      navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
    }
    
    deinit {

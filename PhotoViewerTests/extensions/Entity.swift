@@ -34,6 +34,18 @@ extension PhotoAPI {
          return []
       }
    }
+   
+   static func dummy2Photos() -> [PhotoAPI] {
+      let path = Bundle(for: PhotoRepositoryMock.self).path(forResource: "photos2", ofType: "json")
+      
+      do {
+         let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""))
+         let photos = try JSONDecoder().decode([PhotoAPI].self, from: data)
+         return photos
+      } catch {
+         return []
+      }
+   }
 }
 
 extension PictureAPI {

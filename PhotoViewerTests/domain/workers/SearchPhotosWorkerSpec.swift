@@ -135,11 +135,16 @@ class SearchPhotosWorkerSpec: QuickSpec {
             }
             
             it("load more page") {
-               let expectCacheCount = worker.cachePhotos.count * 2
+               let newResults = PhotoAPI.dummy2Photos()
+               result.results = newResults
+               mockRepository.searchPhotoResult = result
+               
+               let expectCacheCount = worker.cachePhotos.count + newResults.count
+               
                worker.loadMorePhotos()
                
                expect(worker.page).to(be(2))
-               expect(worker.cachePhotos.count).to(be(expectCacheCount))
+               expect(worker.cachePhotos.count).to(equal(expectCacheCount))
             }
             
             it("search result empty") {

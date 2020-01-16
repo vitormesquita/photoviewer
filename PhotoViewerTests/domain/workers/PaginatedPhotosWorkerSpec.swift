@@ -88,12 +88,13 @@ class PaginatedPhotosWorkerSpec: QuickSpec {
             }
             
             it("load more pages") {
-               let expectCacheCount = worker.cachePhotos.count * 2
-               
+               mockRepository.photos = PhotoAPI.dummy2Photos()
+               let expectCacheCount = worker.cachePhotos.count + mockRepository.photos.count
+                              
                worker.loadMorePhotos()
                
                expect(worker.page).to(be(2))
-               expect(worker.cachePhotos.count).to(be(expectCacheCount))
+               expect(worker.cachePhotos.count).to(equal(expectCacheCount))
             }
             
             it("get photo on cache") {

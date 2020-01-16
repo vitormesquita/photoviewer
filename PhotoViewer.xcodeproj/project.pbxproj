@@ -31,6 +31,7 @@
 		648762C023B521B4005A7EB2 /* PhotosInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648762BF23B521B4005A7EB2 /* PhotosInteractorMock.swift */; };
 		648762C223B52383005A7EB2 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648762C123B52383005A7EB2 /* Models.swift */; };
 		648762C423B566DC005A7EB2 /* PhotosViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648762C323B566DC005A7EB2 /* PhotosViewControllerSpec.swift */; };
+		648B4CF923D10C9500A53A08 /* photos2.json in Resources */ = {isa = PBXBuildFile; fileRef = 648B4CF823D10C9500A53A08 /* photos2.json */; };
 		6491577023BFA9F3000EDB60 /* PhotosInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491576F23BFA9F3000EDB60 /* PhotosInteractorSpec.swift */; };
 		6491577223BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491577123BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift */; };
 		6491577423BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491577323BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift */; };
@@ -182,6 +183,7 @@
 		648762BF23B521B4005A7EB2 /* PhotosInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosInteractorMock.swift; sourceTree = "<group>"; };
 		648762C123B52383005A7EB2 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		648762C323B566DC005A7EB2 /* PhotosViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewControllerSpec.swift; sourceTree = "<group>"; };
+		648B4CF823D10C9500A53A08 /* photos2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = photos2.json; sourceTree = "<group>"; };
 		6491576F23BFA9F3000EDB60 /* PhotosInteractorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosInteractorSpec.swift; sourceTree = "<group>"; };
 		6491577123BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedPhotosWorkerMock.swift; sourceTree = "<group>"; };
 		6491577323BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosWorkerMock.swift; sourceTree = "<group>"; };
@@ -355,12 +357,12 @@
 		6485607323B1463800C6A0D2 /* PhotoViewerTests */ = {
 			isa = PBXGroup;
 			children = (
+				648B4CFA23D10D9700A53A08 /* json */,
 				648762BB23B4F5AA005A7EB2 /* extensions */,
 				64F1C89223B246D000AB6B92 /* navigation */,
 				64FECE8223BA62C300C98F4B /* domain */,
 				648762B723B4E1BB005A7EB2 /* presentation */,
 				6485607623B1463800C6A0D2 /* Info.plist */,
-				64FECE8923BA757700C98F4B /* photos.json */,
 			);
 			path = PhotoViewerTests;
 			sourceTree = "<group>";
@@ -401,6 +403,15 @@
 				6482272923B66F9F0058ABA8 /* PhotosPresenterMock.swift */,
 			);
 			path = mocks;
+			sourceTree = "<group>";
+		};
+		648B4CFA23D10D9700A53A08 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				64FECE8923BA757700C98F4B /* photos.json */,
+				648B4CF823D10C9500A53A08 /* photos2.json */,
+			);
+			path = json;
 			sourceTree = "<group>";
 		};
 		6491576E23BFA8A2000EDB60 /* interactor */ = {
@@ -940,6 +951,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64FECE8A23BA757700C98F4B /* photos.json in Resources */,
+				648B4CF923D10C9500A53A08 /* photos2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

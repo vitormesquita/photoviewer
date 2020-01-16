@@ -32,7 +32,7 @@ class PaginatedPhotosWorker {
    }
    
    private func transformPhotos(photosAPI: [PhotoAPI]?) -> [Photo] {
-      let photos = Photo.mapArray(photoAPI: photosAPI ?? [])
+      let photos = Photo.mapArray(photoAPI: photosAPI ?? []).filter { !cachePhotos.contains($0) }      
       self.cachePhotos.append(contentsOf: photos)
       return self.cachePhotos
    }
