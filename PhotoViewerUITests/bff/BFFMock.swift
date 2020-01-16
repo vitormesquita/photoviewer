@@ -39,7 +39,7 @@ class BFFMock {
 extension BFFMock {
    
    @discardableResult
-   func mockPhotosToNavigateToPhotosList() -> [String: Any]? {
+   func mockPhotosToNavigateToPhotosList() -> [[String: Any]]? {
       guard let jsonResponse = try? readJsonFile(name: "photos") else {
          return nil
       }
@@ -50,7 +50,7 @@ extension BFFMock {
       }
       
       server.GET["/photos?page=1"] = response
-      return jsonResponse as? [String: Any]
+      return jsonResponse as? [[String: Any]]
    }
    
    @discardableResult

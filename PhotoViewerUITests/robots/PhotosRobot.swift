@@ -31,7 +31,7 @@ class PhotosRobot: Robot {
    }
    
    @discardableResult
-   func expectCellWith(identifier: String) -> Self {
+   func expectCellWith(identifier: String) -> PhotosRobot {
       let cells = app.collectionViews.cells
       expect(cells[identifier].exists).to(beTrue())
       return self

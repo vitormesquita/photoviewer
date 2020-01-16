@@ -15,8 +15,8 @@ protocol CoordinatorProtocol {
 class PhotosCoordinator: CoordinatorProtocol {
 
    let window: UIWindow
-   let navigationController: UINavigationController
    let transitionsAnimated: Bool
+   let navigationController: UINavigationController   
    
    init(window: UIWindow, animated: Bool = true) {
       self.window = window

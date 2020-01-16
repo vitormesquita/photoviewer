@@ -28,15 +28,13 @@ class PhotosSpec: QuickSpec {
          
          it("initial app flow") {
             let response = apiMock.mockPhotosToNavigateToPhotosList()
-            let results = response?["results"] as? [[String: Any]]
-            let firstPhotoUser = results?[0]["user"] as? [String: Any]
+            let firstPhotoUser = response?[0]["user"] as? [String: Any]
             let userName = firstPhotoUser?["name"] as? String
             
             PhotosRobot(app: app)
                .start()
                .expectTitle("Photos")
                .sleepTime(2)
-               .swipeUp()
                .expectCellWith(identifier: userName ?? "")
          }
       }
