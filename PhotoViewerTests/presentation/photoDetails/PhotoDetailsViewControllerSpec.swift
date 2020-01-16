@@ -42,17 +42,16 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
          
          it("check setup views") {
             let view = viewController.view
-            let scrollView = viewController.scrollView
-            let detailsView = viewController.detailsView
+            let photoImageView = viewController.photoImageView
+            let backgroundImageView = viewController.backgroundImageView
             
-            expect(scrollView.isDescendant(of: view!))
+            expect(photoImageView.isDescendant(of: view!))
                .to(beTrue())
             
-            expect(detailsView.isDescendant(of: scrollView))
+            expect(backgroundImageView.isDescendant(of: view!))
                .to(beTrue())
             
-            expect(scrollView.constraints).toNot(beEmpty())
-            expect(detailsView.constraints).toNot(beEmpty())
+            expect(view!.constraints).toNot(beEmpty())
          }
          
          context("more actions") {

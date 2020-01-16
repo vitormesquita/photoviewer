@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PhotoDetailsViewController: BaseViewController {
    
@@ -18,21 +19,25 @@ class PhotoDetailsViewController: BaseViewController {
       return UIBarButtonItem(image: UIImage(named: "ic_more"), style: .plain, target: self, action: #selector(actionsDidTap))
    }()
    
-   private(set) lazy var scrollView: UIScrollView = {
-      let scrollView = UIScrollView()
-      scrollView.translatesAutoresizingMaskIntoConstraints = false
-      return scrollView
+   private(set) lazy var backgroundImageView: UIImageView = {
+      let imageView = UIImageView(frame: UIScreen.main.bounds)
+      imageView.clipsToBounds = true
+      imageView.contentMode = .scaleAspectFill
+      return imageView
    }()
    
-   private(set) lazy var detailsView: PhotoDetailsView = {
-      let view = PhotoDetailsView.loadNibName(viewModel: presenter)
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
+   private(set) lazy var photoImageView: UIImageView = {
+      let imageView = UIImageView()
+      imageView.contentMode = .scaleAspectFit
+      imageView.accessibilityIdentifier = "PhotoDetailsImageView"
+      imageView.translatesAutoresizingMaskIntoConstraints = false
+      return imageView
    }()
    
    override func loadView() {
       super.loadView()
       setupViews()
+      addImageBackgroundWithBlur()
    }
    
    override func viewDidLoad() {
@@ -42,7 +47,20 @@ class PhotoDetailsViewController: BaseViewController {
       navigationItem.largeTitleDisplayMode = .never
       navigationItem.rightBarButtonItem = actionsButton
       //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:)), nil)
+      
+      bind()
    }
+   
+   func bind() {
+      let options: KingfisherOptionsInfo = [
+         .transition(.fade(0.5))
+      ]
+      photoImageView.kf.setImage(with: presenter.imageURL, options: options)
+      backgroundImageView.kf.setImage(with: presenter.imageURL, options: options)
+   }
+}
+
+extension PhotoDetailsViewController {
    
    @objc func actionsDidTap() {
       showActionsActionSheet()
@@ -60,28 +78,27 @@ class PhotoDetailsViewController: BaseViewController {
 extension PhotoDetailsViewController {
    
    private func setupViews() {
-      self.view.addSubview(scrollView)
+      self.view.addSubview(photoImageView)
       
-      let scrollViewConstraints = [
-         scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-         scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-         scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+      let photoConstraints = [
+         photoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         photoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+         photoImageView.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor),
+         photoImageView.bottomAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor),
+         photoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
       ]
       
-      NSLayoutConstraint.activate(scrollViewConstraints)
+      NSLayoutConstraint.activate(photoConstraints)
+   }
+   
+   private func addImageBackgroundWithBlur() {
+      self.view.insertSubview(backgroundImageView, at: 0)
       
-      scrollView.addSubview(detailsView)
-      
-      let detailsViewConstraints = [
-         detailsView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-         detailsView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-         detailsView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-         detailsView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-         detailsView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-      ]
-      
-      NSLayoutConstraint.activate(detailsViewConstraints)
+      let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+      let blurEffectView = UIVisualEffectView(effect: blurEffect)
+      blurEffectView.frame = backgroundImageView.bounds
+      blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+      backgroundImageView.addSubview(blurEffectView)
    }
 }
 

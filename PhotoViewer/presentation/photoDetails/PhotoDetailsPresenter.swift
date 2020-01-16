@@ -12,7 +12,15 @@ protocol PhotoDetailsRouterProtocol: class {
    
 }
 
-protocol PhotoDetailsPresenterProtocol: BasePresenterProtocol, PhotoDetailsViewModelProtocol {
+protocol PhotoDetailsPresenterProtocol: BasePresenterProtocol {   
+   var likes: String { get }
+   var userName: String { get }
+   var userPhotos: String { get }
+   
+   var userURL: URL? { get }
+   var imageURL: URL? { get }
+   var photoDescription: String? { get }
+   
    func downloadDidTap()
 }
 
