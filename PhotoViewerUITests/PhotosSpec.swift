@@ -1,18 +1,19 @@
 //
-//  PhotoSearchSpec.swift
+//  PhotosSpec.swift
 //  PhotoViewerUITests
 //
-//  Created by mano on 10/01/20.
+//  Created by mano on 14/01/20.
 //  Copyright © 2020 Vitor Mesquita. All rights reserved.
 //
 
+import XCTest
 import Quick
 
-class PhotoSearchSpec: QuickSpec {
+class PhotosSpec: QuickSpec {
    
    override func spec() {
       
-      describe("search photo flow") {
+      describe("photo list flow") {
          let apiMock = BFFMock()
          var app: XCUIApplication!
          
@@ -25,9 +26,8 @@ class PhotoSearchSpec: QuickSpec {
             apiMock.stop()
          }
          
-         it("search and display result") {
-            apiMock.mockPhotosToNavigateToPhotosList()
-            let response = apiMock.mockSearchPhotosSuccessResponse()
+         it("initial app flow") {
+            let response = apiMock.mockPhotosToNavigateToPhotosList()
             let results = response?["results"] as? [[String: Any]]
             let firstPhotoUser = results?[0]["user"] as? [String: Any]
             let userName = firstPhotoUser?["name"] as? String
@@ -35,22 +35,9 @@ class PhotoSearchSpec: QuickSpec {
             PhotosRobot(app: app)
                .start()
                .expectTitle("Photos")
-               .sleepTime(3)
-               .searchBy(term: "Sky")
-               .sleepTime(3)
+               .sleepTime(2)
+               .swipeUp()
                .expectCellWith(identifier: userName ?? "")
-         }
-         
-         it("search for a term with no results") {
-            apiMock.mockPhotosToNavigateToPhotosList()
-            apiMock.mockSearchPhotosEmptyResponse()
-            
-            PhotosRobot(app: app)
-               .start()
-               .sleepTime(3)
-               .searchBy(term: "lalalala")
-               .sleepTime(3)
-               .expectEmptyView()
          }
       }
    }

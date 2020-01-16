@@ -38,8 +38,11 @@ class BFFMock {
 
 extension BFFMock {
    
-   func mockPhotosToNavigateToPhotosList() {
-      guard let jsonResponse = try? readJsonFile(name: "photos") else { return }
+   @discardableResult
+   func mockPhotosToNavigateToPhotosList() -> [String: Any]? {
+      guard let jsonResponse = try? readJsonFile(name: "photos") else {
+         return nil
+      }
       
       let response: ((HttpRequest) -> HttpResponse) = { [weak self] _ in
          sleep((self?.sleepTime)!)
@@ -47,6 +50,7 @@ extension BFFMock {
       }
       
       server.GET["/photos?page=1"] = response
+      return jsonResponse as? [String: Any]
    }
    
    @discardableResult

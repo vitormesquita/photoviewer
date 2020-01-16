@@ -61,7 +61,7 @@ So the flow is:
 
 ![VIPER flow](./Assets/viper-oneway-flow.png)
 
-I'm using `RxSwift` and `RxCocoa` to implement this flow without `Input`/`Output` protocols.
+The project is using `RxSwift` and `RxCocoa` to implement this flow without `Input`/`Output` protocols.
 
 ## Outsource libraries
 
