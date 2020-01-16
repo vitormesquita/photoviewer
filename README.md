@@ -21,6 +21,7 @@ In this project the iOS stack was:
 - Xcode 11.3
 - VIPER architecture
 - Coordinator pattern
+- Factory pattern
 
 ## Installation
 
@@ -62,6 +63,18 @@ So the flow is:
 ![VIPER flow](./Assets/viper-oneway-flow.png)
 
 The project is using `RxSwift` and `RxCocoa` to implement this flow without `Input`/`Output` protocols.
+
+Also I've implemented two Design Patterns to increase the maintainability of this project. These patterns are ***Coordinator*** and ***Factory***.
+
+### Factory
+
+It's using to create VIPER modules, and it's powerful to inject all VIPER dependencies.
+
+### Coordinator
+
+It's using to manage all project navigation. It's in charge to implement `Routing` protocol from modules.
+
+Instead of using `WireFrames`, the Coordinators bring more flexibility to use a module in differentes flows with diffrerents contexts and approaches and is clearer understand flows and features.
 
 ## Outsource libraries
 
