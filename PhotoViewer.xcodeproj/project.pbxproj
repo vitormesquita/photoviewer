@@ -11,6 +11,8 @@
 		527F305D3961F1E6AF9FD3B9 /* Pods_PhotoViewer_Local.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF530B32F3EF0E1F2B1705E /* Pods_PhotoViewer_Local.framework */; };
 		5571DC86856E845AECE580AB /* Pods_PhotoViewer_PhotoViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAC22E9E653F10757CD252A /* Pods_PhotoViewer_PhotoViewerTests.framework */; };
 		624270A7BB995ACDAF2B5794 /* Pods_PhotoViewer_Local_PhotoViewerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54DACCB65DD5DD832FA00B6 /* Pods_PhotoViewer_Local_PhotoViewerUITests.framework */; };
+		640F7D8723D2259900E479AD /* EmptyPresentableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F7D8623D2259900E479AD /* EmptyPresentableSpec.swift */; };
+		640F7D8923D2358200E479AD /* LoadingPresentableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F7D8823D2358200E479AD /* LoadingPresentableSpec.swift */; };
 		644C73FC23C6082F003387C2 /* PhotoDetailsPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644C73FB23C6082F003387C2 /* PhotoDetailsPresenterMock.swift */; };
 		6450428C23CC9A7600C5C2DC /* photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 6450428B23CC9A7600C5C2DC /* photos.json */; };
 		6450428E23CC9BAF00C5C2DC /* BFFMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6450428D23CC9BAF00C5C2DC /* BFFMock.swift */; };
@@ -159,6 +161,8 @@
 		3CF530B32F3EF0E1F2B1705E /* Pods_PhotoViewer_Local.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer_Local.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EAC22E9E653F10757CD252A /* Pods_PhotoViewer_PhotoViewerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer_PhotoViewerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		521868FCF64DE4B5CF852117 /* Pods-PhotoViewer-Local.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewer-Local.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoViewer-Local/Pods-PhotoViewer-Local.debug.xcconfig"; sourceTree = "<group>"; };
+		640F7D8623D2259900E479AD /* EmptyPresentableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPresentableSpec.swift; sourceTree = "<group>"; };
+		640F7D8823D2358200E479AD /* LoadingPresentableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPresentableSpec.swift; sourceTree = "<group>"; };
 		644C73FB23C6082F003387C2 /* PhotoDetailsPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsPresenterMock.swift; sourceTree = "<group>"; };
 		6450428B23CC9A7600C5C2DC /* photos.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = photos.json; sourceTree = "<group>"; };
 		6450428D23CC9BAF00C5C2DC /* BFFMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFFMock.swift; sourceTree = "<group>"; };
@@ -292,6 +296,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		640F7D8523D2256D00E479AD /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				640F7D8623D2259900E479AD /* EmptyPresentableSpec.swift */,
+				640F7D8823D2358200E479AD /* LoadingPresentableSpec.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		6450428923CC99DF00C5C2DC /* bff */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +383,7 @@
 		648762B723B4E1BB005A7EB2 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				640F7D8523D2256D00E479AD /* extensions */,
 				648762B823B4E1C3005A7EB2 /* photos */,
 				64F92AEB23C3B3B50071D9E2 /* photoDetails */,
 			);
@@ -1166,9 +1180,11 @@
 				6491577223BFABC4000EDB60 /* PaginatedPhotosWorkerMock.swift in Sources */,
 				64E22F1123C50838003DF3C9 /* PhotoDetailsViewControllerSpec.swift in Sources */,
 				64D0D5C723BE2B420065793B /* SearchPhotosWorkerSpec.swift in Sources */,
+				640F7D8923D2358200E479AD /* LoadingPresentableSpec.swift in Sources */,
 				64F92AE823C3677A0071D9E2 /* Entity.swift in Sources */,
 				648762BD23B4F5C9005A7EB2 /* PhotosRouterMock.swift in Sources */,
 				6491577423BFAC5C000EDB60 /* SearchPhotosWorkerMock.swift in Sources */,
+				640F7D8723D2259900E479AD /* EmptyPresentableSpec.swift in Sources */,
 				64FECE8823BA673B00C98F4B /* PhotoRepositoryMock.swift in Sources */,
 				6491577023BFA9F3000EDB60 /* PhotosInteractorSpec.swift in Sources */,
 				648762C023B521B4005A7EB2 /* PhotosInteractorMock.swift in Sources */,

@@ -16,7 +16,11 @@ class PhotoDetailsViewController: BaseViewController {
    }
    
    private(set) lazy var actionsButton: UIBarButtonItem = {
-      return UIBarButtonItem(image: UIImage(named: "ic_more"), style: .plain, target: self, action: #selector(actionsDidTap))
+      return UIBarButtonItem(image: UIImage(named: "ic_more"), style: .plain, target: self, action: #selector(didTapActions))
+   }()
+   
+   private(set) lazy var infoButton: UIBarButtonItem = {
+      return UIBarButtonItem(image: UIImage(named: "ic_info"), style: .plain, target: self, action: #selector(didTapInfo))
    }()
    
    private(set) lazy var backgroundImageView: UIImageView = {
@@ -45,9 +49,7 @@ class PhotoDetailsViewController: BaseViewController {
       
       title = "Details"
       navigationItem.largeTitleDisplayMode = .never
-      navigationItem.rightBarButtonItem = actionsButton
-      //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.didFinishSaving(_:error:)), nil)
-      
+      navigationItem.rightBarButtonItems = [actionsButton, infoButton]
       bind()
    }
    
@@ -62,8 +64,12 @@ class PhotoDetailsViewController: BaseViewController {
 
 extension PhotoDetailsViewController {
    
-   @objc func actionsDidTap() {
+   @objc func didTapActions() {
       showActionsActionSheet()
+   }
+   
+   @objc func didTapInfo() {
+      //TODO
    }
    
    @objc func didFinishSaving(_ image: UIImage, error: Error?) {
@@ -94,7 +100,7 @@ extension PhotoDetailsViewController {
    private func addImageBackgroundWithBlur() {
       self.view.insertSubview(backgroundImageView, at: 0)
       
-      let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+      let blurEffect = UIBlurEffect(style: .regular)
       let blurEffectView = UIVisualEffectView(effect: blurEffect)
       blurEffectView.frame = backgroundImageView.bounds
       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
