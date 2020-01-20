@@ -77,7 +77,7 @@ class PhotoPreviewViewController: BaseViewController {
 extension PhotoPreviewViewController {
    
    @objc func didTapInfo() {
-      //TODO
+      presenter.didTapInfo()
    }
    
    @objc func didTapView() {

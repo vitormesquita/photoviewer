@@ -39,4 +39,9 @@ extension PhotosCoordinator: PhotosRouterProtocol, PhotoPreviewRouterProtocol {
       let detailsVC = PhotoFactory.preview(photo: photo, router: self)
       navigationController.pushViewController(detailsVC, animated: transitionsAnimated)
    }
+   
+   func showPhotoInfo(photo: Photo) {
+      let infoVC = PhotoFactory.info(photo: photo)
+      navigationController.present(infoVC, animated: true)
+   }
 }

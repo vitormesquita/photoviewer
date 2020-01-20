@@ -51,6 +51,17 @@ class PhotosCoordinatorSpec: QuickSpec {
             let viewController = photosCoodinator.navigationController.visibleViewController
             expect(viewController).to(beAKindOf(expectedVCType))
          }
+         
+         it("photo info presentable") {
+            //Arrange
+            let photo = Photo(id: 0)
+            let expectedVCType = PhotoInfoViewController.self
+            //Act
+            photosCoodinator.showPhotoInfo(photo: photo)
+            //Assert
+            let viewController = photosCoodinator.navigationController.presentedViewController
+            expect(viewController).to(beAKindOf(expectedVCType))
+         }
       }
    }
 }

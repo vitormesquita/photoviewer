@@ -25,4 +25,11 @@ enum PhotoFactory {
       presenter.router = router
       return PhotoPreviewViewController(presenter: presenter)
    }
+   
+   static func info(photo: Photo) -> UIViewController {
+      let presenter = PhotoInfoPresenter()
+      let viewController = PhotoInfoViewController(presenter: presenter)
+      viewController.modalPresentationStyle = .pageSheet
+      return viewController
+   }
 }

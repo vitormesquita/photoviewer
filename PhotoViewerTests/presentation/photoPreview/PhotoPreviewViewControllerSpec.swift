@@ -80,14 +80,19 @@ class PhotoPreviewViewControllerSpec: QuickSpec {
             }
          }
          
-         context("when click on view") {
+         context("actions") {
             
-            it("check elements is hidden") {
+            it("click view check elements is hidden") {
                viewController.didTapView()
                
                expect(viewController.isFullScreen).to(beTrue())
                expect(viewController.infoButton.alpha).to(equal(0))
                expect(viewController.prefersStatusBarHidden).to(beTrue())
+            }
+            
+            it("click info button") {
+               viewController.didTapInfo()
+               expect(presenterMock.infoDidTap).to(beTrue())
             }
          }
          

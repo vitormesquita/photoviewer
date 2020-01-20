@@ -11,4 +11,9 @@ import UIKit
 
 class PhotoPreviewRouterMock: PhotoPreviewRouterProtocol {
    
+   var _selectedPhoto: Photo?
+   
+   func showPhotoInfo(photo: Photo) {
+      self._selectedPhoto = photo
+   }
 }

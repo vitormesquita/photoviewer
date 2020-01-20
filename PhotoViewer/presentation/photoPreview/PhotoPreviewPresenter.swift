@@ -9,7 +9,7 @@
 import RxSwift
 
 protocol PhotoPreviewRouterProtocol: class {
-   
+   func showPhotoInfo(photo: Photo)
 }
 
 protocol PhotoPreviewPresenterProtocol: BasePresenterProtocol {   
@@ -20,6 +20,8 @@ protocol PhotoPreviewPresenterProtocol: BasePresenterProtocol {
    var userURL: URL? { get }
    var imageURL: URL? { get }
    var photoDescription: String? { get }
+   
+   func didTapInfo()
 }
 
 class PhotoPreviewPresenter: BasePresenter {
@@ -57,5 +59,9 @@ extension PhotoPreviewPresenter: PhotoPreviewPresenterProtocol {
    
    var photoDescription: String? {
       return photo.description
+   }
+   
+   func didTapInfo() {
+      router?.showPhotoInfo(photo: photo)
    }
 }

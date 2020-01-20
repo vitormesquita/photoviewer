@@ -36,6 +36,16 @@ class FactorySpec: QuickSpec {
             //Assert
             expect(viewController).to(beAKindOf(expectType))
          }
+         
+         it("check photo info") {
+            //Arrange
+            let photo = Photo(id: 0)
+            let expectType = PhotoInfoViewController.self
+            //Act
+            let viewController = PhotoFactory.info(photo: photo)
+            //Assert
+            expect(viewController).to(beAKindOf(expectType))
+         }
       }
    }
 }

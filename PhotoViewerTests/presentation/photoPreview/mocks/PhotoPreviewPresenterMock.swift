@@ -10,8 +10,9 @@ import Foundation
 @testable import PhotoViewer
 
 class PhotoPreviewPresenterMock: PhotoPreviewPresenterProtocol {
-   
+
    var photo: Photo?
+   var infoDidTap = false
    
    var likes: String {
       return photo?.likes.description ?? ""
@@ -37,7 +38,7 @@ class PhotoPreviewPresenterMock: PhotoPreviewPresenterProtocol {
       return photo?.description
    }
    
-   func downloadDidTap() {
-      
+   func didTapInfo() {
+      self.infoDidTap = true
    }
 }

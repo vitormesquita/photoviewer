@@ -16,14 +16,14 @@ class PhotoPreviewPresenterSpec: QuickSpec {
       
       describe("photo preview presenter") {
          var photo: Photo!
-         var router: PhotoPreviewRouterMock!
+         var routerMock: PhotoPreviewRouterMock!
          var presenter: PhotoPreviewPresenter!
          
          beforeEach {
             photo = Photo(id: 100)
-            router = PhotoPreviewRouterMock()
+            routerMock = PhotoPreviewRouterMock()
             presenter = PhotoPreviewPresenter(photo: photo)
-            presenter.router = router
+            presenter.router = routerMock
          }
          
          it("check dependencies") {
@@ -38,6 +38,11 @@ class PhotoPreviewPresenterSpec: QuickSpec {
             expect(presenter.userURL).to(equal(photo.user.thumbURL))
             expect(presenter.imageURL).to(equal(photo.pictures.regular))
             expect(presenter.photoDescription).to(equal(photo.description))
+         }
+         
+         it("check call didTapInfo") {
+            presenter.didTapInfo()
+            expect(routerMock._selectedPhoto).to(equal(photo))
          }
       }
    }
