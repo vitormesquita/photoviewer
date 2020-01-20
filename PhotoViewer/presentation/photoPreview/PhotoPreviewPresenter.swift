@@ -12,7 +12,7 @@ protocol PhotoDetailsRouterProtocol: class {
    
 }
 
-protocol PhotoDetailsPresenterProtocol: BasePresenterProtocol {   
+protocol PhotoPreviewPresenterProtocol: BasePresenterProtocol {   
    var likes: String { get }
    var userName: String { get }
    var userPhotos: String { get }
@@ -22,7 +22,7 @@ protocol PhotoDetailsPresenterProtocol: BasePresenterProtocol {
    var photoDescription: String? { get }
 }
 
-class PhotoDetailsPresenter: BasePresenter {
+class PhotoPreviewPresenter: BasePresenter {
    
    let photo: Photo
    weak var router: PhotoDetailsRouterProtocol?
@@ -33,7 +33,7 @@ class PhotoDetailsPresenter: BasePresenter {
    }
 }
 
-extension PhotoDetailsPresenter: PhotoDetailsPresenterProtocol {
+extension PhotoPreviewPresenter: PhotoPreviewPresenterProtocol {
    
    var likes: String {
       return photo.likes.description

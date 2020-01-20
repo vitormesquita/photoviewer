@@ -41,10 +41,10 @@ class PhotosCoordinatorSpec: QuickSpec {
             expect(photosCoodinator.window.rootViewController).to(be(navigationController))
          }
          
-         it("photo details flow navigation") {
+         it("photo preview flow navigation") {
             //Arrange
             let photo = Photo(id: 0)
-            let expectedVCType = PhotoDetailsViewController.self
+            let expectedVCType = PhotoPreviewViewController.self
             //Act
             photosCoodinator.showPhotoDetails(photo: photo)
             //Assert

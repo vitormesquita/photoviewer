@@ -26,13 +26,13 @@ class FactorySpec: QuickSpec {
             expect(viewController).to(beAKindOf(expectType))
          }
          
-         it("check photo details") {
+         it("check photo preview") {
             //Arrange
             let photo = Photo(id: 0)
-            let routerMock = PhotoDetailsRouterMock()
-            let expectType = PhotoDetailsViewController.self
+            let routerMock = PhotoPreviewRouterMock()
+            let expectType = PhotoPreviewViewController.self
             //Act
-            let viewController = PhotoFactory.details(photo: photo, router: routerMock)
+            let viewController = PhotoFactory.preview(photo: photo, router: routerMock)
             //Assert
             expect(viewController).to(beAKindOf(expectType))
          }

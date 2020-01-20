@@ -36,7 +36,7 @@ class PhotosCoordinator: CoordinatorProtocol {
 extension PhotosCoordinator: PhotosRouterProtocol, PhotoDetailsRouterProtocol {
 
    func showPhotoDetails(photo: Photo) {
-      let detailsVC = PhotoFactory.details(photo: photo, router: self)
+      let detailsVC = PhotoFactory.preview(photo: photo, router: self)
       navigationController.pushViewController(detailsVC, animated: transitionsAnimated)
    }
 }

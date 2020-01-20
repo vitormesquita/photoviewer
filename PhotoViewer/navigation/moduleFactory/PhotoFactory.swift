@@ -20,9 +20,9 @@ enum PhotoFactory {
       return PhotosViewController(presenter: presenter)
    }
    
-   static func details(photo: Photo, router: PhotoDetailsRouterProtocol) -> UIViewController {
-      let presenter = PhotoDetailsPresenter(photo: photo)
+   static func preview(photo: Photo, router: PhotoDetailsRouterProtocol) -> UIViewController {
+      let presenter = PhotoPreviewPresenter(photo: photo)
       presenter.router = router
-      return PhotoDetailsViewController(presenter: presenter)
+      return PhotoPreviewViewController(presenter: presenter)
    }
 }

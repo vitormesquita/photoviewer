@@ -16,19 +16,19 @@ class PhotoDetailsPresenterSpec: QuickSpec {
       
       describe("photo details presenter") {
          var photo: Photo!
-         var router: PhotoDetailsRouterMock!
-         var presenter: PhotoDetailsPresenter!
+         var router: PhotoPreviewRouterMock!
+         var presenter: PhotoPreviewPresenter!
          
          beforeEach {
             photo = Photo(id: 100)
-            router = PhotoDetailsRouterMock()
-            presenter = PhotoDetailsPresenter(photo: photo)
+            router = PhotoPreviewRouterMock()
+            presenter = PhotoPreviewPresenter(photo: photo)
             presenter.router = router
          }
          
          it("check dependencies") {
             expect(presenter.photo).to(equal(photo))
-            expect(presenter.router).to(beAKindOf(PhotoDetailsRouterMock.self))            
+            expect(presenter.router).to(beAKindOf(PhotoPreviewRouterMock.self))            
          }
          
          it("details protocol conform by photo") {

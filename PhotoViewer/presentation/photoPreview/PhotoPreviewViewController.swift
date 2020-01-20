@@ -9,10 +9,10 @@
 import UIKit
 import Kingfisher
 
-class PhotoDetailsViewController: BaseViewController {
+class PhotoPreviewViewController: BaseViewController {
    
-   var presenter: PhotoDetailsPresenterProtocol {
-      return basePresenter as! PhotoDetailsPresenterProtocol
+   var presenter: PhotoPreviewPresenterProtocol {
+      return basePresenter as! PhotoPreviewPresenterProtocol
    }
    
    private(set) lazy var infoButton: UIButton = {
@@ -60,6 +60,11 @@ class PhotoDetailsViewController: BaseViewController {
       view.addGestureRecognizer(tapGesture)
    }
    
+   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+      super.traitCollectionDidChange(previousTraitCollection)
+      backgroundImageView.frame = UIScreen.main.bounds
+   }
+   
    func bind() {
       title = presenter.userName
       
@@ -69,7 +74,7 @@ class PhotoDetailsViewController: BaseViewController {
    }
 }
 
-extension PhotoDetailsViewController {
+extension PhotoPreviewViewController {
    
    @objc func didTapInfo() {
       //TODO
@@ -78,7 +83,7 @@ extension PhotoDetailsViewController {
    @objc func didTapView() {
       isFullScreen = !isFullScreen
       
-      UIView.animate(withDuration: 0.4) {
+      UIView.animate(withDuration: 0.3) {
          self.setNeedsStatusBarAppearanceUpdate()
          self.infoButton.alpha = self.isFullScreen ? 0 : 1
       }
@@ -95,7 +100,7 @@ extension PhotoDetailsViewController {
    }
 }
 
-extension PhotoDetailsViewController {
+extension PhotoPreviewViewController {
    
    private func setupViews() {
       self.view.addSubview(photoImageView)
@@ -133,8 +138,8 @@ extension PhotoDetailsViewController {
    }
 }
 
-extension PhotoDetailsViewController {
-
+extension PhotoPreviewViewController {
+   
    private func showOkAlertWith(title: String, message: String) {
       let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))

@@ -27,11 +27,11 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
       
       describe("photo details viewController") {
          var presenterMock: PhotoDetailsPresenterMock!
-         var viewController: PhotoDetailsViewController!
+         var viewController: PhotoPreviewViewController!
          
          beforeEach {
             presenterMock = PhotoDetailsPresenterMock()
-            viewController = PhotoDetailsViewController(presenter: presenterMock)
+            viewController = PhotoPreviewViewController(presenter: presenterMock)
             
             let window = UIWindow(frame: UIScreen.main.bounds)
             window.rootViewController = viewController
