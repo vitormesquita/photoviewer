@@ -32,6 +32,10 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
          beforeEach {
             presenterMock = PhotoDetailsPresenterMock()
             viewController = PhotoDetailsViewController(presenter: presenterMock)
+            
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.rootViewController = viewController
+            window.makeKeyAndVisible()
             viewController.viewDidLoad()
          }
          
@@ -54,35 +58,8 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
             expect(view!.constraints).toNot(beEmpty())
          }
          
-         context("more actions") {
-            
-            beforeEach {
-               let window = UIWindow(frame: UIScreen.main.bounds)
-               window.rootViewController = viewController
-               window.makeKeyAndVisible()
-            }
-            
-            it("check button is on navigation bar") {
-               expect(viewController.navigationItem.rightBarButtonItem)
-                  .to(be(viewController.actionsButton))
-            }
-            
-            it("check show sheet when click in action") {
-               let button = viewController.actionsButton
-               _ = button.target?.perform(button.action, with: nil)
-               
-               expect(viewController.presentedViewController).toNot(beNil())
-               expect(viewController.presentedViewController).to(beAnInstanceOf(UIAlertController.self))
-            }
-         }
          
          context("when trying download image") {
-            
-            beforeEach {
-               let window = UIWindow(frame: UIScreen.main.bounds)
-               window.rootViewController = viewController
-               window.makeKeyAndVisible()
-            }
             
             it("success save image") {
                viewController.didFinishSaving(UIImage(), error: nil)
@@ -100,6 +77,31 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
                expect(alert).toNot(beNil())
                expect(alert?.title).to(equal("Opss..."))
                expect(alert?.message).to(equal(Error.failureSaveImage.localizedDescription))
+            }
+         }
+         
+         context("when click on view") {
+            
+            it("check elements is hidden") {
+               viewController.didTapView()
+               
+               expect(viewController.isFullScreen).to(beTrue())
+               expect(viewController.infoButton.alpha).to(equal(0))
+               expect(viewController.prefersStatusBarHidden).to(beTrue())
+            }
+         }
+         
+         context("when click on view after hidden elements") {
+            
+            beforeEach {
+               viewController.didTapView()
+            }
+            
+            it("check elements is showing") {
+               viewController.didTapView()
+               expect(viewController.isFullScreen).to(beFalse())
+               expect(viewController.infoButton.alpha).to(equal(1))
+               expect(viewController.prefersStatusBarHidden).to(beFalse())
             }
          }
       }

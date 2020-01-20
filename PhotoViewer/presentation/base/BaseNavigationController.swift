@@ -10,6 +10,22 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
    
+   override var prefersStatusBarHidden: Bool {
+      if let visibleViewController = self.visibleViewController {
+         return visibleViewController.prefersStatusBarHidden
+      }
+      
+      return self.prefersStatusBarHidden
+   }
+   
+   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+      if let visibleViewController = self.visibleViewController {
+         return visibleViewController.preferredStatusBarUpdateAnimation
+      }
+      
+      return self.preferredStatusBarUpdateAnimation
+   }
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       applyLayout()

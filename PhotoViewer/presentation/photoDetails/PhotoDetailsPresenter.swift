@@ -20,8 +20,6 @@ protocol PhotoDetailsPresenterProtocol: BasePresenterProtocol {
    var userURL: URL? { get }
    var imageURL: URL? { get }
    var photoDescription: String? { get }
-   
-   func downloadDidTap()
 }
 
 class PhotoDetailsPresenter: BasePresenter {
@@ -59,9 +57,5 @@ extension PhotoDetailsPresenter: PhotoDetailsPresenterProtocol {
    
    var photoDescription: String? {
       return photo.description
-   }
-   
-   func downloadDidTap() {
-      //TODO
    }
 }

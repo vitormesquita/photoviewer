@@ -15,12 +15,13 @@ class PhotoDetailsViewController: BaseViewController {
       return basePresenter as! PhotoDetailsPresenterProtocol
    }
    
-   private(set) lazy var actionsButton: UIBarButtonItem = {
-      return UIBarButtonItem(image: UIImage(named: "ic_more"), style: .plain, target: self, action: #selector(didTapActions))
-   }()
-   
-   private(set) lazy var infoButton: UIBarButtonItem = {
-      return UIBarButtonItem(image: UIImage(named: "ic_info"), style: .plain, target: self, action: #selector(didTapInfo))
+   private(set) lazy var infoButton: UIButton = {
+      let btn = UIButton()
+      btn.tintColor = .textPrimary
+      btn.translatesAutoresizingMaskIntoConstraints = false
+      btn.setImage(UIImage.Icon.info, for: .normal)
+      btn.addTarget(self, action: #selector(didTapInfo), for: .touchUpInside)            
+      return btn
    }()
    
    private(set) lazy var backgroundImageView: UIImageView = {
@@ -38,6 +39,12 @@ class PhotoDetailsViewController: BaseViewController {
       return imageView
    }()
    
+   private(set) var isFullScreen = false
+   
+   override var prefersStatusBarHidden: Bool {
+      return isFullScreen
+   }
+   
    override func loadView() {
       super.loadView()
       setupViews()
@@ -46,17 +53,17 @@ class PhotoDetailsViewController: BaseViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
-      title = "Details"
-      navigationItem.largeTitleDisplayMode = .never
-      navigationItem.rightBarButtonItems = [actionsButton, infoButton]
       bind()
+      navigationItem.largeTitleDisplayMode = .never
+      
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapView))
+      view.addGestureRecognizer(tapGesture)
    }
    
    func bind() {
-      let options: KingfisherOptionsInfo = [
-         .transition(.fade(0.5))
-      ]
+      title = presenter.userName
+      
+      let options: KingfisherOptionsInfo = [ .transition(.fade(0.5)) ]
       photoImageView.kf.setImage(with: presenter.imageURL, options: options)
       backgroundImageView.kf.setImage(with: presenter.imageURL, options: options)
    }
@@ -64,12 +71,19 @@ class PhotoDetailsViewController: BaseViewController {
 
 extension PhotoDetailsViewController {
    
-   @objc func didTapActions() {
-      showActionsActionSheet()
-   }
-   
    @objc func didTapInfo() {
       //TODO
+   }
+   
+   @objc func didTapView() {
+      isFullScreen = !isFullScreen
+      
+      UIView.animate(withDuration: 0.4) {
+         self.setNeedsStatusBarAppearanceUpdate()
+         self.infoButton.alpha = self.isFullScreen ? 0 : 1
+      }
+      
+      self.navigationController?.setNavigationBarHidden(self.isFullScreen, animated: true)
    }
    
    @objc func didFinishSaving(_ image: UIImage, error: Error?) {
@@ -95,6 +109,17 @@ extension PhotoDetailsViewController {
       ]
       
       NSLayoutConstraint.activate(photoConstraints)
+      
+      self.view.addSubview(infoButton)
+      
+      let infoConstraints = [
+         infoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+         infoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+         infoButton.heightAnchor.constraint(equalToConstant: 40),
+         infoButton.widthAnchor.constraint(equalToConstant: 40)
+      ]
+      
+      NSLayoutConstraint.activate(infoConstraints)
    }
    
    private func addImageBackgroundWithBlur() {
@@ -109,18 +134,7 @@ extension PhotoDetailsViewController {
 }
 
 extension PhotoDetailsViewController {
-   
-   private func showActionsActionSheet() {
-      let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-      
-      actionSheet.addAction(UIAlertAction(title: "Download", style: .default, handler: { [unowned self] (_) in
-         self.presenter.downloadDidTap()
-      }))
-      
-      actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel))
-      present(actionSheet, animated: true)
-   }
-   
+
    private func showOkAlertWith(title: String, message: String) {
       let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
