@@ -14,6 +14,13 @@ class PhotoPreviewRobot: Robot {
    @discardableResult
    func expectPreview() -> PhotoPreviewRobot {
       expect(self.app.images["PhotoPreviewImageView"].exists).to(beTrue())
+      expect(self.app.buttons["PhotoPreviewInfoButton"].exists).to(beTrue())
+      return self
+   }
+   
+   @discardableResult
+   func clickInfoButton() -> PhotoPreviewRobot {
+      self.app.buttons["PhotoPreviewInfoButton"].tap()
       return self
    }
 }

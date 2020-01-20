@@ -17,10 +17,13 @@ class PhotoPreviewViewController: BaseViewController {
    
    private(set) lazy var infoButton: UIButton = {
       let btn = UIButton()
-      btn.tintColor = .textPrimary
+      btn.clipsToBounds = true
+      btn.tintColor = .background
+      btn.accessibilityIdentifier = "PhotoPreviewInfoButton"
       btn.translatesAutoresizingMaskIntoConstraints = false
       btn.setImage(UIImage.Icon.info, for: .normal)
-      btn.addTarget(self, action: #selector(didTapInfo), for: .touchUpInside)            
+      btn.addTarget(self, action: #selector(didTapInfo), for: .touchUpInside)
+      btn.setBackgroundImage(UIImage.fromColor(color: UIColor.textPrimary!), for: .normal)
       return btn
    }()
    
@@ -58,6 +61,11 @@ class PhotoPreviewViewController: BaseViewController {
       
       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapView))
       view.addGestureRecognizer(tapGesture)
+   }
+   
+   override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      infoButton.layer.cornerRadius = infoButton.bounds.size.width/2
    }
    
    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -118,10 +126,10 @@ extension PhotoPreviewViewController {
       self.view.addSubview(infoButton)
       
       let infoConstraints = [
-         infoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-         infoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
-         infoButton.heightAnchor.constraint(equalToConstant: 40),
-         infoButton.widthAnchor.constraint(equalToConstant: 40)
+         infoButton.widthAnchor.constraint(equalToConstant: 60),
+         infoButton.heightAnchor.constraint(equalTo: infoButton.widthAnchor, multiplier: 1),
+         infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+         infoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
       ]
       
       NSLayoutConstraint.activate(infoConstraints)

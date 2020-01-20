@@ -26,7 +26,7 @@ class PhotoPreviewSpec: QuickSpec {
             apiMock.stop()
          }
          
-         it("show a photo details") {
+         it("show photo preview") {
             let response = apiMock.mockPhotosToNavigateToPhotosList()
             let firstPhotoUser = response?[2]["user"] as? [String: Any]
             let userName = firstPhotoUser?["name"] as? String
@@ -40,6 +40,17 @@ class PhotoPreviewSpec: QuickSpec {
                .expectTitle(userName!)
                .expectPreview()               
                .clickBackButton()
+         }
+         
+         it("show photo infos") {
+            apiMock.mockPhotosToNavigateToPhotosList()
+            
+            PhotosRobot(app: app)
+               .start()
+               .sleepTime(3)
+               .clickPhoto()
+               .expectPreview()
+               .clickInfoButton()
          }
       }
    }

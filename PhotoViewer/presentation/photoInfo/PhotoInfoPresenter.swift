@@ -13,7 +13,13 @@ protocol PhotoInfoPresenterProtocol: BasePresenterProtocol {
 }
 
 class PhotoInfoPresenter: BasePresenter {
-
+   
+   let photo: Photo
+   
+   init(photo: Photo) {
+      self.photo = photo
+      super.init()
+   }
 }
 
 extension PhotoInfoPresenter: PhotoInfoPresenterProtocol {
