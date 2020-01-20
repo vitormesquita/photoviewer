@@ -32,14 +32,14 @@ class PhotoInfoPresentTransitioning: NSObject, UIViewControllerAnimatedTransitio
       transitionContext.containerView.addSubview(infoVC.view)
       
       let footerView = infoVC.footerView
-      footerView.transform = CGAffineTransform(translationX: 0, y: UIScreen.main.bounds.size.height)
+      footerView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.main.bounds.size.height)
       infoVC.view.backgroundColor = infoVC.view.backgroundColor?.withAlphaComponent(0)
       
       let duration = transitionDuration(using: transitionContext)
       
       UIView.animate(withDuration: duration, animations: {
          footerView.transform = .identity
-         infoVC.view.backgroundColor = infoVC.view.backgroundColor?.withAlphaComponent(0.3)
+         infoVC.view.backgroundColor = infoVC.view.backgroundColor?.withAlphaComponent(0.4)
          
       }, completion: { (finished) in
          transitionContext.completeTransition(finished)

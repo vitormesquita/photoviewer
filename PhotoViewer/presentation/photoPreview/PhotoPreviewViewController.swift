@@ -15,15 +15,8 @@ class PhotoPreviewViewController: BaseViewController {
       return basePresenter as! PhotoPreviewPresenterProtocol
    }
    
-   private(set) lazy var infoButton: UIButton = {
-      let btn = UIButton()
-      btn.clipsToBounds = true
-      btn.tintColor = .background
-      btn.accessibilityIdentifier = "PhotoPreviewInfoButton"
-      btn.translatesAutoresizingMaskIntoConstraints = false
-      btn.setImage(UIImage.Icon.info, for: .normal)
-      btn.addTarget(self, action: #selector(didTapInfo), for: .touchUpInside)
-      btn.setBackgroundImage(UIImage.fromColor(color: UIColor.textPrimary!), for: .normal)
+   private(set) lazy var infoButton: UIBarButtonItem = {
+      let btn = UIBarButtonItem(image: UIImage.Icon.info, style: .plain, target: self, action: #selector(didTapInfo))
       return btn
    }()
    
@@ -58,14 +51,10 @@ class PhotoPreviewViewController: BaseViewController {
       super.viewDidLoad()
       bind()
       navigationItem.largeTitleDisplayMode = .never
+      navigationItem.rightBarButtonItem = infoButton
       
       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapView))
       view.addGestureRecognizer(tapGesture)
-   }
-   
-   override func viewDidLayoutSubviews() {
-      super.viewDidLayoutSubviews()
-      infoButton.layer.cornerRadius = infoButton.bounds.size.width/2
    }
    
    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -92,10 +81,9 @@ extension PhotoPreviewViewController {
       isFullScreen = !isFullScreen
       
       UIView.animate(withDuration: 0.3) {
-         self.setNeedsStatusBarAppearanceUpdate()
-         self.infoButton.alpha = self.isFullScreen ? 0 : 1
       }
       
+      self.setNeedsStatusBarAppearanceUpdate()
       self.navigationController?.setNavigationBarHidden(self.isFullScreen, animated: true)
    }
    
@@ -122,17 +110,6 @@ extension PhotoPreviewViewController {
       ]
       
       NSLayoutConstraint.activate(photoConstraints)
-      
-      self.view.addSubview(infoButton)
-      
-      let infoConstraints = [
-         infoButton.widthAnchor.constraint(equalToConstant: 60),
-         infoButton.heightAnchor.constraint(equalTo: infoButton.widthAnchor, multiplier: 1),
-         infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-         infoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
-      ]
-      
-      NSLayoutConstraint.activate(infoConstraints)
    }
    
    private func addImageBackgroundWithBlur() {

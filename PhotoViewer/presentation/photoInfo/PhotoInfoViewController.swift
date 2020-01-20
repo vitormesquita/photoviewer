@@ -58,7 +58,7 @@ extension PhotoInfoViewController {
       self.view.addSubview(footerView)
       
       let footerConstraints = [
-         footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+         footerView.topAnchor.constraint(equalTo: view.topAnchor),
          footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
          footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
          footerView.heightAnchor.constraint(equalToConstant: 200)
