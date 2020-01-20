@@ -9,11 +9,11 @@
 import XCTest
 import Nimble
 
-class PhotoDetailsRobot: Robot {
+class PhotoPreviewRobot: Robot {
 
    @discardableResult
-   func expectDetails() -> PhotoDetailsRobot {
-      expect(self.app.images["PhotoDetailsImageView"].exists).to(beTrue())
+   func expectPreview() -> PhotoPreviewRobot {
+      expect(self.app.images["PhotoPreviewImageView"].exists).to(beTrue())
       return self
    }
 }

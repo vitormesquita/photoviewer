@@ -1,5 +1,5 @@
 //
-//  PhotoDetailsViewController.swift
+//  PhotoPreviewViewController.swift
 //  PhotoViewer
 //
 //  Created by Vitor Mesquita on 01/12/18.
@@ -34,7 +34,7 @@ class PhotoPreviewViewController: BaseViewController {
    private(set) lazy var photoImageView: UIImageView = {
       let imageView = UIImageView()
       imageView.contentMode = .scaleAspectFit
-      imageView.accessibilityIdentifier = "PhotoDetailsImageView"
+      imageView.accessibilityIdentifier = "PhotoPreviewImageView"
       imageView.translatesAutoresizingMaskIntoConstraints = false
       return imageView
    }()

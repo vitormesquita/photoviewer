@@ -12,10 +12,10 @@ import Nimble
 class PhotosRobot: Robot {
    
    @discardableResult
-   func clickPhoto() -> PhotoDetailsRobot {
+   func clickPhoto() -> PhotoPreviewRobot {
       let element = app.collectionViews.cells.element(boundBy: 1)
       element.tap()
-      return PhotoDetailsRobot(app: app)
+      return PhotoPreviewRobot(app: app)
    }
    
    @discardableResult

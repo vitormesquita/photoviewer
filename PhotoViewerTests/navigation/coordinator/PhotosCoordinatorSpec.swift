@@ -46,7 +46,7 @@ class PhotosCoordinatorSpec: QuickSpec {
             let photo = Photo(id: 0)
             let expectedVCType = PhotoPreviewViewController.self
             //Act
-            photosCoodinator.showPhotoDetails(photo: photo)
+            photosCoodinator.showPhotoPreview(photo: photo)
             //Assert
             let viewController = photosCoodinator.navigationController.visibleViewController
             expect(viewController).to(beAKindOf(expectedVCType))

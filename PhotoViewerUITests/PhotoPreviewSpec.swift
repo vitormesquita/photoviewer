@@ -9,11 +9,11 @@
 import Quick
 import XCTest
 
-class PhotoDetailsSpec: QuickSpec {
+class PhotoPreviewSpec: QuickSpec {
    
    override func spec() {
       
-      describe("photo details flow") {
+      describe("photo preview flow") {
          let apiMock = BFFMock()
          var app: XCUIApplication!
          
@@ -38,7 +38,7 @@ class PhotoDetailsSpec: QuickSpec {
                .swipeUp()
                .clickPhoto()
                .expectTitle(userName!)
-               .expectDetails()               
+               .expectPreview()               
                .clickBackButton()
          }
       }

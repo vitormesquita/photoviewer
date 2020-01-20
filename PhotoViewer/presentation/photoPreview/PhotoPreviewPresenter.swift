@@ -1,5 +1,5 @@
 //
-//  PhotoDetailsPresenter.swift
+//  PhotoPreviewPresenter.swift
 //  PhotoViewer
 //
 //  Created by Vitor Mesquita on 01/12/18.
@@ -8,7 +8,7 @@
 
 import RxSwift
 
-protocol PhotoDetailsRouterProtocol: class {
+protocol PhotoPreviewRouterProtocol: class {
    
 }
 
@@ -25,7 +25,7 @@ protocol PhotoPreviewPresenterProtocol: BasePresenterProtocol {
 class PhotoPreviewPresenter: BasePresenter {
    
    let photo: Photo
-   weak var router: PhotoDetailsRouterProtocol?
+   weak var router: PhotoPreviewRouterProtocol?
    
    init(photo: Photo) {
       self.photo = photo

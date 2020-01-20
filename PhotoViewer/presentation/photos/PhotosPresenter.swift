@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol PhotosRouterProtocol: class {
-   func showPhotoDetails(photo: Photo)
+   func showPhotoPreview(photo: Photo)
 }
 
 protocol PhotosPresenterProtocol: BasePresenterProtocol {
@@ -77,7 +77,7 @@ extension PhotosPresenter: PhotosPresenterProtocol {
    
    func didSelected(item: Int) {
       guard let photo = interactor.getPhotoBy(index: item) else { return }
-      router?.showPhotoDetails(photo: photo)
+      router?.showPhotoPreview(photo: photo)
    }
    
    func didSearchWith(term: String?) {

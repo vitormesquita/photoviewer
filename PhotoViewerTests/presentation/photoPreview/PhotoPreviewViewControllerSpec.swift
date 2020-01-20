@@ -1,5 +1,5 @@
 //
-//  PhotoDetailsViewControllerSpec.swift
+//  PhotoPreviewViewControllerSpec.swift
 //  PhotoViewerTests
 //
 //  Created by mano on 07/01/20.
@@ -10,7 +10,7 @@ import Quick
 import Nimble
 @testable import PhotoViewer
 
-class PhotoDetailsViewControllerSpec: QuickSpec {
+class PhotoPreviewViewControllerSpec: QuickSpec {
    
    enum Error: Swift.Error, LocalizedError {
       case failureSaveImage
@@ -25,12 +25,12 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
    
    override func spec() {
       
-      describe("photo details viewController") {
-         var presenterMock: PhotoDetailsPresenterMock!
+      describe("photo preview viewController") {
+         var presenterMock: PhotoPreviewPresenterMock!
          var viewController: PhotoPreviewViewController!
          
          beforeEach {
-            presenterMock = PhotoDetailsPresenterMock()
+            presenterMock = PhotoPreviewPresenterMock()
             viewController = PhotoPreviewViewController(presenter: presenterMock)
             
             let window = UIWindow(frame: UIScreen.main.bounds)
@@ -41,7 +41,7 @@ class PhotoDetailsViewControllerSpec: QuickSpec {
          
          it("check dependencies") {
             expect(viewController.presenter)
-               .to(beAKindOf(PhotoDetailsPresenterMock.self))
+               .to(beAKindOf(PhotoPreviewPresenterMock.self))
          }
          
          it("check setup views") {

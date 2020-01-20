@@ -9,6 +9,6 @@
 import UIKit
 @testable import PhotoViewer
 
-class PhotoPreviewRouterMock: PhotoDetailsRouterProtocol {
+class PhotoPreviewRouterMock: PhotoPreviewRouterProtocol {
    
 }

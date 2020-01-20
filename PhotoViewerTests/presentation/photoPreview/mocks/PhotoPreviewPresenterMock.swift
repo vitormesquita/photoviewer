@@ -9,7 +9,7 @@
 import Foundation
 @testable import PhotoViewer
 
-class PhotoDetailsPresenterMock: PhotoPreviewPresenterProtocol {
+class PhotoPreviewPresenterMock: PhotoPreviewPresenterProtocol {
    
    var photo: Photo?
    

@@ -13,7 +13,7 @@ class PhotosRouterMock: PhotosRouterProtocol {
 
    var _selectedPhoto: Photo?
    
-   func showPhotoDetails(photo: Photo) {
+   func showPhotoPreview(photo: Photo) {
       _selectedPhoto = photo
    }
 }

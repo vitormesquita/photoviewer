@@ -1,5 +1,5 @@
 //
-//  PhotoDetailsPresenterSpec.swift
+//  PhotoPreviewPresenterSpec.swift
 //  PhotoViewerTests
 //
 //  Created by mano on 06/01/20.
@@ -10,11 +10,11 @@ import Quick
 import Nimble
 @testable import PhotoViewer
 
-class PhotoDetailsPresenterSpec: QuickSpec {
+class PhotoPreviewPresenterSpec: QuickSpec {
    
    override func spec() {
       
-      describe("photo details presenter") {
+      describe("photo preview presenter") {
          var photo: Photo!
          var router: PhotoPreviewRouterMock!
          var presenter: PhotoPreviewPresenter!
