@@ -30,7 +30,7 @@ class PhotoInfoDimissTransitioning: NSObject, UIViewControllerAnimatedTransition
       
       UIView.animate(withDuration: duration, animations: {
          infoVc.view.backgroundColor = infoVc.view.backgroundColor?.withAlphaComponent(0)
-         infoVc.footerView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.main.bounds.height)
+         infoVc.infoView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.main.bounds.height)
       }, completion: { finished in
          transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
       })

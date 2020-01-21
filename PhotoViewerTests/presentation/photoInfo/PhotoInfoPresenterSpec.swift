@@ -26,6 +26,13 @@ class PhotoInfoPresenterSpec: QuickSpec {
          it("check dependencies") {
             expect(presenter.photo).to(equal(photo))
          }
+         
+         it("check photoInfoViewModel attr") {
+            let expectPublished = "Published \(photo.createdAt.stringBy(format: "dd MMM yyyy"))"
+            
+            expect(presenter.userName).to(equal(photo.user.name))
+            expect(presenter.publishedAt).to(equal(expectPublished))
+         }
       }
    }
 }

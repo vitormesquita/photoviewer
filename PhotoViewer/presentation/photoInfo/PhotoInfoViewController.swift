@@ -10,10 +10,14 @@ import UIKit
 
 class PhotoInfoViewController: BaseViewController {
    
+   var presenter: PhotoInfoPresenterProtocol {
+      return basePresenter as! PhotoInfoPresenterProtocol
+   }
+   
    let presentationManager = PhotoInfoPresentationManager()
    
-   private(set) lazy var footerView: UIView = {
-      let view = UIView()
+   private(set) lazy var infoView: UIView = {
+      let view = PhotoInfoView.loadNibName(viewModel: presenter)
       view.backgroundColor = .background
       view.translatesAutoresizingMaskIntoConstraints = false
       return view
@@ -46,7 +50,7 @@ class PhotoInfoViewController: BaseViewController {
    @objc func didTapView(sender: UITapGestureRecognizer) {
       let point = sender.location(in: self.view)
       
-      if !self.footerView.frame.contains(point) {
+      if !self.infoView.frame.contains(point) {
          self.dismiss(animated: true)
       }
    }
@@ -55,13 +59,12 @@ class PhotoInfoViewController: BaseViewController {
 extension PhotoInfoViewController {
    
    private func setupViews() {
-      self.view.addSubview(footerView)
+      self.view.addSubview(infoView)
       
       let footerConstraints = [
-         footerView.topAnchor.constraint(equalTo: view.topAnchor),
-         footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-         footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-         footerView.heightAnchor.constraint(equalToConstant: 200)
+         infoView.topAnchor.constraint(equalTo: view.topAnchor),
+         infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
       ]
       
       NSLayoutConstraint.activate(footerConstraints)

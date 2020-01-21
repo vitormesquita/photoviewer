@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoInfoPresenterProtocol: BasePresenterProtocol {
+protocol PhotoInfoPresenterProtocol: BasePresenterProtocol, PhotoInfoViewModelProtocol {
    
 }
 
@@ -24,4 +24,11 @@ class PhotoInfoPresenter: BasePresenter {
 
 extension PhotoInfoPresenter: PhotoInfoPresenterProtocol {
    
+   var userName: String {
+      return photo.user.name
+   }
+   
+   var publishedAt: String {
+      return "Published \(photo.createdAt.stringBy(format: "dd MMM yyyy"))"
+   }
 }

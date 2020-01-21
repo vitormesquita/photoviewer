@@ -86,7 +86,6 @@ class PhotoPreviewViewControllerSpec: QuickSpec {
                viewController.didTapView()
                
                expect(viewController.isFullScreen).to(beTrue())
-               expect(viewController.infoButton.alpha).to(equal(0))
                expect(viewController.prefersStatusBarHidden).to(beTrue())
             }
             
@@ -105,7 +104,6 @@ class PhotoPreviewViewControllerSpec: QuickSpec {
             it("check elements is showing") {
                viewController.didTapView()
                expect(viewController.isFullScreen).to(beFalse())
-               expect(viewController.infoButton.alpha).to(equal(1))
                expect(viewController.prefersStatusBarHidden).to(beFalse())
             }
          }
